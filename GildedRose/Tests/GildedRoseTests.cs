@@ -60,15 +60,17 @@ namespace GildedRose.Tests
         }
 
         [Theory]
-        [InlineData("Conjured item name")]
-        [InlineData("conjured item name")]
-        public void Conjured_item_Quality_degrades_by_2_when_sell_date_has_passed(string name)
+        [InlineData("Conjured item name", 0)]
+        [InlineData("conjured item name", -1)]
+        public void Conjured_item_Quality_degrades_by_2_when_sell_date_has_passed(
+            string name,
+            int passedSellIn)
         {
             Item conjuredItem = new()
             {
                 Name = name,
                 Quality = 4,
-                SellIn = 0
+                SellIn = passedSellIn
             };
             var sut = new GildedRose();
             sut.Items.Add(conjuredItem);

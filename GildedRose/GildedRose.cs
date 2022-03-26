@@ -29,7 +29,7 @@ namespace GildedRose
 
                 if (IsConjured(item))
                 {
-                    if (item.SellIn == 0)
+                    if (item.SellIn <= 0)
                     {
                         item.Quality -= ConjuredItemQualityDegradingRate * 2;
                     }
