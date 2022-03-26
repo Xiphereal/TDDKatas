@@ -2,7 +2,7 @@
 
 namespace GildedRose
 {
-    public class GildedRose
+    public class GildedRoseInventory
     {
         private const int ConjuredItemQualityDegradingRate = 2;
 

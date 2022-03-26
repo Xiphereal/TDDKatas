@@ -8,7 +8,7 @@
         {
             System.Console.WriteLine("OMGHAI!");
 
-            GildedRose gildedRose = new();
+            GildedRoseInventory gildedRose = new();
 
             Items = gildedRose.Items;
 

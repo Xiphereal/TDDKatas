@@ -4,7 +4,7 @@ using Xunit;
 
 namespace GildedRose.Tests
 {
-    public class GildedRoseTests
+    public class GildedRoseInventoryTests
     {
         [Theory]
         [InlineData("Normal item", 1)]
@@ -21,7 +21,7 @@ namespace GildedRose.Tests
                 Quality = 0,
                 SellIn = sellIn
             };
-            var sut = new GildedRose();
+            var sut = new GildedRoseInventory();
             sut.Items.Add(item);
 
             sut.UpdateQuality();
@@ -41,7 +41,7 @@ namespace GildedRose.Tests
                 Quality = 50,
                 SellIn = sellIn
             };
-            var sut = new GildedRose();
+            var sut = new GildedRoseInventory();
             sut.Items.Add(item);
 
             sut.UpdateQuality();
@@ -56,7 +56,7 @@ namespace GildedRose.Tests
         public void Item_SellIn_only_decreases_in_decrements_of_one(int sellIn, int decrementedSellIn)
         {
             Item item = new() { SellIn = sellIn };
-            var sut = new GildedRose();
+            var sut = new GildedRoseInventory();
             sut.Items.Add(item);
 
             sut.UpdateQuality();
@@ -72,7 +72,7 @@ namespace GildedRose.Tests
                 Quality = 2,
                 SellIn = 1
             };
-            var sut = new GildedRose();
+            var sut = new GildedRoseInventory();
             sut.Items.Add(normalItem);
 
             sut.UpdateQuality();
@@ -90,7 +90,7 @@ namespace GildedRose.Tests
                 Quality = 2,
                 SellIn = passedSellIn
             };
-            var sut = new GildedRose();
+            var sut = new GildedRoseInventory();
             sut.Items.Add(normalItem);
 
             sut.UpdateQuality();
@@ -109,7 +109,7 @@ namespace GildedRose.Tests
                 Quality = 2,
                 SellIn = 1
             };
-            var sut = new GildedRose();
+            var sut = new GildedRoseInventory();
             sut.Items.Add(conjuredItem);
 
             sut.UpdateQuality();
@@ -130,7 +130,7 @@ namespace GildedRose.Tests
                 Quality = 4,
                 SellIn = passedSellIn
             };
-            var sut = new GildedRose();
+            var sut = new GildedRoseInventory();
             sut.Items.Add(conjuredItem);
 
             sut.UpdateQuality();
@@ -147,7 +147,7 @@ namespace GildedRose.Tests
                 Quality = 0,
                 SellIn = 1
             };
-            var sut = new GildedRose();
+            var sut = new GildedRoseInventory();
             sut.Items.Add(agedBrie);
 
             sut.UpdateQuality();
@@ -166,7 +166,7 @@ namespace GildedRose.Tests
                 Quality = 0,
                 SellIn = sellIn
             };
-            var sut = new GildedRose();
+            var sut = new GildedRoseInventory();
             sut.Items.Add(agedBrie);
 
             sut.UpdateQuality();
