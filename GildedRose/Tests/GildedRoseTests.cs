@@ -30,6 +30,26 @@ namespace GildedRose.Tests
         }
 
         [Theory]
+        [InlineData("Aged Brie", 1)]
+        [InlineData("Aged Brie", 0)]
+        [InlineData("Backstage passes to a TAFKAL80ETC concert", 1)]
+        public void Special_Items_Quality_never_goes_above_50(string itemName, int sellIn)
+        {
+            Item item = new()
+            {
+                Name = itemName,
+                Quality = 50,
+                SellIn = sellIn
+            };
+            var sut = new GildedRose();
+            sut.Items.Add(item);
+
+            sut.UpdateQuality();
+
+            item.Quality.Should().Be(50);
+        }
+
+        [Theory]
         [InlineData(1, 0)]
         [InlineData(0, -1)]
         [InlineData(-1, -2)]
@@ -116,6 +136,42 @@ namespace GildedRose.Tests
             sut.UpdateQuality();
 
             conjuredItem.Quality.Should().Be(0);
+        }
+
+        [Fact]
+        public void Aged_Brie_Quality_increases_over_time()
+        {
+            Item agedBrie = new()
+            {
+                Name = "Aged Brie",
+                Quality = 0,
+                SellIn = 1
+            };
+            var sut = new GildedRose();
+            sut.Items.Add(agedBrie);
+
+            sut.UpdateQuality();
+
+            agedBrie.Quality.Should().Be(1);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-1)]
+        public void Aged_Brie_Quality_increases_twice_as_fast_when_sell_date_has_passed(int sellIn)
+        {
+            Item agedBrie = new()
+            {
+                Name = "Aged Brie",
+                Quality = 0,
+                SellIn = sellIn
+            };
+            var sut = new GildedRose();
+            sut.Items.Add(agedBrie);
+
+            sut.UpdateQuality();
+
+            agedBrie.Quality.Should().Be(2);
         }
     }
 }
