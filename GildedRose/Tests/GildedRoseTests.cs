@@ -22,13 +22,15 @@ namespace GildedRose.Tests
             normalItem.Quality.Should().Be(1);
         }
 
-        [Fact]
-        public void Normal_item_Quality_degrades_twice_as_fast_when_sell_date_has_passed()
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-1)]
+        public void Normal_item_Quality_degrades_twice_as_fast_when_sell_date_has_passed(int passedSellIn)
         {
             Item normalItem = new()
             {
                 Quality = 2,
-                SellIn = 0
+                SellIn = passedSellIn
             };
             var sut = new GildedRose();
             sut.Items.Add(normalItem);
