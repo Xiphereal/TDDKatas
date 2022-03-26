@@ -4,6 +4,8 @@ namespace GildedRose
 {
     public class GildedRose
     {
+        private const int ConjuredItemQualityDegradingRate = 2;
+
         public List<Item> Items { get; } = new List<Item>
         {
             new Item {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
@@ -27,7 +29,16 @@ namespace GildedRose
 
                 if (IsConjured(item))
                 {
-                    item.Quality -= 2;
+                    if (item.SellIn == 0)
+                    {
+                        item.Quality -= ConjuredItemQualityDegradingRate * 2;
+                    }
+                    else
+                    {
+                        item.Quality -= ConjuredItemQualityDegradingRate;
+                    }
+
+                    continue;
                 }
 
                 if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
