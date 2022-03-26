@@ -5,7 +5,7 @@
 - [x] Conjure item with SellIn == 0
 - [x] Normal item with negative SellIn
 - [x] Conjured item with negative SellIn
-- [ ] SellIn decrement
+- [x] SellIn decrement
 - [ ] "Aged brie" Quality increment 
 - [ ] Special items Quality increment doesn't go above 50
 - [ ] "Sulfuras" Quality increment doesn't go above 80

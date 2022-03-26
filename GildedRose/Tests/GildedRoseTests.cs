@@ -29,6 +29,21 @@ namespace GildedRose.Tests
             item.Quality.Should().Be(0);
         }
 
+        [Theory]
+        [InlineData(1, 0)]
+        [InlineData(0, -1)]
+        [InlineData(-1, -2)]
+        public void Item_SellIn_only_decreases_in_decrements_of_one(int sellIn, int decrementedSellIn)
+        {
+            Item item = new() { SellIn = sellIn };
+            var sut = new GildedRose();
+            sut.Items.Add(item);
+
+            sut.UpdateQuality();
+
+            item.SellIn.Should().Be(decrementedSellIn);
+        }
+
         [Fact]
         public void Normal_item_Quality_degrades_by_1_when_sell_date_has_not_passed_yet()
         {
