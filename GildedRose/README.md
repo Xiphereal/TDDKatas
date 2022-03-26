@@ -53,3 +53,5 @@ What & Why: [Refactor This: The Gilded Rose Kata](http://iamnotmyself.com/2011/0
 
 This has been copied from [https://github.com/NotMyself/GildedRose](https://github.com/NotMyself/GildedRose)
 
+## See also
+https://github.com/emilybache/GildedRose-Refactoring-Kata
