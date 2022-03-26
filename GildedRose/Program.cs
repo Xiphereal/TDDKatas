@@ -10,7 +10,7 @@
 
             GildedRose gildedRose = new();
 
-            Items = gildedRose.items;
+            Items = gildedRose.Items;
 
             gildedRose.UpdateQuality();
 

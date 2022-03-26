@@ -4,7 +4,7 @@ namespace GildedRose
 {
     public class GildedRose
     {
-        public List<Item> items = new List<Item>
+        public List<Item> Items { get; } = new List<Item>
         {
             new Item {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
             new Item {Name = "Aged Brie", SellIn = 2, Quality = 0},
@@ -21,78 +21,92 @@ namespace GildedRose
 
         public void UpdateQuality()
         {
-            for (var i = 0; i < items.Count; i++)
+            for (var i = 0; i < Items.Count; i++)
             {
-                if (items[i].Name != "Aged Brie" && items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                Item item = Items[i];
+
+                if (IsConjured(item))
                 {
-                    if (items[i].Quality > 0)
+                    item.Quality -= 2;
+                }
+
+                if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                {
+                    if (Items[i].Quality > 0)
                     {
-                        if (items[i].Name != "Sulfuras, Hand of Ragnaros")
+                        if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
                         {
-                            items[i].Quality = items[i].Quality - 1;
+                            Items[i].Quality = Items[i].Quality - 1;
                         }
                     }
                 }
                 else
                 {
-                    if (items[i].Quality < 50)
+                    if (Items[i].Quality < 50)
                     {
-                        items[i].Quality = items[i].Quality + 1;
+                        Items[i].Quality = Items[i].Quality + 1;
 
-                        if (items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
+                        if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
                         {
-                            if (items[i].SellIn < 11)
+                            if (Items[i].SellIn < 11)
                             {
-                                if (items[i].Quality < 50)
+                                if (Items[i].Quality < 50)
                                 {
-                                    items[i].Quality = items[i].Quality + 1;
+                                    Items[i].Quality = Items[i].Quality + 1;
                                 }
                             }
 
-                            if (items[i].SellIn < 6)
+                            if (Items[i].SellIn < 6)
                             {
-                                if (items[i].Quality < 50)
+                                if (Items[i].Quality < 50)
                                 {
-                                    items[i].Quality = items[i].Quality + 1;
+                                    Items[i].Quality = Items[i].Quality + 1;
                                 }
                             }
                         }
                     }
                 }
 
-                if (items[i].Name != "Sulfuras, Hand of Ragnaros")
+                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
                 {
-                    items[i].SellIn = items[i].SellIn - 1;
+                    Items[i].SellIn = Items[i].SellIn - 1;
                 }
 
-                if (items[i].SellIn < 0)
+                if (Items[i].SellIn < 0)
                 {
-                    if (items[i].Name != "Aged Brie")
+                    if (Items[i].Name != "Aged Brie")
                     {
-                        if (items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                        if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
                         {
-                            if (items[i].Quality > 0)
+                            if (Items[i].Quality > 0)
                             {
-                                if (items[i].Name != "Sulfuras, Hand of Ragnaros")
+                                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
                                 {
-                                    items[i].Quality = items[i].Quality - 1;
+                                    Items[i].Quality = Items[i].Quality - 1;
                                 }
                             }
                         }
                         else
                         {
-                            items[i].Quality = items[i].Quality - items[i].Quality;
+                            Items[i].Quality = Items[i].Quality - Items[i].Quality;
                         }
                     }
                     else
                     {
-                        if (items[i].Quality < 50)
+                        if (Items[i].Quality < 50)
                         {
-                            items[i].Quality = items[i].Quality + 1;
+                            Items[i].Quality = Items[i].Quality + 1;
                         }
                     }
                 }
             }
+        }
+
+        private static bool IsConjured(Item item)
+        {
+            string? name = item.Name?.ToLower();
+
+            return name is not null ? name.Contains("conjured") : false;
         }
     }
 }
