@@ -1,3 +1,4 @@
+using FluentAssertions;
 using GildedRose.Console;
 using Xunit;
 
@@ -18,7 +19,7 @@ namespace GildedRose.Tests
 
             sut.UpdateQuality();
 
-            Assert.Equal(expected: 1, normalItem.Quality);
+            normalItem.Quality.Should().Be(1);
         }
 
         [Theory]
@@ -37,7 +38,7 @@ namespace GildedRose.Tests
 
             sut.UpdateQuality();
 
-            Assert.Equal(expected: 0, conjuredItem.Quality);
+            conjuredItem.Quality.Should().Be(0);
         }
     }
 }
