@@ -5,12 +5,13 @@
 - [x] Conjure item with SellIn == 0
 - [x] Normal item with negative SellIn
 - [x] Conjured item with negative SellIn
+- [ ] SellIn decrement
 - [ ] "Aged brie" Quality increment 
 - [ ] Special items Quality increment doesn't go above 50
 - [ ] "Sulfuras" Quality increment doesn't go above 80
 - [ ] "Sulfuras" has no SellIn
 - [ ] "Sulfuras" Quality never degrades
-- [ ] Item Quality is never negative
+- [x] Item Quality is never negative
 - [ ] "Backstage passes" Quality drops to 0 after concert
 - [ ] "Backstage passes" Quality increases by 2 when there are 10 days or less until the concert
 - [ ] "Backstage passes" Quality increases by 3 when there are 5 days or less until the concert

@@ -31,11 +31,11 @@ namespace GildedRose
                 {
                     if (item.SellIn <= 0)
                     {
-                        item.Quality -= ConjuredItemQualityDegradingRate * 2;
+                        item.DegradeQualityBy(ConjuredItemQualityDegradingRate * 2);
                     }
                     else
                     {
-                        item.Quality -= ConjuredItemQualityDegradingRate;
+                        item.DegradeQualityBy(ConjuredItemQualityDegradingRate);
                     }
 
                     continue;
@@ -47,7 +47,7 @@ namespace GildedRose
                     {
                         if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
                         {
-                            Items[i].Quality = Items[i].Quality - 1;
+                            Items[i].DegradeQualityBy(1);
                         }
                     }
                 }
@@ -93,7 +93,7 @@ namespace GildedRose
                             {
                                 if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
                                 {
-                                    Items[i].Quality = Items[i].Quality - 1;
+                                    Items[i].DegradeQualityBy(1);
                                 }
                             }
                         }
@@ -117,7 +117,7 @@ namespace GildedRose
         {
             string? name = item.Name?.ToLower();
 
-            return name is not null ? name.Contains("conjured") : false;
+            return name is not null && name.Contains("conjured");
         }
     }
 }
