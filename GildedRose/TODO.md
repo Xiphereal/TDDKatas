@@ -9,8 +9,8 @@
 - [x] "Aged brie" Quality increment 
 - [x] Special items Quality increment doesn't go above 50
 - [ ] "Sulfuras" Quality increment doesn't go above 80
-- [ ] "Sulfuras" has no SellIn
-- [ ] "Sulfuras" Quality never degrades
+- [x] "Sulfuras" SellIn never decreases
+- [x] "Sulfuras" Quality never degrades
 - [x] Item Quality is never negative
 - [ ] "Backstage passes" Quality drops to 0 after concert
 - [ ] "Backstage passes" Quality increases by 2 when there are 10 days or less until the concert

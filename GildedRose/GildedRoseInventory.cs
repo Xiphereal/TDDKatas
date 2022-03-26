@@ -4,17 +4,20 @@ namespace GildedRose
 {
     public class GildedRoseInventory
     {
+        public const string AgedBrieName = "Aged Brie";
+        public const string SulfurasName = "Sulfuras, Hand of Ragnaros";
+        public const string BackstagePassesName = "Backstage passes to a TAFKAL80ETC concert";
         private const int ConjuredItemQualityDegradingRate = 2;
 
         public List<Item> Items { get; } = new List<Item>
         {
             new Item { Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20 },
-            new Item { Name = "Aged Brie", SellIn = 2, Quality = 0 },
+            new Item { Name = AgedBrieName, SellIn = 2, Quality = 0 },
             new Item { Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7 },
-            new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80 },
+            new Item { Name = SulfurasName, SellIn = 0, Quality = 80 },
             new Item
             {
-                Name = "Backstage passes to a TAFKAL80ETC concert",
+                Name = BackstagePassesName,
                 SellIn = 15,
                 Quality = 20
             },
@@ -41,11 +44,11 @@ namespace GildedRose
                     continue;
                 }
 
-                if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                if (Items[i].Name != AgedBrieName && Items[i].Name != BackstagePassesName)
                 {
                     if (Items[i].Quality > 0)
                     {
-                        if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                        if (Items[i].Name != SulfurasName)
                         {
                             Items[i].DegradeQualityBy(1);
                         }
@@ -57,7 +60,7 @@ namespace GildedRose
                     {
                         Items[i].Quality = Items[i].Quality + 1;
 
-                        if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
+                        if (Items[i].Name == BackstagePassesName)
                         {
                             if (Items[i].SellIn < 11)
                             {
@@ -78,20 +81,20 @@ namespace GildedRose
                     }
                 }
 
-                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                if (Items[i].Name != SulfurasName)
                 {
                     Items[i].SellIn = Items[i].SellIn - 1;
                 }
 
                 if (Items[i].SellIn < 0)
                 {
-                    if (Items[i].Name != "Aged Brie")
+                    if (Items[i].Name != AgedBrieName)
                     {
-                        if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                        if (Items[i].Name != BackstagePassesName)
                         {
                             if (Items[i].Quality > 0)
                             {
-                                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                                if (Items[i].Name != SulfurasName)
                                 {
                                     Items[i].DegradeQualityBy(1);
                                 }

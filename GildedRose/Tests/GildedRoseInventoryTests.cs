@@ -173,5 +173,37 @@ namespace GildedRose.Tests
 
             agedBrie.Quality.Should().Be(2);
         }
+
+        [Fact]
+        public void Sulfuras_Quality_never_degrades()
+        {
+            Item sulfuras = CreateSulfuras();
+            GildedRoseInventory sut = CreateInventoryWith(sulfuras);
+
+            sut.UpdateQuality();
+
+            sulfuras.Quality.Should().Be(80);
+        }
+
+        private static Item CreateSulfuras()
+        {
+            return new()
+            {
+                Name = GildedRoseInventory.SulfurasName,
+                Quality = 80,
+                SellIn = 0
+            };
+        }
+
+        [Fact]
+        public void Sulfuras_SellIn_never_decreases()
+        {
+            Item sulfuras = CreateSulfuras();
+            GildedRoseInventory sut = CreateInventoryWith(sulfuras);
+
+            sut.UpdateQuality();
+
+            sulfuras.SellIn.Should().Be(0);
+        }
     }
 }
