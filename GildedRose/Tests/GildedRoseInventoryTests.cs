@@ -175,7 +175,7 @@ namespace GildedRose.Tests
         }
 
         [Fact]
-        public void Sulfuras_Quality_never_degrades()
+        public void Sulfuras_Quality_never_degrades_nor_goes_above_80()
         {
             Item sulfuras = CreateSulfuras();
             GildedRoseInventory sut = CreateInventoryWith(sulfuras);

@@ -8,7 +8,7 @@
 - [x] SellIn decrement
 - [x] "Aged brie" Quality increment 
 - [x] Special items Quality increment doesn't go above 50
-- [ ] "Sulfuras" Quality increment doesn't go above 80
+- [ ] ~~"Sulfuras" Quality increment doesn't go above 80~~
 - [x] "Sulfuras" SellIn never decreases
 - [x] "Sulfuras" Quality never degrades
 - [x] Item Quality is never negative
