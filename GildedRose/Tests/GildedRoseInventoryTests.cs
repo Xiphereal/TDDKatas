@@ -205,5 +205,27 @@ namespace GildedRose.Tests
 
             sulfuras.SellIn.Should().Be(0);
         }
+
+        [Theory]
+        [InlineData(50, 0)]
+        [InlineData(1, 0)]
+        [InlineData(0, 0)]
+        [InlineData(50, -1)]
+        [InlineData(1, -1)]
+        [InlineData(0, -1)]
+        public void BackstagePasses_Quality_drops_to_0_after_concert(int quality, int sellIn)
+        {
+            Item backstagePasses = new()
+            {
+                Name = GildedRoseInventory.BackstagePassesName,
+                Quality = quality,
+                SellIn = sellIn
+            };
+            GildedRoseInventory sut = CreateInventoryWith(backstagePasses);
+
+            sut.UpdateQuality();
+
+            backstagePasses.Quality.Should().Be(0);
+        }
     }
 }

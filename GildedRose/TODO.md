@@ -12,6 +12,6 @@
 - [x] "Sulfuras" SellIn never decreases
 - [x] "Sulfuras" Quality never degrades
 - [x] Item Quality is never negative
-- [ ] "Backstage passes" Quality drops to 0 after concert
+- [x] "Backstage passes" Quality drops to 0 after concert
 - [ ] "Backstage passes" Quality increases by 2 when there are 10 days or less until the concert
 - [ ] "Backstage passes" Quality increases by 3 when there are 5 days or less until the concert

@@ -90,7 +90,11 @@ namespace GildedRose
                 {
                     if (Items[i].Name != AgedBrieName)
                     {
-                        if (Items[i].Name != BackstagePassesName)
+                        if (Items[i].Name == BackstagePassesName)
+                        {
+                            Items[i].Quality = 0;
+                        }
+                        else
                         {
                             if (Items[i].Quality > 0)
                             {
@@ -99,10 +103,6 @@ namespace GildedRose
                                     Items[i].DegradeQualityBy(1);
                                 }
                             }
-                        }
-                        else
-                        {
-                            Items[i].Quality = Items[i].Quality - Items[i].Quality;
                         }
                     }
                     else
