@@ -28,81 +28,93 @@ namespace GildedRose
         {
             foreach (Item item in Items)
             {
-                if (IsConjured(item))
+                if (item.Name == SulfurasName)
                 {
-                    if (item.SellIn <= 0)
-                    {
-                        item.DegradeQualityBy(ConjuredItemQualityDegradingRate * 2);
-                    }
-                    else
-                    {
-                        item.DegradeQualityBy(ConjuredItemQualityDegradingRate);
-                    }
-
                     continue;
                 }
 
                 if (item.Name == AgedBrieName)
                 {
-                    item.IncreaseQualityBy(1);
-
-                    item.UpdateDaysToSell();
-
-                    if (item.SellIn < 0)
-                    {
-                        item.IncreaseQualityBy(1);
-                    }
+                    UpdateAgedBrieQuality(item);
 
                     continue;
                 }
 
                 if (item.Name == BackstagePassesName)
                 {
-                    if (item.SellIn < 6)
-                    {
-                        item.IncreaseQualityBy(3);
-                    }
-                    else if (item.SellIn < 11)
-                    {
-                        item.IncreaseQualityBy(2);
-                    }
-                    else
-                    {
-                        item.IncreaseQualityBy(1);
-                    }
-
-                    item.UpdateDaysToSell();
-
-                    if (item.SellIn < 0)
-                    {
-                        item.Quality = 0;
-                    }
+                    UpdateBackstagePassesQuality(item);
 
                     continue;
                 }
 
-                if (item.Name != SulfurasName)
+                if (item.IsConjured())
                 {
-                    item.DegradeQualityBy(1);
+                    UpdateConjuredItemQuality(item);
+
+                    continue;
                 }
 
-                item.UpdateDaysToSell();
-
-                if (item.SellIn < 0)
-                {
-                    if (item.Name != SulfurasName)
-                    {
-                        item.DegradeQualityBy(1);
-                    }
-                }
+                UpdateNormalItem(item);
             }
         }
 
-        private static bool IsConjured(Item item)
+        private static void UpdateAgedBrieQuality(Item item)
         {
-            string? name = item.Name?.ToLower();
+            item.IncreaseQualityBy(1);
 
-            return name is not null && name.Contains("conjured");
+            item.UpdateDaysToSell();
+
+            if (item.SellIn < 0)
+            {
+                item.IncreaseQualityBy(1);
+            }
+        }
+
+        private static void UpdateBackstagePassesQuality(Item item)
+        {
+            if (item.SellIn < 6)
+            {
+                item.IncreaseQualityBy(3);
+            }
+            else if (item.SellIn < 11)
+            {
+                item.IncreaseQualityBy(2);
+            }
+            else
+            {
+                item.IncreaseQualityBy(1);
+            }
+
+            item.UpdateDaysToSell();
+
+            if (item.SellIn < 0)
+            {
+                item.Quality = 0;
+            }
+        }
+
+        private static void UpdateConjuredItemQuality(Item item)
+        {
+            if (item.SellIn <= 0)
+            {
+                item.DegradeQualityBy(ConjuredItemQualityDegradingRate * 2);
+            }
+            else
+            {
+                item.DegradeQualityBy(ConjuredItemQualityDegradingRate);
+            }
+        }
+
+        private static void UpdateNormalItem(Item item)
+        {
+            item.DegradeQualityBy(1);
+
+            item.UpdateDaysToSell();
+
+            if (item.SellIn < 0)
+            {
+                item.DegradeQualityBy(1);
+            }
         }
     }
 }

@@ -2,6 +2,13 @@
 {
     internal static class ItemExtensions
     {
+        public static bool IsConjured(this Item item)
+        {
+            string? name = item.Name?.ToLower();
+
+            return name is not null && name.Contains("conjured");
+        }
+
         public static void DegradeQualityBy(this Item item, int decrement)
         {
             if (item.Quality - decrement < 0)
