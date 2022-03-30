@@ -227,5 +227,57 @@ namespace GildedRose.Tests
 
             backstagePasses.Quality.Should().Be(0);
         }
+
+        [Theory]
+        [InlineData(10)]
+        [InlineData(6)]
+        public void BackstagePasses_Quality_increases_by_2_each_day_when_there_are_10_days_or_less_until_the_concert(int sellIn)
+        {
+            Item backstagePasses = new()
+            {
+                Name = GildedRoseInventory.BackstagePassesName,
+                Quality = 1,
+                SellIn = sellIn
+            };
+            GildedRoseInventory sut = CreateInventoryWith(backstagePasses);
+
+            sut.UpdateQuality();
+
+            backstagePasses.Quality.Should().Be(3);
+        }
+
+        [Theory]
+        [InlineData(5)]
+        [InlineData(1)]
+        public void BackstagePasses_Quality_increases_by_3_each_day_when_there_are_5_days_or_less_until_the_concert(int sellIn)
+        {
+            Item backstagePasses = new()
+            {
+                Name = GildedRoseInventory.BackstagePassesName,
+                Quality = 1,
+                SellIn = sellIn
+            };
+            GildedRoseInventory sut = CreateInventoryWith(backstagePasses);
+
+            sut.UpdateQuality();
+
+            backstagePasses.Quality.Should().Be(4);
+        }
+
+        [Fact]
+        public void BackstagePasses_Quality_increases_only_by_1_each_day_when_there_are_more_than_10_days_until_the_concert()
+        {
+            Item backstagePasses = new()
+            {
+                Name = GildedRoseInventory.BackstagePassesName,
+                Quality = 1,
+                SellIn = 11
+            };
+            GildedRoseInventory sut = CreateInventoryWith(backstagePasses);
+
+            sut.UpdateQuality();
+
+            backstagePasses.Quality.Should().Be(2);
+        }
     }
 }
