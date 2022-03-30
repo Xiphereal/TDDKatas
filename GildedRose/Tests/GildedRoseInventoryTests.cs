@@ -57,12 +57,19 @@ namespace GildedRose.Tests
         }
 
         [Theory]
-        [InlineData(1, 0)]
-        [InlineData(0, -1)]
-        [InlineData(-1, -2)]
-        public void Item_SellIn_only_decreases_in_decrements_of_one(int sellIn, int decrementedSellIn)
+        [InlineData("Normal Item", 1, 0)]
+        [InlineData("Normal Item", 0, -1)]
+        [InlineData("Normal Item", -1, -2)]
+        [InlineData("Conjured Item", 1, 0)]
+        [InlineData("Conjured Item", 0, -1)]
+        [InlineData("Conjured Item", -1, -2)]
+        public void Item_SellIn_only_decreases_in_decrements_of_one(string name, int sellIn, int decrementedSellIn)
         {
-            Item item = new() { SellIn = sellIn };
+            Item item = new()
+            {
+                Name = name,
+                SellIn = sellIn
+            };
             GildedRoseInventory sut = CreateInventoryWith(item);
 
             sut.UpdateQuality();

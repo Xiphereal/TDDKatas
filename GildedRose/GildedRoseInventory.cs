@@ -28,43 +28,45 @@ namespace GildedRose
         {
             foreach (Item item in Items)
             {
-                if (item.Name == SulfurasName)
+                switch (item.Name)
                 {
-                    continue;
+                    case SulfurasName:
+                        break;
+
+                    case AgedBrieName:
+                        UpdateAgedBrieQuality(item);
+
+                        break;
+
+                    case BackstagePassesName:
+                        UpdateBackstagePassesQuality(item);
+
+                        break;
+
+                    default:
+                        if (item.IsConjured())
+                        {
+                            UpdateConjuredItemQuality(item);
+                        }
+                        else
+                        {
+                            UpdateNormalItemQuality(item);
+                        }
+
+                        break;
                 }
 
-                if (item.Name == AgedBrieName)
-                {
-                    UpdateAgedBrieQuality(item);
-
-                    continue;
-                }
-
-                if (item.Name == BackstagePassesName)
-                {
-                    UpdateBackstagePassesQuality(item);
-
-                    continue;
-                }
-
-                if (item.IsConjured())
-                {
-                    UpdateConjuredItemQuality(item);
-
-                    continue;
-                }
-
-                UpdateNormalItem(item);
+                item.UpdateDaysToSell();
             }
         }
 
         private static void UpdateAgedBrieQuality(Item item)
         {
-            item.IncreaseQualityBy(1);
-
-            item.UpdateDaysToSell();
-
-            if (item.SellIn < 0)
+            if (item.HasSellDayPassedOrIsDueToday())
+            {
+                item.IncreaseQualityBy(2);
+            }
+            else
             {
                 item.IncreaseQualityBy(1);
             }
@@ -85,9 +87,7 @@ namespace GildedRose
                 item.IncreaseQualityBy(1);
             }
 
-            item.UpdateDaysToSell();
-
-            if (item.SellIn < 0)
+            if (item.HasSellDayPassedOrIsDueToday())
             {
                 item.Quality = 0;
             }
@@ -95,7 +95,7 @@ namespace GildedRose
 
         private static void UpdateConjuredItemQuality(Item item)
         {
-            if (item.SellIn <= 0)
+            if (item.HasSellDayPassedOrIsDueToday())
             {
                 item.DegradeQualityBy(ConjuredItemQualityDegradingRate * 2);
             }
@@ -105,13 +105,13 @@ namespace GildedRose
             }
         }
 
-        private static void UpdateNormalItem(Item item)
+        private static void UpdateNormalItemQuality(Item item)
         {
-            item.DegradeQualityBy(1);
-
-            item.UpdateDaysToSell();
-
-            if (item.SellIn < 0)
+            if (item.HasSellDayPassedOrIsDueToday())
+            {
+                item.DegradeQualityBy(2);
+            }
+            else
             {
                 item.DegradeQualityBy(1);
             }

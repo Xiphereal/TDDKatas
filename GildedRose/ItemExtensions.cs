@@ -9,6 +9,11 @@
             return name is not null && name.Contains("conjured");
         }
 
+        public static bool HasSellDayPassedOrIsDueToday(this Item item)
+        {
+            return item.SellIn < 1;
+        }
+
         public static void DegradeQualityBy(this Item item, int decrement)
         {
             if (item.Quality - decrement < 0)
