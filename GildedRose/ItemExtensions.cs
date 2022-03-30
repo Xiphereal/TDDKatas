@@ -11,5 +11,23 @@
 
             item.Quality -= decrement;
         }
+
+        public static void IncreaseQualityBy(this Item item, int increment)
+        {
+            if (item.Quality + increment < 50)
+            {
+                item.Quality += increment;
+            }
+        }
+
+        public static void UpdateDaysToSell(this Item item)
+        {
+            if (item.Name == GildedRoseInventory.SulfurasName)
+            {
+                return;
+            }
+
+            item.SellIn--;
+        }
     }
 }

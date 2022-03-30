@@ -26,10 +26,8 @@ namespace GildedRose
 
         public void UpdateQuality()
         {
-            for (var i = 0; i < Items.Count; i++)
+            foreach (Item item in Items)
             {
-                Item item = Items[i];
-
                 if (IsConjured(item))
                 {
                     if (item.SellIn <= 0)
@@ -44,72 +42,73 @@ namespace GildedRose
                     continue;
                 }
 
-                if (Items[i].Name != AgedBrieName && Items[i].Name != BackstagePassesName)
+                if (item.Name == AgedBrieName)
                 {
-                    if (Items[i].Quality > 0)
+                    item.IncreaseQualityBy(1);
+
+                    item.UpdateDaysToSell();
+
+                    if (item.SellIn < 0)
                     {
-                        if (Items[i].Name != SulfurasName)
+                        item.IncreaseQualityBy(1);
+                    }
+
+                    continue;
+                }
+
+                if (item.Name != BackstagePassesName)
+                {
+                    if (item.Quality > 0)
+                    {
+                        if (item.Name != SulfurasName)
                         {
-                            Items[i].DegradeQualityBy(1);
+                            item.DegradeQualityBy(1);
                         }
                     }
                 }
                 else
                 {
-                    if (Items[i].Quality < 50)
+                    if (item.Quality < 50)
                     {
-                        Items[i].Quality = Items[i].Quality + 1;
+                        item.Quality = item.Quality + 1;
 
-                        if (Items[i].Name == BackstagePassesName)
+                        if (item.Name == BackstagePassesName)
                         {
-                            if (Items[i].SellIn < 11)
+                            if (item.SellIn < 11)
                             {
-                                if (Items[i].Quality < 50)
+                                if (item.Quality < 50)
                                 {
-                                    Items[i].Quality = Items[i].Quality + 1;
+                                    item.Quality = item.Quality + 1;
                                 }
                             }
 
-                            if (Items[i].SellIn < 6)
+                            if (item.SellIn < 6)
                             {
-                                if (Items[i].Quality < 50)
+                                if (item.Quality < 50)
                                 {
-                                    Items[i].Quality = Items[i].Quality + 1;
+                                    item.Quality = item.Quality + 1;
                                 }
                             }
                         }
                     }
                 }
 
-                if (Items[i].Name != SulfurasName)
-                {
-                    Items[i].SellIn = Items[i].SellIn - 1;
-                }
+                item.UpdateDaysToSell();
 
-                if (Items[i].SellIn < 0)
+                if (item.SellIn < 0)
                 {
-                    if (Items[i].Name != AgedBrieName)
+                    if (item.Name == BackstagePassesName)
                     {
-                        if (Items[i].Name == BackstagePassesName)
-                        {
-                            Items[i].Quality = 0;
-                        }
-                        else
-                        {
-                            if (Items[i].Quality > 0)
-                            {
-                                if (Items[i].Name != SulfurasName)
-                                {
-                                    Items[i].DegradeQualityBy(1);
-                                }
-                            }
-                        }
+                        item.Quality = 0;
                     }
                     else
                     {
-                        if (Items[i].Quality < 50)
+                        if (item.Quality > 0)
                         {
-                            Items[i].Quality = Items[i].Quality + 1;
+                            if (item.Name != SulfurasName)
+                            {
+                                item.DegradeQualityBy(1);
+                            }
                         }
                     }
                 }
