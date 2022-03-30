@@ -56,60 +56,43 @@ namespace GildedRose
                     continue;
                 }
 
-                if (item.Name != BackstagePassesName)
+                if (item.Name == BackstagePassesName)
                 {
-                    if (item.Quality > 0)
+                    if (item.SellIn < 6)
                     {
-                        if (item.Name != SulfurasName)
-                        {
-                            item.DegradeQualityBy(1);
-                        }
+                        item.IncreaseQualityBy(3);
                     }
+                    else if (item.SellIn < 11)
+                    {
+                        item.IncreaseQualityBy(2);
+                    }
+                    else
+                    {
+                        item.IncreaseQualityBy(1);
+                    }
+
+                    item.UpdateDaysToSell();
+
+                    if (item.SellIn < 0)
+                    {
+                        item.Quality = 0;
+                    }
+
+                    continue;
                 }
-                else
+
+                if (item.Name != SulfurasName)
                 {
-                    if (item.Quality < 50)
-                    {
-                        item.Quality = item.Quality + 1;
-
-                        if (item.Name == BackstagePassesName)
-                        {
-                            if (item.SellIn < 11)
-                            {
-                                if (item.Quality < 50)
-                                {
-                                    item.Quality = item.Quality + 1;
-                                }
-                            }
-
-                            if (item.SellIn < 6)
-                            {
-                                if (item.Quality < 50)
-                                {
-                                    item.Quality = item.Quality + 1;
-                                }
-                            }
-                        }
-                    }
+                    item.DegradeQualityBy(1);
                 }
 
                 item.UpdateDaysToSell();
 
                 if (item.SellIn < 0)
                 {
-                    if (item.Name == BackstagePassesName)
+                    if (item.Name != SulfurasName)
                     {
-                        item.Quality = 0;
-                    }
-                    else
-                    {
-                        if (item.Quality > 0)
-                        {
-                            if (item.Name != SulfurasName)
-                            {
-                                item.DegradeQualityBy(1);
-                            }
-                        }
+                        item.DegradeQualityBy(1);
                     }
                 }
             }
