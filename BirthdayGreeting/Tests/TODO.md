@@ -1,8 +1,8 @@
 ﻿# TODO
 - [ ] Load from empty data source.
 - [ ] Load single record from data source.
-- [ ] No greeting sent when there're no employees.
-- [ ] No greeting sent to single employee whose bday is not today.
+- [x] No greeting sent when there're no employees.
+- [x] No greeting sent to single employee whose bday is not today.
 - [ ] Send greeting to single employee whose bday is today.
 - [ ] No email on send.
 - [ ] Malformed email on send.
