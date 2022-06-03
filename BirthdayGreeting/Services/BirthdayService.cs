@@ -23,14 +23,14 @@ namespace BirthdayGreetings.Services
             if (!employees.Any())
                 return;
 
-            IEnumerable<string> employeesToGreet = employees
+            IEnumerable<string> employeesToGreetMails = employees
                 .Where(e => e.Birthday.Equals(forDate))
                 .Select(e => e.Email);
 
-            if (!employeesToGreet.Any())
+            if (!employeesToGreetMails.Any())
                 return;
 
-            this.emailService.SendTo(employeesToGreet);
+            this.emailService.SendTo(employeesToGreetMails);
         }
     }
 }

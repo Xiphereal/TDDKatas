@@ -3,9 +3,10 @@
 - [ ] Load single record from data source.
 - [x] No greeting sent when there're no employees.
 - [x] No greeting sent to single employee whose bday is not today.
-- [ ] Send greeting to single employee whose bday is today.
+- [x] Send greeting to single employee whose bday is today.
+- [x] Send greeting to several employees whose bday is today.
+- [ ] Employees with same email?
 - [ ] No email on send.
 - [ ] Malformed email on send.
-- [ ] Send greeting to several employees whose bday is today.
 - [ ] No greeting sent to several employees whose bday is not today.
 - [ ] Send greeting only to employees whose bday is today.
