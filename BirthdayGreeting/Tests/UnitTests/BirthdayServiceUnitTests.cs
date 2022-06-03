@@ -99,6 +99,25 @@ namespace BirthdayGreetings.Tests.UnitTests
                 employees);
         }
 
+        [Fact]
+        public void Send_greeting_only_to_employees_whose_birthday_is_today()
+        {
+            // Arrange.
+            DateOnly today = new();
+            DateOnly notToday = today.AddDays(1);
+
+            List<Employee> employees = new()
+            {
+                new Employee(birthday: today, email: "email"),
+                new Employee(birthday: notToday, email: "anotherEmail"),
+            };
+
+            // Arrange & Act & Assert.
+            VerifyThat_greeting_is_sent_to_employees_whose_birthday_is_today(
+                today,
+                employees);
+        }
+
         private static Employee CreateEmployee(DateOnly birthday)
         {
             return new Employee(birthday: birthday, email: null);
@@ -158,11 +177,12 @@ namespace BirthdayGreetings.Tests.UnitTests
             birthdayService.SendGreetings(forDate: today);
 
             // Assert.
-            IEnumerable<string> employeesMails = employees.Select(e => e.Email);
+            IEnumerable<string> employeesMailsWhoseBirthdayIsToday =
+                employees.Where(e => e.Birthday.Equals(today)).Select(e => e.Email);
 
             emailServiceMock.Verify(
                 m => m.SendTo(It.Is<IEnumerable<string>>(
-                    ienum => ienum.SequenceEqual(employeesMails))));
+                    ienum => ienum.SequenceEqual(employeesMailsWhoseBirthdayIsToday))));
         }
     }
 }
