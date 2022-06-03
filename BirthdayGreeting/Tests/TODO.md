@@ -5,8 +5,8 @@
 - [x] No greeting sent to single employee whose bday is not today.
 - [x] Send greeting to single employee whose bday is today.
 - [x] Send greeting to several employees whose bday is today.
+- [x] No greeting sent to several employees whose bday is not today.
 - [ ] Employees with same email?
 - [ ] No email on send.
 - [ ] Malformed email on send.
-- [ ] No greeting sent to several employees whose bday is not today.
 - [ ] Send greeting only to employees whose bday is today.
