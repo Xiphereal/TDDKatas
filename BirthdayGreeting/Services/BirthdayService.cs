@@ -23,14 +23,17 @@ namespace BirthdayGreetings.Services
             if (!employees.Any())
                 return;
 
-            IEnumerable<string> employeesToGreetMails = employees
+            IEnumerable<Email> mailsToEmployeesWhoseBirthdayIsToday = employees
                 .Where(e => e.Birthday.Equals(forDate))
-                .Select(e => e.Email);
+                .Select(e => new Email(
+                    to: e.Email,
+                    subject: "Happy birthday!",
+                    message: $"Happy birthday, dear {e.FirstName}!"));
 
-            if (!employeesToGreetMails.Any())
+            if (!mailsToEmployeesWhoseBirthdayIsToday.Any())
                 return;
 
-            this.emailService.SendTo(employeesToGreetMails);
+            this.emailService.Send(mailsToEmployeesWhoseBirthdayIsToday);
         }
     }
 }

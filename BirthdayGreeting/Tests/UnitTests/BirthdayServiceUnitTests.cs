@@ -10,6 +10,11 @@ namespace BirthdayGreetings.Tests.UnitTests
 {
     public class BirthdayServiceUnitTests
     {
+        private const string AMailAdress = "email";
+        private const string AnotherMailAdress = "anotherEmail";
+        private const string AFirstName = "FirstName";
+        private const string AnotherFirstName = "AnotherFirstName";
+
         [Fact]
         public void No_greeting_is_sent_when_there_are_no_employees()
         {
@@ -72,7 +77,7 @@ namespace BirthdayGreetings.Tests.UnitTests
 
             List<Employee> employees = new()
             {
-                new Employee(birthday: today, email: "email"),
+                new Employee(AFirstName, birthday: today, AMailAdress),
             };
 
             // Arrange & Act & Assert.
@@ -89,8 +94,8 @@ namespace BirthdayGreetings.Tests.UnitTests
 
             List<Employee> employees = new()
             {
-                new Employee(birthday: today, email: "email"),
-                new Employee(birthday: today, email: "anotherEmail"),
+                new Employee(AFirstName, birthday: today, AMailAdress),
+                new Employee(AnotherFirstName, birthday: today, AnotherMailAdress),
             };
 
             // Arrange & Act & Assert.
@@ -108,8 +113,8 @@ namespace BirthdayGreetings.Tests.UnitTests
 
             List<Employee> employees = new()
             {
-                new Employee(birthday: today, email: "email"),
-                new Employee(birthday: notToday, email: "anotherEmail"),
+                new Employee(AFirstName, birthday: today, AMailAdress),
+                new Employee(AnotherFirstName, birthday: notToday, AnotherMailAdress),
             };
 
             // Arrange & Act & Assert.
@@ -120,7 +125,7 @@ namespace BirthdayGreetings.Tests.UnitTests
 
         private static Employee CreateEmployee(DateOnly birthday)
         {
-            return new Employee(birthday: birthday, email: null);
+            return new Employee(firstName: null, birthday: birthday, email: null);
         }
 
         private static void VerifyThat_no_greeting_is_sent_any_employee_whose_birthday_is_not_today(
@@ -157,7 +162,7 @@ namespace BirthdayGreetings.Tests.UnitTests
             Mock<IEmailService> emailServiceMock)
         {
             emailServiceMock.Verify(
-                m => m.SendTo(It.IsAny<IEnumerable<string>>()),
+                m => m.Send(It.IsAny<IEnumerable<Email>>()),
                 Times.Never());
         }
 
@@ -177,12 +182,16 @@ namespace BirthdayGreetings.Tests.UnitTests
             birthdayService.SendGreetings(forDate: today);
 
             // Assert.
-            IEnumerable<string> employeesMailsWhoseBirthdayIsToday =
-                employees.Where(e => e.Birthday.Equals(today)).Select(e => e.Email);
+            IEnumerable<Email> mailsToEmployeesWhoseBirthdayIsToday =
+                employees.Where(e => e.Birthday.Equals(today))
+                .Select(e => new Email(
+                    to: e.Email,
+                    subject: "Happy birthday!",
+                    message: $"Happy birthday, dear {e.FirstName}!"));
 
             emailServiceMock.Verify(
-                m => m.SendTo(It.Is<IEnumerable<string>>(
-                    ienum => ienum.SequenceEqual(employeesMailsWhoseBirthdayIsToday))));
+                m => m.Send(It.Is<IEnumerable<Email>>(
+                    ienum => ienum.SequenceEqual(mailsToEmployeesWhoseBirthdayIsToday))));
         }
     }
 }

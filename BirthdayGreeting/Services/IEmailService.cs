@@ -1,7 +1,9 @@
-﻿namespace BirthdayGreetings.Services
+﻿using BirthdayGreetings.Domain;
+
+namespace BirthdayGreetings.Services
 {
     public interface IEmailService
     {
-        void SendTo(IEnumerable<string> enumerable);
+        void Send(IEnumerable<Email> emails);
     }
 }
