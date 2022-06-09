@@ -69,6 +69,33 @@ namespace BirthdayGreetings.Tests.UnitTests
                 employees);
         }
 
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        [Theory]
+        public void No_greeting_is_sent_to_employee_whose_birthay_is_today_but_has_no_mail(
+            string email)
+        {
+            // Arrange.
+            DateOnly today = new();
+
+            Employee employee = new(firstName: "FirstName", birthday: today, email: email);
+
+            Mock<IEmployeeRepository> employeeRepositoryMock =
+                CreateEmployeeRepositoryMock(new List<Employee>() { employee });
+
+            Mock<IEmailService> emailServiceMock = new();
+
+            BirthdayService birthdayService =
+                new(employeeRepositoryMock.Object, emailServiceMock.Object);
+
+            // Act.
+            birthdayService.SendGreetings(forDate: today);
+
+            // Assert.
+            AssertThat_NoGreetingIsSent(emailServiceMock);
+        }
+
         [Fact]
         public void Send_greeting_to_employee_whose_birthday_is_today()
         {
@@ -81,7 +108,7 @@ namespace BirthdayGreetings.Tests.UnitTests
             };
 
             // Arrange & Act & Assert.
-            VerifyThat_greeting_is_sent_to_employees_whose_birthday_is_today(
+            VerifyThat_greeting_is_sent_to_employees_whose_birthday_is_today_and_have_mail(
                 today,
                 employees);
         }
@@ -99,7 +126,7 @@ namespace BirthdayGreetings.Tests.UnitTests
             };
 
             // Arrange & Act & Assert.
-            VerifyThat_greeting_is_sent_to_employees_whose_birthday_is_today(
+            VerifyThat_greeting_is_sent_to_employees_whose_birthday_is_today_and_have_mail(
                 today,
                 employees);
         }
@@ -118,7 +145,29 @@ namespace BirthdayGreetings.Tests.UnitTests
             };
 
             // Arrange & Act & Assert.
-            VerifyThat_greeting_is_sent_to_employees_whose_birthday_is_today(
+            VerifyThat_greeting_is_sent_to_employees_whose_birthday_is_today_and_have_mail(
+                today,
+                employees);
+        }
+
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        [Theory]
+        public void Send_greeting_only_to_employees_whose_birthay_is_today_and_have_mail(
+            string email)
+        {
+            // Arrange.
+            DateOnly today = new();
+
+            List<Employee> employees = new()
+            {
+                new(firstName: "Employee without mail", birthday: today, email: email),
+                new(firstName: "Employee with mail", birthday: today, email: AMailAdress),
+            };
+
+            // Arrange & Act & Assert.
+            VerifyThat_greeting_is_sent_to_employees_whose_birthday_is_today_and_have_mail(
                 today,
                 employees);
         }
@@ -166,10 +215,11 @@ namespace BirthdayGreetings.Tests.UnitTests
                 Times.Never());
         }
 
-        private static void VerifyThat_greeting_is_sent_to_employees_whose_birthday_is_today(
+        private static void VerifyThat_greeting_is_sent_to_employees_whose_birthday_is_today_and_have_mail(
             DateOnly today,
             List<Employee> employees)
         {
+            // Arrange.
             Mock<IEmployeeRepository> employeeRepositoryMock =
                 CreateEmployeeRepositoryMock(employees);
 
@@ -183,11 +233,11 @@ namespace BirthdayGreetings.Tests.UnitTests
 
             // Assert.
             IEnumerable<Email> mailsToEmployeesWhoseBirthdayIsToday =
-                employees.Where(e => e.Birthday.Equals(today))
-                .Select(e => new Email(
-                    to: e.Email,
-                    subject: "Happy birthday!",
-                    message: $"Happy birthday, dear {e.FirstName}!"));
+                employees.Where(e => e.Birthday.Equals(today) && !string.IsNullOrWhiteSpace(e.Email))
+                    .Select(e => new Email(
+                        to: e.Email,
+                        subject: "Happy birthday!",
+                        message: $"Happy birthday, dear {e.FirstName}!"));
 
             emailServiceMock.Verify(
                 m => m.Send(It.Is<IEnumerable<Email>>(

@@ -24,7 +24,7 @@ namespace BirthdayGreetings.Services
                 return;
 
             IEnumerable<Email> mailsToEmployeesWhoseBirthdayIsToday = employees
-                .Where(e => e.Birthday.Equals(forDate))
+                .Where(e => e.Birthday.Equals(forDate) && !string.IsNullOrWhiteSpace(e.Email))
                 .Select(e => new Email(
                     to: e.Email,
                     subject: "Happy birthday!",

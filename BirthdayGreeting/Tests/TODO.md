@@ -8,6 +8,6 @@
 - [x] Send greeting to several employees whose bday is today.
 - [x] Send greeting only to employees whose bday is today.
 - [x] Pass also the message contents and subject to the IEmailService.
+- [x] No email on send.
 - [ ] Employees with same email?
-- [ ] No email on send.
 - [ ] Malformed email on send.
