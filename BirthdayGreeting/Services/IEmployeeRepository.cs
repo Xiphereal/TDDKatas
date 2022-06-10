@@ -1,6 +1,6 @@
 ﻿using BirthdayGreetings.Domain;
 
-namespace BirthdayGreetings
+namespace BirthdayGreetings.Services
 {
     public interface IEmployeeRepository
     {
