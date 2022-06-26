@@ -27,6 +27,22 @@ namespace BirthdayGreetings.Tests.IntegrationTests
         }
 
         [Fact]
+        public void Reading_from_file_with_only_the_header()
+        {
+            // Arrange.
+            const string FilePath = "FilePath";
+            CreateFileWithHeaderAndEmployeesRecords(filePath: FilePath, Array.Empty<Employee>());
+
+            EmployeeRepository employeeRepository = new(dataSource: new FileSource(FilePath));
+
+            // Act.
+            IEnumerable<Employee> result = employeeRepository.GetEmployees();
+
+            // Arrange.
+            result.Should().BeEmpty();
+        }
+
+        [Fact]
         public void Reading_single_employee_record()
         {
             const string AFirstName = "AFirstName";
