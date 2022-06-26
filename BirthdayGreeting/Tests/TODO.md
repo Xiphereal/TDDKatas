@@ -1,7 +1,7 @@
 ﻿# TODO
 - [x] Load from empty data source.
 - [x] Load single record from data source.
-- [ ] Load several records from data source.
+- [x] Load several records from data source.
 - [ ] Load from file with only header.
 - [x] No greeting sent when there're no employees.
 - [x] No greeting sent to single employee whose bday is not today.
