@@ -1,6 +1,6 @@
-﻿namespace AdventOfCode2022.Day1
+﻿namespace AdventOfCode2022.Day1.Model
 {
-    public class HighestCaloriesFinder
+    internal class HighestCaloriesFinder
     {
         public static Elf Find(params Elf[] elfs)
         {

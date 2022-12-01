@@ -1,5 +1,6 @@
-﻿using AdventOfCode2022.Day1;
+﻿using AdventOfCode2022.Day1.Model;
 using FluentAssertions;
+using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
@@ -72,6 +73,47 @@ namespace AdventOfCode2022.Tests
             Expedition sut = new(firstElf, secondElf);
 
             sut.SumOfCaloriesOfHighestCarrier.Should().Be(1);
+        }
+
+        [Fact]
+        public void Convert_calories_grouped_by_elf_to_Elfs()
+        {
+            List<string> lines = new()
+            {
+                "1",
+                "",
+                "2",
+                " ",
+                "3"
+            };
+
+            new LinesToElfs(lines).Elfs.Should().BeEquivalentTo(new[]
+            {
+                new Elf(1),
+                new Elf(2),
+                new Elf(3)
+            });
+        }
+
+        [Fact]
+        public void Several_food_are_taken_into_account()
+        {
+            List<string> lines = new()
+            {
+                "1",
+                "1",
+                "",
+                "2",
+                " ",
+                "3"
+            };
+
+            new LinesToElfs(lines).Elfs.Should().BeEquivalentTo(new[]
+            {
+                new Elf(1, 1),
+                new Elf(2),
+                new Elf(3)
+            });
         }
     }
 }
