@@ -1,11 +1,25 @@
 ﻿using AdventOfCode2022.Day1;
 using FluentAssertions;
+using System.Linq;
 using Xunit;
 
 namespace AdventOfCode2022.Tests
 {
     public class Day1Tests
     {
+        [Fact]
+        public void Total_number_of_calories_can_be_obtained()
+        {
+            Elf elf = new()
+            {
+                CarriedFood = new[] { 1 }
+            };
+
+            Expedition sut = new(elf);
+
+            sut.SumOfCaloriesOfHighestCarrier.Should().Be(1);
+        }
+
         [Fact]
         public void Elf_with_highest_caloric_food_is_selected()
         {
@@ -19,7 +33,9 @@ namespace AdventOfCode2022.Tests
                 CarriedFood = new[] { 1 }
             };
 
-            HighestCaloriesFinder.Find(highestCarrier, other).Should().Be(highestCarrier);
+            Expedition sut = new(highestCarrier, other);
+
+            sut.SumOfCaloriesOfHighestCarrier.Should().Be(2);
         }
 
         [Fact]
@@ -35,7 +51,9 @@ namespace AdventOfCode2022.Tests
                 CarriedFood = new[] { 2 }
             };
 
-            HighestCaloriesFinder.Find(highestCarrier, other).Should().Be(highestCarrier);
+            Expedition sut = new(highestCarrier, other);
+
+            sut.SumOfCaloriesOfHighestCarrier.Should().Be(highestCarrier.CarriedFood.Sum());
         }
 
         [Fact]
@@ -51,7 +69,9 @@ namespace AdventOfCode2022.Tests
                 CarriedFood = new[] { 1 }
             };
 
-            HighestCaloriesFinder.Find(firstElf, secondElf).Should().Be(firstElf);
+            Expedition sut = new(firstElf, secondElf);
+
+            sut.SumOfCaloriesOfHighestCarrier.Should().Be(1);
         }
     }
 }
