@@ -1,4 +1,5 @@
-﻿using AdventOfCode2022.Day1.Model;
+﻿using AdventOfCode2022.Day1;
+using AdventOfCode2022.Day1.Model;
 using FluentAssertions;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,12 @@ namespace AdventOfCode2022.Tests
 {
     public class Day1Tests
     {
+        [Fact]
+        public void Output_problem_solution_as_test_error()
+        {
+            Problem.Solve().Should().Be(0);
+        }
+
         [Fact]
         public void Total_number_of_calories_can_be_obtained()
         {

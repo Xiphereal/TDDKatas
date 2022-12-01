@@ -12,4 +12,8 @@
 		<None Remove="Tests\**" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<None Update="Day1/Input.txt" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
+
 </Project>
