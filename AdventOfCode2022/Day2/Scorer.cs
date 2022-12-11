@@ -1,8 +1,8 @@
 ﻿namespace AdventOfCode2022.Tests
 {
-    public class ADSfasfd
+    public class Scorer
     {
-        public Play Winner { get; set; }
+        public Play Winner { get; init; }
 
         public int Score => Winner switch
         {
