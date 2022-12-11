@@ -1,10 +1,17 @@
-﻿using FluentAssertions;
+﻿using AdventOfCode2022.Day2;
+using FluentAssertions;
+using System.Collections.Generic;
 using Xunit;
 
 namespace AdventOfCode2022.Tests
 {
     public class Day2Tests
     {
+        public void Output_problem_solution_as_test_error()
+        {
+            Problem.Solve().Should().Be(0);
+        }
+
         [Theory]
         [InlineData(Shape.Rock, 1)]
         [InlineData(Shape.Paper, 2)]
@@ -54,30 +61,45 @@ namespace AdventOfCode2022.Tests
             sut.Score.Should().Be(score);
         }
 
-        [Theory]
-        [InlineData(Shape.Rock, Shape.Paper)]
-        [InlineData(Shape.Paper, Shape.Rock)]
-        [InlineData(Shape.Scissors, Shape.Scissors)]
-        public void Stagegy_guide_recommendation(Shape opponent, Shape shape)
+        [Fact]
+        public void Tournament_score_is_the_sum_of_all_rounds_scores()
         {
-            var sut = new StrategyGuide
+            var sut = new Tournament()
             {
-                Opponent = opponent
+                RoundsScores = new List<int>() { 1, 1 }
             };
 
-            sut.Recommendation.Should().Be(shape);
+            sut.Score.Should().Be(2);
         }
 
         [Theory]
         [InlineData("A", Shape.Rock)]
         [InlineData("B", Shape.Paper)]
         [InlineData("C", Shape.Scissors)]
-        [InlineData("Y", Shape.Rock)]
-        [InlineData("X", Shape.Paper)]
+        [InlineData("X", Shape.Rock)]
+        [InlineData("Y", Shape.Paper)]
         [InlineData("Z", Shape.Scissors)]
         public void Letter_to_shape_mapper(string letter, Shape shape)
         {
             new Letter(letter).ToShape().Should().Be(shape);
+        }
+
+        [Fact]
+        public void Example_input_for_strategy_guide()
+        {
+            var recommendations = new[]
+            {
+                "A Y",
+                "B X",
+                "C Z"
+            };
+
+            var sut = new StrategyGuide()
+            {
+                Recommendations = recommendations
+            };
+
+            sut.TournamentScore.Should().Be(15);
         }
     }
 }

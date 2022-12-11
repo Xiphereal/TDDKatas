@@ -17,8 +17,8 @@
         {
             return letter switch
             {
-                "A" or "Y" => Shape.Rock,
-                "B" or "X" => Shape.Paper,
+                "A" or "X" => Shape.Rock,
+                "B" or "Y" => Shape.Paper,
                 "C" or "Z" => Shape.Scissors,
                 _ => throw new InvalidOperationException("The letter must be {A, B, C, Y, X, Z}"),
             };

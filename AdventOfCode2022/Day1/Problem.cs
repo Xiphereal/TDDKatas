@@ -1,5 +1,5 @@
 ﻿using AdventOfCode2022.Day1.Model;
-using AdventOfCode2022.Day1.Views;
+using AdventOfCode2022.Utils;
 
 namespace AdventOfCode2022.Day1
 {
@@ -7,7 +7,7 @@ namespace AdventOfCode2022.Day1
     {
         public static int Solve()
         {
-            var lines = new FileReader().LinesOfProblemInput();
+            var lines = FileReader.LinesOfProblemInput(path: "./Day1/Input.txt");
 
             var elfs = new LinesToElfs(lines).Elfs.ToArray();
 
