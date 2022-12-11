@@ -9,7 +9,6 @@ namespace AdventOfCode2022.Tests
 {
     public class Day1Tests
     {
-        [Fact]
         public void Output_problem_solution_as_test_error()
         {
             Problem.Solve().Should().Be(0);
