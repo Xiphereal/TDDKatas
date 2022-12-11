@@ -56,16 +56,16 @@ namespace AdventOfCode2022.Tests
 
         [Theory]
         [InlineData(Shape.Rock, Shape.Paper)]
-        [InlineData(Shape.Paper, Shape.Scissors)]
-        [InlineData(Shape.Scissors, Shape.Rock)]
-        public void Always_choose_winner_play(Shape opponent, Shape winner)
+        [InlineData(Shape.Paper, Shape.Rock)]
+        [InlineData(Shape.Scissors, Shape.Scissors)]
+        public void Stagegy_guide_recommendation(Shape opponent, Shape shape)
         {
-            var sut = new PlaySelector
+            var sut = new StrategyGuide
             {
                 Opponent = opponent
             };
 
-            sut.ShouldPlay.Should().Be(winner);
+            sut.Recommendation.Should().Be(shape);
         }
 
         [Theory]
