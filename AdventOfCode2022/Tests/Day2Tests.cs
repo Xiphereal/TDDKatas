@@ -72,6 +72,9 @@ namespace AdventOfCode2022.Tests
         [InlineData("A", Shape.Rock)]
         [InlineData("B", Shape.Paper)]
         [InlineData("C", Shape.Scissors)]
+        [InlineData("Y", Shape.Rock)]
+        [InlineData("X", Shape.Paper)]
+        [InlineData("Z", Shape.Scissors)]
         public void Letter_to_shape_mapper(string letter, Shape shape)
         {
             new Letter(letter).ToShape().Should().Be(shape);

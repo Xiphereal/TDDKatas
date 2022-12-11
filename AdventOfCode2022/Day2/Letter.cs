@@ -6,8 +6,9 @@
 
         public Letter(string letter)
         {
-            if (letter != "A" && letter != "B" && letter != "C")
-                throw new ArgumentException("The letter must be A, B or C");
+            if (letter != "A" && letter != "B" && letter != "C"
+                && letter != "Y" && letter != "X" && letter != "Z")
+                throw new ArgumentException("The letter must be {A, B, C, Y, X, Z}");
 
             this.letter = letter;
         }
@@ -16,10 +17,10 @@
         {
             return letter switch
             {
-                "A" => Shape.Rock,
-                "B" => Shape.Paper,
-                "C" => Shape.Scissors,
-                _ => throw new InvalidOperationException("The letter must be A, B or C"),
+                "A" or "Y" => Shape.Rock,
+                "B" or "X" => Shape.Paper,
+                "C" or "Z" => Shape.Scissors,
+                _ => throw new InvalidOperationException("The letter must be {A, B, C, Y, X, Z}"),
             };
         }
     }
