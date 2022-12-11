@@ -2,14 +2,14 @@
 {
     public class PlaySelector
     {
-        public Play Me => Opponent switch
+        public Shape ShouldPlay => Opponent switch
         {
-            Play.Rock => Play.Paper,
-            Play.Paper => Play.Scissors,
-            Play.Scissors => Play.Rock,
+            Shape.Rock => Shape.Paper,
+            Shape.Paper => Shape.Scissors,
+            Shape.Scissors => Shape.Rock,
             _ => throw new InvalidOperationException("Invalid opponent play"),
         };
 
-        public Play Opponent { get; set; }
+        public Shape Opponent { get; set; }
     }
 }

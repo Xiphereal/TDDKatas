@@ -1,14 +1,14 @@
 ﻿namespace AdventOfCode2022.Tests
 {
-    public class Scorer
+    public class PlayScoreCalculator
     {
-        public Play Winner { get; init; }
+        public Shape Play { get; init; }
 
-        public int Score => Winner switch
+        public int Score => Play switch
         {
-            Play.Rock => 1,
-            Play.Paper => 2,
-            Play.Scissors => 3,
+            Shape.Rock => 1,
+            Shape.Paper => 2,
+            Shape.Scissors => 3,
             _ => throw new InvalidOperationException("Invalid play"),
         };
     }

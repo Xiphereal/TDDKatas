@@ -5,51 +5,46 @@ namespace AdventOfCode2022.Tests
 {
     public class Day2Tests
     {
-        [Fact]
-        public void Rock_scores_1()
+        [Theory]
+        [InlineData(Shape.Rock, 1)]
+        [InlineData(Shape.Paper, 2)]
+        [InlineData(Shape.Scissors, 3)]
+        public void Play_score_varies_depending_on_shape(Shape shape, int score)
         {
-            var sut = new Scorer
+            var sut = new PlayScoreCalculator
             {
-                Winner = Play.Rock
+                Play = shape
             };
 
-            sut.Score.Should().Be(1);
-        }
-
-        [Fact]
-        public void Paper_scores_2()
-        {
-            var sut = new Scorer
-            {
-                Winner = Play.Paper
-            };
-
-            sut.Score.Should().Be(2);
-        }
-
-        [Fact]
-        public void Scissors_scores_3()
-        {
-            var sut = new Scorer
-            {
-                Winner = Play.Scissors
-            };
-
-            sut.Score.Should().Be(3);
+            sut.Score.Should().Be(score);
         }
 
         [Theory]
-        [InlineData(Play.Rock, Play.Paper)]
-        [InlineData(Play.Paper, Play.Scissors)]
-        [InlineData(Play.Scissors, Play.Rock)]
-        public void Always_choose_winner_play(Play opponent, Play winner)
+        [InlineData(Outcome.Loss, 0)]
+        [InlineData(Outcome.Draw, 3)]
+        [InlineData(Outcome.Win, 6)]
+        public void Round_score_varies_depending_on_outcome(Outcome outcome, int score)
+        {
+            var sut = new RoundScoreCalculator
+            {
+                Outcome = outcome
+            };
+
+            sut.Score.Should().Be(score);
+        }
+
+        [Theory]
+        [InlineData(Shape.Rock, Shape.Paper)]
+        [InlineData(Shape.Paper, Shape.Scissors)]
+        [InlineData(Shape.Scissors, Shape.Rock)]
+        public void Always_choose_winner_play(Shape opponent, Shape winner)
         {
             var sut = new PlaySelector
             {
                 Opponent = opponent
             };
 
-            sut.Me.Should().Be(winner);
+            sut.ShouldPlay.Should().Be(winner);
         }
     }
 }
