@@ -2,18 +2,26 @@
 {
     public class Fitter
     {
-        private int sizeInCm;
+        private int availableSpaceInCm;
+        private int elementSizeInCm;
 
-        public Fitter WithConfigurationOf(params int[] sizesInCm)
+        private Fitter(int availableSpaceInCm)
         {
-            sizeInCm = sizesInCm.First();
+            this.availableSpaceInCm = availableSpaceInCm;
+        }
+
+        public static Fitter WithAnSpaceOf(int availableSpaceInCm) => new(availableSpaceInCm);
+
+        public Fitter AndAConfigurationOf(params int[] sizesInCm)
+        {
+            elementSizeInCm = sizesInCm.First();
 
             return this;
         }
 
-        public string FittingIn(int availableSizeInCm)
+        public string HowManyWouldFit()
         {
-            return $"{availableSizeInCm / sizeInCm} of {sizeInCm}cm";
+            return $"{availableSpaceInCm / elementSizeInCm} of {elementSizeInCm}cm";
         }
     }
 }
