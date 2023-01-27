@@ -2,14 +2,18 @@
 {
     public class Fitter
     {
-        public Fitter WithSizes(params int[] size)
+        private int sizeInCm;
+
+        public Fitter WithSizes(params int[] sizesInCm)
         {
+            sizeInCm = sizesInCm.First();
+
             return this;
         }
 
-        public string FittingIn(int v)
+        public string FittingIn(int availableSizeInCm)
         {
-            return "5 of 50cm";
+            return $"{availableSizeInCm / sizeInCm} of {sizeInCm}cm";
         }
     }
 }

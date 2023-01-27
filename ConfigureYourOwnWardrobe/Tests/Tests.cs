@@ -5,10 +5,14 @@ namespace ConfigureYourOwnWardrobe.Tests
 {
     public class Tests
     {
-        [Fact]
-        public void Five_wardrobe_elements_of_50cm_fill_the_wall()
+        [InlineData(50, 5)]
+        [InlineData(75, 3)]
+        [InlineData(100, 2)]
+        [InlineData(120, 2)]
+        [Theory]
+        public void Single_size_wardrobe_elements_fill_the_wall(int sizeInCm, int numberOfElements)
         {
-            new Fitter().WithSizes(50).FittingIn(250).Should().Be("5 of 50cm");
+            new Fitter().WithSizes(sizeInCm).FittingIn(250).Should().Be($"{numberOfElements} of {sizeInCm}cm");
         }
     }
 }
