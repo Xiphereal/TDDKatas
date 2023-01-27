@@ -1,10 +1,10 @@
-﻿namespace ConfigureYourOwnWardrobe.Tests
+﻿namespace ConfigureYourOwnWardrobe
 {
     public class Fitter
     {
         private int sizeInCm;
 
-        public Fitter WithSizes(params int[] sizesInCm)
+        public Fitter WithConfigurationOf(params int[] sizesInCm)
         {
             sizeInCm = sizesInCm.First();
 
