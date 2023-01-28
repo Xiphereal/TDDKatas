@@ -19,15 +19,22 @@
             return this;
         }
 
-        public IEnumerable<string> HowManyCombinationsWouldFitExactly()
+        public IEnumerable<Combination> HowManyCombinationsWouldFitExactly()
         {
-            var combinations = new List<string>();
+            var combinations = new List<Combination>();
 
             foreach (WardrobeElement element in configuration.WardrobeElements)
             {
                 if (element.FitsExactlyIn(availableSpaceInCm))
                 {
-                    combinations.Add($"{availableSpaceInCm / element.SizeInCm} of {element.SizeInCm}cm");
+                    combinations.Add(Combination.Of
+                    (
+                        new Part()
+                        {
+                            Element = element,
+                            Quantity = availableSpaceInCm / element.SizeInCm,
+                        }
+                    ));
 
                     continue;
                 }
@@ -46,9 +53,9 @@
             return combinations;
         }
 
-        private IEnumerable<string> CombinationsOfDifferentWardrobeElementsThatFitExactly(WardrobeElement first, WardrobeElement second)
+        private IEnumerable<Combination> CombinationsOfDifferentWardrobeElementsThatFitExactly(WardrobeElement first, WardrobeElement second)
         {
-            var result = new List<string>();
+            var result = new List<Combination>();
 
             for (int numberOfFirst = 1; numberOfFirst <= configuration.WardrobeElements.Count; numberOfFirst++)
                 for (int numberOfSecond = 1; numberOfSecond <= configuration.WardrobeElements.Count; numberOfSecond++)
@@ -56,7 +63,19 @@
                     var estimate = first.SizeInCm * numberOfFirst + second.SizeInCm * numberOfSecond;
 
                     if (estimate == availableSpaceInCm)
-                        result.Add($"{numberOfFirst} of {first.SizeInCm}cm and {numberOfSecond} of {second.SizeInCm}cm");
+                        result.Add(Combination.Of
+                        (
+                            new Part()
+                            {
+                                Element = first,
+                                Quantity = numberOfFirst,
+                            },
+                            new Part()
+                            {
+                                Element = second,
+                                Quantity = numberOfSecond,
+                            }
+                        ));
                 }
 
             return result;

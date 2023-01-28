@@ -1,6 +1,6 @@
 ﻿namespace ConfigureYourOwnWardrobe
 {
-    internal class WardrobeElement
+    public class WardrobeElement
     {
         public WardrobeElement(int sizeInCm)
         {

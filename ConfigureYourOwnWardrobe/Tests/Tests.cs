@@ -14,7 +14,17 @@ namespace ConfigureYourOwnWardrobe.Tests
         {
             WithAnSpaceOf(AvailableSpaceInCm).AndAConfigurationOf(WardrobeElements().Of(50))
                 .HowManyCombinationsWouldFitExactly()
-                .Should().BeEquivalentTo($"{5} of {50}cm");
+                .Should().BeEquivalentTo(new[]
+                {
+                    Combination.Of
+                    (
+                        new Part()
+                        {
+                             Element = new WardrobeElement(sizeInCm: 50),
+                             Quantity = 5,
+                        }
+                    )
+                });
         }
 
         [Fact]
@@ -24,8 +34,27 @@ namespace ConfigureYourOwnWardrobe.Tests
                 .HowManyCombinationsWouldFitExactly()
                 .Should().BeEquivalentTo(new[]
                 {
-                    "5 of 50cm",
-                    "2 of 75cm and 2 of 50cm",
+                    Combination.Of
+                    (
+                        new Part()
+                        {
+                             Element = new WardrobeElement(sizeInCm: 50),
+                             Quantity = 5,
+                        }
+                    ),
+                    Combination.Of
+                    (
+                        new Part()
+                        {
+                             Element = new WardrobeElement(sizeInCm: 50),
+                             Quantity = 2,
+                        },
+                        new Part()
+                        {
+                             Element = new WardrobeElement(sizeInCm: 75),
+                             Quantity = 2,
+                        }
+                    )
                 });
         }
     }
