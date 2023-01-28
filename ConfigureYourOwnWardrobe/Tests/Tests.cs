@@ -7,16 +7,26 @@ namespace ConfigureYourOwnWardrobe.Tests
 {
     public class Tests
     {
-        [InlineData(50, 5)]
-        [InlineData(75, 3)]
-        [InlineData(100, 2)]
-        [InlineData(120, 2)]
-        [Theory]
-        public void Single_size_wardrobe_elements_fill_the_wall(int sizeInCm, int numberOfElements)
+        private const int AvailableSpaceInCm = 250;
+
+        [Fact]
+        public void Five_wardrobe_elements_of_50cm_exactly_fill_the_wall()
         {
-            WithAnSpaceOf(250).AndAConfigurationOf(WardrobeElements().Of(sizeInCm))
-                .HowManyWouldFit()
-                .Should().Be($"{numberOfElements} of {sizeInCm}cm");
+            WithAnSpaceOf(AvailableSpaceInCm).AndAConfigurationOf(WardrobeElements().Of(50))
+                .HowManyCombinationsWouldFitExactly()
+                .Should().BeEquivalentTo($"{5} of {50}cm");
+        }
+
+        [Fact]
+        public void Combinations_of_50cm_and_75cm()
+        {
+            WithAnSpaceOf(AvailableSpaceInCm).AndAConfigurationOf(WardrobeElements().Of(50, 75))
+                .HowManyCombinationsWouldFitExactly()
+                .Should().BeEquivalentTo(new[]
+                {
+                    "5 of 50cm",
+                    "2 of 75cm and 2 of 50cm",
+                });
         }
     }
 }
