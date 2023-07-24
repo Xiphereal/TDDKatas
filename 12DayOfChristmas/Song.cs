@@ -23,6 +23,9 @@ namespace TwelveDayOfChristmas.Tests
 
         public static string Play(int day)
         {
+            if (day < 1 || day > 12)
+                throw new ArgumentOutOfRangeException();
+
             const string initialLines = "On the First day of Christmas,\r\n" +
                 "My true love gave to me:";
 
