@@ -4,27 +4,42 @@ namespace TwelveDayOfChristmas.Tests
 {
     public class Song
     {
+        private static string[] additionalGiftsLines =
+        {
+            "Twelve drummers drumming",
+            "Eleven pipers piping",
+            "Ten lords a-leaping",
+            "Nine ladies dancing",
+            "Eight maids a-milking",
+            "Seven swans a-swimming",
+            "Six geese a-laying",
+            "Five golden rings",
+            "Four calling birds",
+            "Three French hens",
+            "Two turtle doves",
+        };
+
         public static string Play(int day)
         {
             const string initialLines = "On the First day of Christmas,\r\n" +
                 "My true love gave to me:";
 
-            var gifts = new StringBuilder();
+            var additionalGifts = new StringBuilder();
 
-            if (day == 2)
+            foreach (var line in additionalGiftsLines[Range.EndAt(day - 1)])
             {
-                gifts.AppendLine("Two turtle doves,");
+                additionalGifts.AppendLine($"{line},");
             }
 
-            if (gifts.Any())
+            if (additionalGifts.Any())
             {
-                gifts.Append("And ");
+                additionalGifts.Append("And ");
             }
 
-            const string lastGift = "a partridge in a pear tree";
+            const string lastGift = "a partridge in a pear tree.";
 
             return initialLines + "\r\n"
-                + gifts.ToString()
+                + additionalGifts.ToString()
                 + lastGift;
         }
     }
