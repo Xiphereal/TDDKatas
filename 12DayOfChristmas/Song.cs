@@ -4,7 +4,9 @@ namespace TwelveDayOfChristmas.Tests
 {
     public class Song
     {
-        private static string[] additionalGiftsLines =
+        private const int LastDay = 12;
+
+        private static readonly string[] additionalGiftsLines =
         {
             "Twelve drummers drumming",
             "Eleven pipers piping",
@@ -26,7 +28,7 @@ namespace TwelveDayOfChristmas.Tests
 
             var additionalGifts = new StringBuilder();
 
-            foreach (var line in additionalGiftsLines[Range.EndAt(day - 1)])
+            foreach (var line in additionalGiftsLines[Range.StartAt(LastDay - day)])
             {
                 additionalGifts.AppendLine($"{line},");
             }

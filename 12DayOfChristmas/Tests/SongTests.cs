@@ -28,6 +28,19 @@ namespace TwelveDayOfChristmas.Tests
         }
 
         [Fact]
+        public void Any_in_between_day()
+        {
+            Song.Play(6)
+                .Should().EndWithEquivalentOf(
+                    "Six geese a-laying,\r\n" +
+                    "Five golden rings,\r\n" +
+                    "Four calling birds,\r\n" +
+                    "Three French hens,\r\n" +
+                    "Two turtle doves,\r\n" +
+                    "And a partridge in a pear tree.");
+        }
+
+        [Fact]
         public void All_days()
         {
             Song.Play(12)
