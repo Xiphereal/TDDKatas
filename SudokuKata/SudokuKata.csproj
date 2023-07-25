@@ -11,5 +11,9 @@
 	  <EmbeddedResource Remove="Tests\**" />
 	  <None Remove="Tests\**" />
 	</ItemGroup>
-	
+
+	<ItemGroup>
+		<None Update="Input.csv" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
+
 </Project>
