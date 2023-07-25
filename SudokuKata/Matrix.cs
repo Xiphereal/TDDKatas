@@ -2,15 +2,15 @@
 {
     public class Matrix
     {
-        public List<List<int>> Rows { get; set; } = new List<List<int>>();
-        public List<List<int>> Columns => ColumnsFrom(Rows);
+        public List<List<Cell>> Rows { get; set; } = new List<List<Cell>>();
+        public List<List<Cell>> Columns => ColumnsFrom(Rows);
 
-        private List<List<int>> ColumnsFrom(List<List<int>> rows)
+        private List<List<Cell>> ColumnsFrom(List<List<Cell>> rows)
         {
-            var columns = new List<List<int>>();
+            var columns = new List<List<Cell>>();
             for (int i = 0; i < rows.Count; i++)
             {
-                var column = new List<int>();
+                var column = new List<Cell>();
                 for (int j = 0; j < rows.Count; j++)
                 {
                     column.Add(rows[j][i]);
@@ -29,7 +29,7 @@
 
             return "The input complies with Sudoku's rules.";
 
-            static bool HasDuplicates(List<int> row)
+            static bool HasDuplicates(List<Cell> row)
             {
                 return row.Distinct().Count() != row.Count;
             }

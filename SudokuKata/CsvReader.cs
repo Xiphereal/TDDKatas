@@ -8,9 +8,9 @@
 
             foreach (string line in File.ReadAllLines(path))
             {
-                var row = new List<int>();
+                var row = new List<Cell>();
                 foreach (int number in line.Split(';').Select(x => int.Parse(x)))
-                    row.Add(number);
+                    row.Add(new Cell(number));
 
                 matrix.Rows.Add(row);
             }

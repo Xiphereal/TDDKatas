@@ -5,7 +5,7 @@ namespace SudokuKata.Tests.Builders
 {
     public class MatrixBuilder
     {
-        private readonly List<List<int>> rows = new List<List<int>>();
+        private readonly List<List<Cell>> rows = new List<List<Cell>>();
 
         private MatrixBuilder()
         { }
@@ -14,7 +14,14 @@ namespace SudokuKata.Tests.Builders
 
         public MatrixBuilder WithRow(params int[] numbers)
         {
-            rows.Add(numbers.ToList());
+            rows.Add(numbers.Select(n => new Cell(n)).ToList());
+
+            return this;
+        }
+
+        public MatrixBuilder WithRow(params Cell[] cells)
+        {
+            rows.Add(cells.ToList());
 
             return this;
         }

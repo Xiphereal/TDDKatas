@@ -62,8 +62,21 @@ namespace SudokuKata.Tests
 
             matrix.Columns.Should().BeEquivalentTo(new[]
             {
-                new[] { 1, 1},
-                new[] { 2, 2},
+                new[] { new Cell(1), new Cell(1) },
+                new[] { new Cell(2), new Cell(2) },
+            });
+        }
+
+        [Fact]
+        public void Matrix_can_have_empty_cells()
+        {
+            var matrix = Matrix()
+                .WithRow(new EmptyCell(), new Cell(1))
+                .Build();
+
+            matrix.Rows.Should().BeEquivalentTo(new[]
+            {
+                new[] { new EmptyCell(), new Cell(1) }
             });
         }
     }
