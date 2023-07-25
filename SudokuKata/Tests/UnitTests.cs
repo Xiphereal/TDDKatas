@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
-using System.Collections.Generic;
 using Xunit;
+using static SudokuKata.Tests.Builders.MatrixBuilder;
 
 namespace SudokuKata.Tests
 {
@@ -9,9 +9,10 @@ namespace SudokuKata.Tests
         [Fact]
         public void Compliant_matrix()
         {
-            var matrix = new Matrix();
-            matrix.Rows.Add(new List<int> { 1, 2 });
-            matrix.Rows.Add(new List<int> { 2, 1 });
+            var matrix = Matrix()
+                .WithRow(1, 2)
+                .WithRow(2, 1)
+                .Build();
 
             matrix.CheckForViolations().Should().Be("The input complies with Sudoku's rules.");
         }
@@ -19,9 +20,10 @@ namespace SudokuKata.Tests
         [Fact]
         public void Matrix_with_duplicated_numbers_in_row_is_noncompliant()
         {
-            var matrix = new Matrix();
-            matrix.Rows.Add(new List<int> { 1, 1 });
-            matrix.Rows.Add(new List<int> { 2, 2 });
+            var matrix = Matrix()
+                .WithRow(1, 1)
+                .WithRow(2, 2)
+                .Build();
 
             matrix.CheckForViolations().Should().Be("The input doesn't comply with Sudoku's rules.");
         }
@@ -29,9 +31,10 @@ namespace SudokuKata.Tests
         [Fact]
         public void Matrix_with_duplicated_numbers_in_column_is_noncompliant()
         {
-            var matrix = new Matrix();
-            matrix.Rows.Add(new List<int> { 1, 2 });
-            matrix.Rows.Add(new List<int> { 1, 2 });
+            var matrix = Matrix()
+                .WithRow(1, 2)
+                .WithRow(1, 2)
+                .Build();
 
             matrix.CheckForViolations().Should().Be("The input doesn't comply with Sudoku's rules.");
         }
@@ -39,11 +42,12 @@ namespace SudokuKata.Tests
         [Fact]
         public void Matrix_with_several_duplicated_numbers_in_both_columns_and_rows_is_noncompliant()
         {
-            var matrix = new Matrix();
-            matrix.Rows.Add(new List<int> { 2, 1, 3, 4 });
-            matrix.Rows.Add(new List<int> { 3, 4, 1, 2 });
-            matrix.Rows.Add(new List<int> { 2, 3, 4, 1 });
-            matrix.Rows.Add(new List<int> { 3, 1, 2, 4 });
+            var matrix = Matrix()
+                .WithRow(2, 1, 3, 4)
+                .WithRow(3, 4, 1, 2)
+                .WithRow(2, 3, 4, 1)
+                .WithRow(3, 1, 2, 4)
+                .Build();
 
             matrix.CheckForViolations().Should().Be("The input doesn't comply with Sudoku's rules.");
         }
@@ -51,9 +55,10 @@ namespace SudokuKata.Tests
         [Fact]
         public void Columns_can_be_obtained_from_rows()
         {
-            var matrix = new Matrix();
-            matrix.Rows.Add(new List<int> { 1, 2 });
-            matrix.Rows.Add(new List<int> { 1, 2 });
+            var matrix = Matrix()
+                .WithRow(1, 2)
+                .WithRow(1, 2)
+                .Build();
 
             matrix.Columns.Should().BeEquivalentTo(new[]
             {
