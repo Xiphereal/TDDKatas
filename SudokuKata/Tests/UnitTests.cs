@@ -25,5 +25,29 @@ namespace SudokuKata.Tests
 
             matrix.CheckForViolations().Should().Be("The input doesn't comply with Sudoku's rules.");
         }
+
+        [Fact]
+        public void Matrix_with_duplicated_numbers_in_column_is_noncompliant()
+        {
+            var matrix = new Matrix();
+            matrix.Rows.Add(new List<int> { 1, 2 });
+            matrix.Rows.Add(new List<int> { 1, 2 });
+
+            matrix.CheckForViolations().Should().Be("The input doesn't comply with Sudoku's rules.");
+        }
+
+        [Fact]
+        public void Columns_can_be_obtained_from_rows()
+        {
+            var matrix = new Matrix();
+            matrix.Rows.Add(new List<int> { 1, 2 });
+            matrix.Rows.Add(new List<int> { 1, 2 });
+
+            matrix.Columns.Should().BeEquivalentTo(new[]
+            {
+                new[] { 1, 1},
+                new[] { 2, 2},
+            });
+        }
     }
 }
