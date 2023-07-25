@@ -7,6 +7,11 @@
 
         private List<List<Cell>> ColumnsFrom(List<List<Cell>> rows)
         {
+            if (Rows.Any(r => r.Count != Rows.Count))
+            {
+                throw new ArgumentException("Matrix must be squared (NxN)");
+            }
+
             var columns = new List<List<Cell>>();
             for (int i = 0; i < rows.Count; i++)
             {
@@ -24,6 +29,11 @@
 
         public string CheckForViolations()
         {
+            if (Rows.Any(r => r.Count != Rows.Count))
+            {
+                throw new ArgumentException("Matrix must be squared (NxN)");
+            }
+
             if (Rows.Any(r => HasDuplicates(r)) || Columns.Any(r => HasDuplicates(r)))
                 return "The input doesn't comply with Sudoku's rules.";
 
