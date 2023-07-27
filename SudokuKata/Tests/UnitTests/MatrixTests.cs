@@ -2,9 +2,9 @@
 using Xunit;
 using static SudokuKata.Tests.Builders.MatrixBuilder;
 
-namespace SudokuKata.Tests
+namespace SudokuKata.Tests.UnitTests
 {
-    public class UnitTests
+    public class MatrixTests
     {
         [Fact]
         public void Compliant_matrix()
