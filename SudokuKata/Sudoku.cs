@@ -11,7 +11,7 @@
 
         public string IsSolution(Matrix proposal)
         {
-            if (proposal.DoesNotComplyWithRules())
+            if (proposal.DoesNotComplyWithRules() || !proposal.AllNumbersCorrelateWith(initialGrid))
                 return "The proposed solution is incorrect";
 
             return "The proposed solution is correct";

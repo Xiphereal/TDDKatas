@@ -49,5 +49,27 @@
                 return row.Distinct().Count() != row.Count;
             }
         }
+
+        public bool AllNumbersCorrelateWith(Matrix initialGrid)
+        {
+            for (int i = 0; i < Rows.Count; i++)
+            {
+                List<Cell> row = Rows[i];
+                for (int j = 0; j < row.Count; j++)
+                {
+                    Cell cell = row[j];
+
+                    if (cell is EmptyCell || initialGrid.Rows[i][j] is EmptyCell)
+                        continue;
+
+                    if (cell.Number != initialGrid.Rows[i][j].Number)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
     }
 }

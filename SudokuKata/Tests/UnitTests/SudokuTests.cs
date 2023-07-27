@@ -7,7 +7,7 @@ namespace SudokuKata.Tests.UnitTests
     public class SudokuTests
     {
         [Fact]
-        public void Correct_proposed_solution_is_recognized_as_such()
+        public void Proposed_solution_that_fills_empty_cell_complying_with_Sudokus_rules_is_correct()
         {
             Matrix initialGrid =
                 Matrix()
@@ -26,7 +26,7 @@ namespace SudokuKata.Tests.UnitTests
         }
 
         [Fact]
-        public void Incorrect_proposed_solution_is_recognized_as_such()
+        public void Proposed_solution_violating_Sudokus_rules_is_incorrect()
         {
             Matrix initialGrid =
                 Matrix()
@@ -40,6 +40,23 @@ namespace SudokuKata.Tests.UnitTests
                 Matrix()
                     .WithRow(new Cell(1), new Cell(1))
                     .WithRow(new Cell(1), new Cell(2))
+                    .Build())
+                .Should().Be("The proposed solution is incorrect");
+        }
+
+        [Fact]
+        public void Proposed_solution_with_numbers_not_matching_initial_grid_is_incorrect()
+        {
+            Matrix initialGrid =
+                Matrix()
+                    .WithRow(new Cell(1))
+                    .Build();
+
+            var sut = new Sudoku(initialGrid);
+
+            sut.IsSolution(
+                Matrix()
+                    .WithRow(new Cell(2))
                     .Build())
                 .Should().Be("The proposed solution is incorrect");
         }
