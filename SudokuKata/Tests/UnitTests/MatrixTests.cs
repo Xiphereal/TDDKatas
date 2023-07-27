@@ -79,5 +79,16 @@ namespace SudokuKata.Tests.UnitTests
                 new[] { new EmptyCell(), new Cell(1) }
             });
         }
+
+        [Fact]
+        public void Matrix_can_be_cloned()
+        {
+            var original = Matrix()
+                .WithRow(1, 2)
+                .WithRow(2, 1)
+                .Build();
+
+            original.Clone().Should().BeEquivalentTo(original);
+        }
     }
 }

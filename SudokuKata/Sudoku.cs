@@ -37,7 +37,9 @@
             if (!initialGrid.DoesComplyWithRules())
                 return "The Sudoku is not solvable";
 
-            return "TODO";
+            initialGrid.Rows.ForEach(r => r.Where(c => c is EmptyCell emptyCell).ToList().ForEach(c => c.Number = 1));
+
+            return initialGrid.ToString();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace SudokuKata.Tests
+﻿using System.Text;
+
+namespace SudokuKata.Tests
 {
     public class Matrix
     {
@@ -75,6 +77,34 @@
         internal bool IsSingleCell()
         {
             return Rows.Count == 1 && Columns.Count == 1;
+        }
+
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+
+            foreach (var row in Rows)
+            {
+                foreach (var cell in row)
+                {
+                    builder.Append($"{cell.Number},");
+                }
+
+                if (!Rows.Last().Equals(row))
+                    builder.AppendLine();
+            }
+
+            return builder.ToString();
+        }
+
+        public Matrix Clone()
+        {
+            var clone = new Matrix
+            {
+                Rows = this.Rows.ToList()
+            };
+
+            return clone;
         }
     }
 }

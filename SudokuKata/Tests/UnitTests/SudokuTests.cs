@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using System;
 using Xunit;
 using static SudokuKata.Tests.Builders.MatrixBuilder;
 
@@ -76,7 +77,7 @@ namespace SudokuKata.Tests.UnitTests
         }
 
         [Fact]
-        public void Solvable_Sudoku()
+        public void Solution_can_be_proposed_for_single_empty_cell()
         {
             new Sudoku(
                 Matrix()
@@ -84,7 +85,25 @@ namespace SudokuKata.Tests.UnitTests
                     .WithRow(1, 2)
                     .Build())
                 .ProposeSolution()
-                .Should().Be("TODO");
+                .Should().Be(
+                    "2,1," + Environment.NewLine +
+                    "1,2,");
+        }
+
+        // WIP.
+        public void Solution_can_be_proposed_for_several_empty_cells()
+        {
+            new Sudoku(
+                Matrix()
+                    .WithRow(new EmptyCell(), new Cell(2), new Cell(3))
+                    .WithRow(new Cell(2), new EmptyCell(), new Cell(1))
+                    .WithRow(new Cell(3), new Cell(1), new EmptyCell())
+                    .Build())
+                .ProposeSolution()
+                .Should().Be(
+                    "1,2,3" + Environment.NewLine +
+                    "2,3,1" + Environment.NewLine +
+                    "3,1,2");
         }
     }
 }
