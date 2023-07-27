@@ -49,14 +49,16 @@ namespace SudokuKata.Tests.UnitTests
         {
             Matrix initialGrid =
                 Matrix()
-                    .WithRow(new Cell(1))
+                    .WithRow(1, 2)
+                    .WithRow(2, 1)
                     .Build();
 
             var sut = new Sudoku(initialGrid);
 
             sut.IsSolution(
                 Matrix()
-                    .WithRow(new Cell(2))
+                    .WithRow(2, 1)
+                    .WithRow(1, 2)
                     .Build())
                 .Should().Be("The proposed solution is incorrect");
         }

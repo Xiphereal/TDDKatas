@@ -71,5 +71,10 @@
 
             return true;
         }
+
+        internal bool IsSingleCell()
+        {
+            return Rows.Count == 1 && Columns.Count == 1;
+        }
     }
 }

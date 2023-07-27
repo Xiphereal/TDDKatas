@@ -6,6 +6,11 @@
 
         public Sudoku(Matrix initialGrid)
         {
+            if (initialGrid.IsSingleCell())
+            {
+                throw new ArgumentException("Single cell Sudokus make no sense");
+            }
+
             this.initialGrid = initialGrid;
         }
 
