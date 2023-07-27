@@ -6,7 +6,7 @@
 
         public Sudoku(Matrix initialGrid)
         {
-            if (initialGrid.Rows.Count() is 0)
+            if (initialGrid.Rows.Count is 0)
             {
                 throw new ArgumentException("Sudokus with no cells make no sense");
             }
