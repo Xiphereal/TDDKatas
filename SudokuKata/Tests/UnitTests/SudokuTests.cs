@@ -65,6 +65,25 @@ namespace SudokuKata.Tests.UnitTests
         }
 
         [Fact]
+        public void Proposed_solution_with_empty_cells_is_incorrect()
+        {
+            Matrix initialGrid =
+                Matrix()
+                    .WithRow(new EmptyCell(), new Cell(2))
+                    .WithRow(2, 1)
+                    .Build();
+
+            var sut = new Sudoku(initialGrid);
+
+            sut.IsSolution(
+                Matrix()
+                    .WithRow(new EmptyCell(), new Cell(2))
+                    .WithRow(2, 1)
+                    .Build())
+                .Should().Be("The proposed solution is incorrect");
+        }
+
+        [Fact]
         public void Non_solvable_Sudoku_is_recognized_when_trying_to_solve_it()
         {
             new Sudoku(

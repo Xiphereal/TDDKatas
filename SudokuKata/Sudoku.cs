@@ -26,7 +26,9 @@
 
         public string IsSolution(Matrix proposal)
         {
-            if (!proposal.DoesComplyWithRules() || !proposal.AllNumbersCorrelateWith(initialGrid))
+            if (!proposal.DoesComplyWithRules()
+                || !proposal.AllNumbersCorrelateWith(initialGrid)
+                || proposal.ContainsAnyEmptyCell())
                 return "The proposed solution is incorrect";
 
             return "The proposed solution is correct";

@@ -74,9 +74,14 @@ namespace SudokuKata.Tests
             return true;
         }
 
-        internal bool IsSingleCell()
+        public bool IsSingleCell()
         {
             return Rows.Count == 1 && Columns.Count == 1;
+        }
+
+        public bool ContainsAnyEmptyCell()
+        {
+            return Rows.Any(r => r.Any(c => c is EmptyCell));
         }
 
         public override string ToString()
