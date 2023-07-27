@@ -29,15 +29,20 @@
 
         public string CheckForViolations()
         {
+            if (DoesNotComplyWithRules())
+                return "The input doesn't comply with Sudoku's rules.";
+
+            return "The input complies with Sudoku's rules.";
+        }
+
+        public bool DoesNotComplyWithRules()
+        {
             if (Rows.Any(r => r.Count != Rows.Count))
             {
                 throw new ArgumentException("Matrix must be squared (NxN)");
             }
 
-            if (Rows.Any(r => HasDuplicates(r)) || Columns.Any(r => HasDuplicates(r)))
-                return "The input doesn't comply with Sudoku's rules.";
-
-            return "The input complies with Sudoku's rules.";
+            return Rows.Any(r => HasDuplicates(r)) || Columns.Any(r => HasDuplicates(r));
 
             static bool HasDuplicates(List<Cell> row)
             {

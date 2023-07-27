@@ -9,8 +9,11 @@
             this.initialGrid = initialGrid;
         }
 
-        public string IsSolution(Matrix matrix)
+        public string IsSolution(Matrix proposal)
         {
+            if (proposal.DoesNotComplyWithRules())
+                return "The proposed solution is incorrect";
+
             return "The proposed solution is correct";
         }
     }
