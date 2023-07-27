@@ -26,10 +26,18 @@
 
         public string IsSolution(Matrix proposal)
         {
-            if (proposal.DoesNotComplyWithRules() || !proposal.AllNumbersCorrelateWith(initialGrid))
+            if (!proposal.DoesComplyWithRules() || !proposal.AllNumbersCorrelateWith(initialGrid))
                 return "The proposed solution is incorrect";
 
             return "The proposed solution is correct";
+        }
+
+        public string IsSolvable()
+        {
+            if (!initialGrid.DoesComplyWithRules())
+                return "The Sudoku is not solvable";
+
+            return "TODO";
         }
     }
 }
