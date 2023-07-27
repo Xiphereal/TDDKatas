@@ -49,7 +49,7 @@ namespace SudokuKata.Tests.UnitTests
         {
             Matrix initialGrid =
                 Matrix()
-                    .WithRow(1, 2)
+                    .WithRow(new EmptyCell(), new Cell(2))
                     .WithRow(2, 1)
                     .Build();
 

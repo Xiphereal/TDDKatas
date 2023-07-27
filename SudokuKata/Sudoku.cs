@@ -16,6 +16,11 @@
                 throw new ArgumentException("Single cell Sudokus make no sense");
             }
 
+            if (!initialGrid.Rows.Any(r => r.Any(c => c is EmptyCell)))
+            {
+                throw new ArgumentException("Initial grid must have empty cells");
+            }
+
             this.initialGrid = initialGrid;
         }
 
