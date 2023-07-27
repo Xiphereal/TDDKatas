@@ -72,12 +72,12 @@ namespace SudokuKata.Tests.UnitTests
         public void Matrix_can_have_empty_cells()
         {
             var matrix = Matrix()
-                .WithRow(new EmptyCell(), new Cell(1))
+                .WithRow(new Cell(), new Cell(1))
                 .Build();
 
             matrix.Rows.Should().BeEquivalentTo(new[]
             {
-                new[] { new EmptyCell(), new Cell(1) }
+                new[] { new Cell(), new Cell(1) }
             });
         }
 

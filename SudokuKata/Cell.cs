@@ -2,12 +2,17 @@
 {
     public class Cell
     {
-        public Cell(int? number)
+        public Cell(int? number = null)
         {
             Number = number;
         }
 
         public int? Number { get; set; }
+
+        public bool IsEmpty()
+        {
+            return !Number.HasValue;
+        }
 
         public override bool Equals(object? obj)
         {

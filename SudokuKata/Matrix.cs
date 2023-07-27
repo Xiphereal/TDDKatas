@@ -61,7 +61,7 @@ namespace SudokuKata.Tests
                 {
                     Cell cell = row[j];
 
-                    if (cell is EmptyCell || initialGrid.Rows[i][j] is EmptyCell)
+                    if (cell.IsEmpty() || initialGrid.Rows[i][j].IsEmpty())
                         continue;
 
                     if (cell.Number != initialGrid.Rows[i][j].Number)
@@ -81,7 +81,7 @@ namespace SudokuKata.Tests
 
         public bool ContainsAnyEmptyCell()
         {
-            return Rows.Any(r => r.Any(c => c is EmptyCell));
+            return Rows.Any(r => r.Any(c => c.IsEmpty()));
         }
 
         public override string ToString()

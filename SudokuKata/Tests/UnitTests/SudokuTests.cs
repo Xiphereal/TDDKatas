@@ -12,7 +12,7 @@ namespace SudokuKata.Tests.UnitTests
         {
             Matrix initialGrid =
                 Matrix()
-                    .WithRow(new EmptyCell(), new Cell(1))
+                    .WithRow(new Cell(), new Cell(1))
                     .WithRow(new Cell(1), new Cell(2))
                     .Build();
 
@@ -31,7 +31,7 @@ namespace SudokuKata.Tests.UnitTests
         {
             Matrix initialGrid =
                 Matrix()
-                    .WithRow(new EmptyCell(), new Cell(1))
+                    .WithRow(new Cell(), new Cell(1))
                     .WithRow(new Cell(1), new Cell(2))
                     .Build();
 
@@ -50,7 +50,7 @@ namespace SudokuKata.Tests.UnitTests
         {
             Matrix initialGrid =
                 Matrix()
-                    .WithRow(new EmptyCell(), new Cell(2))
+                    .WithRow(new Cell(), new Cell(2))
                     .WithRow(2, 1)
                     .Build();
 
@@ -69,7 +69,7 @@ namespace SudokuKata.Tests.UnitTests
         {
             Matrix initialGrid =
                 Matrix()
-                    .WithRow(new EmptyCell(), new Cell(2))
+                    .WithRow(new Cell(), new Cell(2))
                     .WithRow(2, 1)
                     .Build();
 
@@ -77,7 +77,7 @@ namespace SudokuKata.Tests.UnitTests
 
             sut.IsSolution(
                 Matrix()
-                    .WithRow(new EmptyCell(), new Cell(2))
+                    .WithRow(new Cell(), new Cell(2))
                     .WithRow(2, 1)
                     .Build())
                 .Should().Be("The proposed solution is incorrect");
@@ -88,7 +88,7 @@ namespace SudokuKata.Tests.UnitTests
         {
             new Sudoku(
                 Matrix()
-                    .WithRow(new Cell(1), new EmptyCell())
+                    .WithRow(new Cell(1), new Cell())
                     .WithRow(1, 2)
                     .Build())
                 .ProposeSolution()
@@ -100,7 +100,7 @@ namespace SudokuKata.Tests.UnitTests
         {
             new Sudoku(
                 Matrix()
-                    .WithRow(new Cell(2), new EmptyCell())
+                    .WithRow(new Cell(2), new Cell())
                     .WithRow(1, 2)
                     .Build())
                 .ProposeSolution()
@@ -109,14 +109,14 @@ namespace SudokuKata.Tests.UnitTests
                     "1,2,");
         }
 
-        // WIP.
+        // WIP
         public void Solution_can_be_proposed_for_several_empty_cells()
         {
             new Sudoku(
                 Matrix()
-                    .WithRow(new EmptyCell(), new Cell(2), new Cell(3))
-                    .WithRow(new Cell(2), new EmptyCell(), new Cell(1))
-                    .WithRow(new Cell(3), new Cell(1), new EmptyCell())
+                    .WithRow(new Cell(), new Cell(2), new Cell(3))
+                    .WithRow(new Cell(2), new Cell(), new Cell(1))
+                    .WithRow(new Cell(3), new Cell(1), new Cell())
                     .Build())
                 .ProposeSolution()
                 .Should().Be(

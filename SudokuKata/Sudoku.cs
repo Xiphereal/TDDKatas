@@ -16,7 +16,7 @@
                 throw new ArgumentException("Single cell Sudokus make no sense");
             }
 
-            if (!initialGrid.Rows.Any(r => r.Any(c => c is EmptyCell)))
+            if (!initialGrid.Rows.Any(r => r.Any(c => c.IsEmpty())))
             {
                 throw new ArgumentException("Initial grid must have empty cells");
             }
@@ -39,9 +39,21 @@
             if (!initialGrid.DoesComplyWithRules())
                 return "The Sudoku is not solvable";
 
-            initialGrid.Rows.ForEach(r => r.Where(c => c is EmptyCell emptyCell).ToList().ForEach(c => c.Number = 1));
+            var candidate = initialGrid.DeepClone();
 
-            return initialGrid.ToString();
+            do
+            {
+                foreach (var row in candidate.Rows)
+                {
+                    foreach (var cell in row.Where(c => c.IsEmpty()))
+                    {
+                        cell.Number = new Random().Next(1, 4);
+                    }
+                }
+            }
+            while (IsSolution(candidate) == "The proposed solution is incorrect");
+
+            return candidate.ToString();
         }
     }
 }
