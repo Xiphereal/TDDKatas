@@ -97,12 +97,19 @@ namespace SudokuKata.Tests
             return builder.ToString();
         }
 
-        public Matrix Clone()
+        public Matrix DeepClone()
         {
-            var clone = new Matrix
+            var clone = new Matrix();
+
+            foreach (var row in Rows)
             {
-                Rows = this.Rows.ToList()
-            };
+                var clonedRow = new List<Cell>();
+
+                foreach (var cell in row)
+                    clonedRow.Add(new Cell(cell.Number));
+
+                clone.Rows.Add(clonedRow);
+            }
 
             return clone;
         }

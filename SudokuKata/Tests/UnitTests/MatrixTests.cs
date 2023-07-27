@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using System.Linq;
 using Xunit;
 using static SudokuKata.Tests.Builders.MatrixBuilder;
 
@@ -81,14 +82,20 @@ namespace SudokuKata.Tests.UnitTests
         }
 
         [Fact]
-        public void Matrix_can_be_cloned()
+        public void Matrix_can_be_deep_cloned()
         {
             var original = Matrix()
                 .WithRow(1, 2)
                 .WithRow(2, 1)
                 .Build();
 
-            original.Clone().Should().BeEquivalentTo(original);
+            Matrix clone = original.DeepClone();
+
+            clone.Should().BeEquivalentTo(original);
+
+            original.Rows.First().First().Number = 99;
+
+            clone.Rows.Any(r => r.Any(c => c.Number == 99)).Should().BeFalse();
         }
     }
 }
