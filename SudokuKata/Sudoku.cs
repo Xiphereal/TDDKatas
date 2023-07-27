@@ -32,7 +32,7 @@
             return "The proposed solution is correct";
         }
 
-        public string IsSolvable()
+        public string ProposeSolution()
         {
             if (!initialGrid.DoesComplyWithRules())
                 return "The Sudoku is not solvable";

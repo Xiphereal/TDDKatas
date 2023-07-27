@@ -64,14 +64,14 @@ namespace SudokuKata.Tests.UnitTests
         }
 
         [Fact]
-        public void Non_solvable_Sudoku()
+        public void Non_solvable_Sudoku_is_recognized_when_trying_to_solve_it()
         {
             new Sudoku(
                 Matrix()
                     .WithRow(new Cell(1), new EmptyCell())
                     .WithRow(1, 2)
                     .Build())
-                .IsSolvable()
+                .ProposeSolution()
                 .Should().Be("The Sudoku is not solvable");
         }
 
@@ -83,7 +83,7 @@ namespace SudokuKata.Tests.UnitTests
                     .WithRow(new Cell(2), new EmptyCell())
                     .WithRow(1, 2)
                     .Build())
-                .IsSolvable()
+                .ProposeSolution()
                 .Should().Be("TODO");
         }
     }
