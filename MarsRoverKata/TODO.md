@@ -1,6 +1,6 @@
 # TODO
-- [ ] Recibir orientación o mover hacia delante.
+- [ ] Recibir orientaciï¿½n o mover hacia delante.
 
 # Refactor
-- [ ] Rover no tiene constancia de posición; se la pide al plateau.
-- [ ] Tuplas con azucar sintáctico.
+- [x] Rover no tiene constancia de posiciï¿½n; se la pide al plateau.
+- [x] Tuplas con azucar sintï¿½ctico.
