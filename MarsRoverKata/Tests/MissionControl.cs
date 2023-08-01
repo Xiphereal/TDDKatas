@@ -1,16 +1,24 @@
-﻿namespace MarsRoverKata.Tests;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+
+namespace MarsRoverKata.Tests;
 
 public class MissionControl
 {
-    readonly Rover doc;
+	private readonly Rover doc;
 
-    public MissionControl(Rover doc)
-    {
-        this.doc = doc;
-    }
+	public MissionControl([NotNull] Rover rover)
+	{
+		if (rover is null)
+		{
+			throw new ArgumentException();
+		}
 
-    public void Order(Command input)
-    {
-        doc.MoveForward();
-    }
+		doc = rover;
+	}
+
+	public void Order(Command input)
+	{
+		doc.MoveForward();
+	}
 }
