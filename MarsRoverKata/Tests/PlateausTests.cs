@@ -126,8 +126,20 @@ namespace MarsRoverKata.Tests
 			rover.MoveForward();
 			rover.MoveForward();
 
-			rover.Position.y.Should().Be(2);
-			rover.Position.x.Should().Be(0);
+			rover.Position.Should().Be((0, 2));
+		}
+
+		[Fact]
+		public void RotateWest_ThenMoveForwards()
+		{
+			var plateau = new Plateau();
+			var rover = new Rover(plateau);
+			rover.LandAt(1, 1);
+
+			rover.RotateLeft();
+			rover.MoveForward();
+
+			rover.Position.Should().Be((0, 1));
 		}
 	}
 }
