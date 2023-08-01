@@ -2,7 +2,7 @@
 
 public class MissionControl
 {
-    readonly Rover doc;
+    private readonly Rover doc;
 
     public MissionControl(Rover doc)
     {
@@ -13,4 +13,8 @@ public class MissionControl
     {
         doc.MoveForward();
     }
+}
+
+public readonly struct Command
+{
 }

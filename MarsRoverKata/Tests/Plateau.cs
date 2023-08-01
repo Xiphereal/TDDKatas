@@ -14,14 +14,14 @@ public class Plateau
         y = 10;
     }
 
-    public void Receive(Rover rover, int x, int y)
+    public void Settle(Rover rover, int x, int y)
     {
-        if(x > this.x || x < 0)
+        if (x > this.x || x < 0)
             throw new ArgumentOutOfRangeException();
-        
-        if(y > this.y || y < 0)
+
+        if (y > this.y || y < 0)
             throw new ArgumentOutOfRangeException();
-        
+
         WhereRoverIs = (x, y);
     }
 }

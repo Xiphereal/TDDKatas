@@ -1,5 +1,3 @@
-using System;
-
 namespace MarsRoverKata.Tests;
 
 public class Rover
@@ -16,31 +14,14 @@ public class Rover
 
     public void LandAt(int x, int y)
     {
-        plateau.Receive(this, x, y);
+        plateau.Settle(this, x, y);
     }
 
     public void MoveForward()
     {
-        var delta = Direction();
+        var delta = Orientation.Direction();
 
-        plateau.Receive(this, Position.x + delta.x, Position.y + delta.y);
-    }
-
-    private (int x, int y) Direction()
-    {
-        switch(Orientation)
-        {
-            case CardinalPoint.North:
-                return (0, 1);
-            case CardinalPoint.East:
-                return (1, 0);
-            case CardinalPoint.South:
-                return (0, -1);
-            case CardinalPoint.West:
-                return (-1, 0);
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+        plateau.Settle(this, Position.x + delta.x, Position.y + delta.y);
     }
 
     public void RotateRight()

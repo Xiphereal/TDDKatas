@@ -15,7 +15,7 @@ public static class SteeringWheel
             _ => throw new ArgumentOutOfRangeException(nameof(origin), origin, null)
         };
     }
-    
+
     public static CardinalPoint RotateLeft(this CardinalPoint origin)
     {
         return origin switch
@@ -25,6 +25,18 @@ public static class SteeringWheel
             CardinalPoint.South => CardinalPoint.East,
             CardinalPoint.East => CardinalPoint.North,
             _ => throw new ArgumentOutOfRangeException(nameof(origin), origin, null)
+        };
+    }
+
+    public static (int x, int y) Direction(this CardinalPoint orientation)
+    {
+        return orientation switch
+        {
+            CardinalPoint.North => (0, 1),
+            CardinalPoint.East => (1, 0),
+            CardinalPoint.South => (0, -1),
+            CardinalPoint.West => (-1, 0),
+            _ => throw new ArgumentOutOfRangeException(),
         };
     }
 }
