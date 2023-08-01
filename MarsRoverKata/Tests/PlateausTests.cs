@@ -102,7 +102,7 @@ namespace MarsRoverKata.Tests
 		}
 
 		[Fact]
-		public void SJDFSDVBDASK()
+		public void TurnAroundAndMoveForward()
 		{
 			var plateau = new Plateau();
 			var rover = new Rover(plateau);
@@ -113,6 +113,20 @@ namespace MarsRoverKata.Tests
 			rover.MoveForward();
 
 			rover.Position.y.Should().Be(-1);
+			rover.Position.x.Should().Be(0);
+		}
+
+		[Fact]
+		public void MoveForwardTwice()
+		{
+			var plateau = new Plateau();
+			var rover = new Rover(plateau);
+			rover.LandAt(0, 0);
+
+			rover.MoveForward();
+			rover.MoveForward();
+
+			rover.Position.y.Should().Be(2);
 			rover.Position.x.Should().Be(0);
 		}
 	}

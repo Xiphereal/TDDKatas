@@ -1,3 +1,4 @@
+using System;
 namespace MarsRoverKata.Tests;
 
 public class Rover
@@ -31,19 +32,15 @@ public class Rover
 			case CardinalPoint.North:
 				return (0, 1);
 			case CardinalPoint.East:
-
-				break;
+				return (1, 0);
 			case CardinalPoint.South:
-				break;
+				return (0, -1);
 			case CardinalPoint.West:
-				break;
+				return (-1, 0);
 			default:
-				break;
-		}
+				throw new ArgumentOutOfRangeException();
 
-		return Orientation == CardinalPoint.East
-			? (Position.x + 1, Position.y)
-			: (Position.x, Position.y + 1);
+		}
 	}
 
 	public void RotateRight()
