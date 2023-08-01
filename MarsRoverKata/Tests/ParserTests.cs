@@ -12,8 +12,20 @@ public class ParserTests
 		var doc = new Rover(otroDocmás);
 
 		var sut = new MissionControl(doc);
-		sut.Order("M");
+		sut.Order('M');
 
 		doc.Position.Should().Be((0, 1));
 	}
+
+    [Fact]
+    public void asdfa()
+    {
+        var plateau = new Plateau();
+        var rover = new Rover(plateau);
+
+        var sut = new MissionControl(rover);
+        sut.Order("RM");
+        
+        rover.Position.Should().Be((1,0));
+    }
 }

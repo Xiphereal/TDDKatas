@@ -2,19 +2,15 @@
 
 public class MissionControl
 {
-    private readonly Rover doc;
+    readonly Rover doc;
 
     public MissionControl(Rover doc)
     {
         this.doc = doc;
     }
 
-    public void Order(string input)
+    public void Order(Command input)
     {
         doc.MoveForward();
     }
-}
-
-public readonly struct Command
-{
 }
