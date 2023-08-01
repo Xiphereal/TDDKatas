@@ -106,14 +106,14 @@ namespace MarsRoverKata.Tests
 		{
 			var plateau = new Plateau();
 			var rover = new Rover(plateau);
-			rover.LandAt(0, 0);
+			rover.LandAt(5, 5);
 
 			rover.RotateRight();
 			rover.RotateRight();
 			rover.MoveForward();
 
-			rover.Position.y.Should().Be(-1);
-			rover.Position.x.Should().Be(0);
+			rover.Position.y.Should().Be(4);
+			rover.Position.x.Should().Be(5);
 		}
 
 		[Fact]
