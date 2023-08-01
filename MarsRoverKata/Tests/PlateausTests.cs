@@ -48,13 +48,50 @@ namespace MarsRoverKata.Tests
 
 			rover.LandAt(0, 0);
 
-			rover.Orientation.Should().Be(Orientation.North);
+			rover.Orientation.Should().Be(CardinalPoint.North);
 		}
+
+        [Fact]
+        public void RotateRight()
+        {
+            var plateau = new Plateau();
+            var rover = new Rover(plateau);
+            rover.LandAt(0, 0);
+
+            rover.RotateRight();
+            
+            rover.Orientation.Should().Be(CardinalPoint.East);
+        }
+        
+        [Fact]
+        public void RotateLeft()
+        {
+            var plateau = new Plateau();
+            var rover = new Rover(plateau);
+            rover.LandAt(0, 0);
+
+            rover.RotateLeft();
+            
+            rover.Orientation.Should().Be(CardinalPoint.West);
+        }
+        
+        [Fact]
+        public void TurnAround()
+        {
+            var plateau = new Plateau();
+            var rover = new Rover(plateau);
+            rover.LandAt(0, 0);
+
+            rover.RotateLeft();
+            rover.RotateLeft();
+
+            rover.Orientation.Should().Be(CardinalPoint.South);
+        }
 	}
 
 	public class Rover
 	{
-		public Orientation Orientation { get; set; }
+		public CardinalPoint Orientation { get; set; }
 		public Tuple<int, int> Position;
 		private readonly Plateau plateau;
 
@@ -72,7 +109,25 @@ namespace MarsRoverKata.Tests
 		{
 			Position = new Tuple<int, int>(Position.Item1, Position.Item2 + 1);
 		}
-	}
+
+        public void RotateRight()
+        {
+            Orientation = CardinalPoint.East;
+        }
+
+        public void RotateLeft()
+        {
+            switch(Orientation)
+            {
+                case CardinalPoint.North:
+                    Orientation = CardinalPoint.West;
+                    break;
+                case CardinalPoint.West:
+                    Orientation = CardinalPoint.South;
+                    break;
+            }
+        }
+    }
 
 	public class Plateau
 	{
@@ -86,8 +141,11 @@ namespace MarsRoverKata.Tests
 		}
 	}
 
-	public enum Orientation
+	public enum CardinalPoint
 	{
-		North
-	}
+		North,
+        East,
+        West,
+        South
+    }
 }
