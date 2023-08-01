@@ -5,7 +5,9 @@ namespace MarsRoverKata.Tests;
 public class Rover
 {
     public CardinalPoint Orientation { get; set; }
-    public Tuple<int, int> Position;
+    public Tuple<int, int> Position { get => position; set => position = value; }
+
+    private Tuple<int, int> position;
     private readonly Plateau plateau;
 
     public Rover(Plateau plateau)
@@ -13,9 +15,10 @@ public class Rover
         this.plateau = plateau;
     }
 
-    public void LandAt(int i, int i1)
+    public void LandAt(int x, int y)
     {
-        Position = new Tuple<int, int>(i, i1);
+        Position = new Tuple<int, int>(x, y);
+        plateau.Receive(this, x, y);
     }
 
     public void MoveForward()
