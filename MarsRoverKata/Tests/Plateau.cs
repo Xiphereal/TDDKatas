@@ -17,6 +17,11 @@ public class Plateau
         y = 10;
     }
 
+    public void Settle((int x, int y) position)
+    {
+        Settle(position.x, position.y);
+    }
+    
     public void Settle( int x, int y)
     {
         if (x > this.x || x < 0)
