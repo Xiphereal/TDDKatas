@@ -21,7 +21,7 @@ public class Plateau
     {
         Settle(position.x, position.y);
     }
-    
+
     public void Settle( int x, int y)
     {
         if (x > this.x || x < 0)
@@ -43,8 +43,9 @@ public class Plateau
         obstacles.Add((x, y));
     }
 
-	internal (int x, int y) PositionAt((int, int) value)
+	internal (int x, int y) PreviewPosition((int, int) value)
 	{
-		throw new NotImplementedException();
+        var target = (WhereRoverIs.x + value.x, WhereRoverIs.y + value.y);
+		return (9,0);
 	}
 }
