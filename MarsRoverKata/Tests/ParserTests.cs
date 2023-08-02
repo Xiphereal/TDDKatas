@@ -56,5 +56,18 @@ public class ParserTests
 
         rover.Position.Should().Be((5, 5));
     }
-    
+
+    [Fact]
+    public void IgnoreCommandWhenDetectsAnObstacle()
+    {
+        var plateau = new Plateau();
+        var rover = new Rover(plateau);
+        plateau.Settle( 5, 5);
+        plateau.PutObstacle(4, 5);
+        
+        var sut = new Antenna(rover);
+        sut.Receive("LMRM");
+
+        rover.Position.Should().Be((5, 5));
+    }
 }
