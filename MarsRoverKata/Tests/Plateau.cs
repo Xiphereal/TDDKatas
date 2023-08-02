@@ -43,9 +43,18 @@ public class Plateau
         obstacles.Add((x, y));
     }
 
-	internal (int x, int y) PreviewPosition((int, int) value)
+	internal (int x, int y) PreviewPosition((int x, int y) value)
 	{
         var target = (WhereRoverIs.x + value.x, WhereRoverIs.y + value.y);
-		return (9,0);
+        if(target.Item1 < 0)
+        {
+            target = (target.Item1 + 10, target.Item2);
+        }
+
+        if(target.Item2 < 0)
+        {
+            target = (target.Item1, target.Item2 + 10);
+        }
+		return target;
 	}
 }

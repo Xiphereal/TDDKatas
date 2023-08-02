@@ -56,8 +56,5 @@ public class ParserTests
 
         rover.Position.Should().Be((5, 5));
     }
-
     
-
-
 }
