@@ -14,7 +14,7 @@ public class Plateau
         y = 10;
     }
 
-    public void Settle(Rover rover, int x, int y)
+    public void Settle( int x, int y)
     {
         if (x > this.x || x < 0)
             throw new ArgumentOutOfRangeException();

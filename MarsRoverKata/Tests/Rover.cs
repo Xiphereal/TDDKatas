@@ -20,14 +20,14 @@ public class Rover
 
 	public void LandAt(int x, int y)
 	{
-		plateau.Settle(this, x, y);
+		plateau.Settle( x, y);
 	}
 
 	public void MoveForward()
 	{
 		var (x, y) = Orientation.Direction();
 
-		plateau.Settle(this, Position.x + x, Position.y + y);
+		plateau.Settle( Position.x + x, Position.y + y);
 	}
 
 	public void RotateRight()
