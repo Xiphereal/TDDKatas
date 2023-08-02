@@ -26,17 +26,19 @@ public class Rover
 
     public bool MoveForward()
     {
+        Stuck = false;
+
         var delta = Orientation.Direction();
         var targetPosition = plateau.PreviewPosition(delta);
 
-        if (!plateau.Occupied(targetPosition))
+        Stuck = plateau.Occupied(targetPosition);
+
+		if (!Stuck)
         {
             plateau.Settle(targetPosition);
-            return true;
         }
 
-        Stuck = true;
-        return false;
+        return !Stuck;
     }
 
     public void RotateRight()

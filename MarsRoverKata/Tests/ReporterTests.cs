@@ -38,6 +38,21 @@ namespace MarsRoverKata.Tests
             sut.Receive("M");
 
             sut.LastReport.Should().Be("O:5:5:N");
-        }
-    }
+		}
+
+		[Fact]
+		public void NotBlockedForever()
+		{
+			var plateau = new Plateau();
+			var rover = new Rover(plateau);
+			var sut = new Antenna(rover);
+			plateau.Settle(5, 5);
+			plateau.PutObstacle(5, 6);
+
+			sut.Receive("M");
+            sut.Receive("LM");
+
+			sut.LastReport.Should().Be("4:5:W");
+		}
+	}
 }
