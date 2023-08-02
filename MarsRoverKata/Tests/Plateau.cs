@@ -42,4 +42,9 @@ public class Plateau
     {
         obstacles.Add((x, y));
     }
+
+	internal (int x, int y) PositionAt((int, int) value)
+	{
+		throw new NotImplementedException();
+	}
 }

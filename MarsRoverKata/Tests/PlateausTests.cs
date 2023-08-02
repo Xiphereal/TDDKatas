@@ -154,5 +154,17 @@ namespace MarsRoverKata.Tests
             
             rover.Position.Should().Be((9, 0));
         }
+
+		[Fact]
+		public void PreviewPosition()
+		{
+			var plateau = new Plateau();
+			var rover = new Rover(plateau);
+			rover.LandAt(0, 0);
+
+			plateau.PositionAt((-1, 0)).Should().Be((9, 0));
+
+			
+		}
 	}
 }

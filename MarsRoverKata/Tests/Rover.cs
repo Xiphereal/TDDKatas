@@ -30,7 +30,10 @@ public class Rover
         
         if(!plateau.Occupied(targetPosition))
         {
-            plateau.Settle(targetPosition);
+			if(targetPosition.Item1 < 0)
+				plateau.Settle((9, targetPosition.Item2));
+			else
+				plateau.Settle(targetPosition);
         }
 	}
 
