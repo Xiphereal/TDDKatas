@@ -55,6 +55,9 @@ public class Plateau
         {
             target = (target.Item1, target.Item2 + 10);
         }
+
+        target = (target.Item1 % 10, target.Item2 % 10);
+        
 		return target;
 	}
 }
