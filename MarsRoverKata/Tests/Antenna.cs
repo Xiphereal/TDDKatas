@@ -5,8 +5,10 @@ namespace MarsRoverKata.Tests;
 
 public class Antenna
 {
-	private readonly Rover rover;
+	readonly Rover rover;
 
+    public string LastReport => rover.Report();
+    
 	public Antenna([NotNull] Rover rover)
 	{
 		if (rover is null)
@@ -17,7 +19,8 @@ public class Antenna
 		this.rover = rover;
 	}
 
-	public void Receive(Inputs input)
+
+    public void Receive(Inputs input)
 	{
         foreach (var command in input)
         {
@@ -29,8 +32,10 @@ public class Antenna
 			{
                 var hasMoved = rover.MoveForward();
 
-				if (!hasMoved)
+                if (!hasMoved)
+                {
 					break;
+                }
 			}
         }
     }

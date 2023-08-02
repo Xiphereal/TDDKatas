@@ -31,12 +31,13 @@ namespace MarsRoverKata.Tests
         {
             var plateau = new Plateau();
             var rover = new Rover(plateau);
+            var sut = new Antenna(rover);
             plateau.Settle( 5, 5);
             plateau.PutObstacle(5, 6);
             
-            rover.MoveForward();
+            sut.Receive("M");
 
-            rover.Report().Should().Be("O:5:5:N");
+            sut.LastReport.Should().Be("O:5:5:N");
         }
     }
 }

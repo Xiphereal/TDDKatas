@@ -9,6 +9,7 @@ public class Rover
     public (int x, int y) Position => plateau.WhereRoverIs;
 
     private readonly Plateau plateau;
+    public bool Stuck { get; private set; }
 
     public Rover([NotNull] Plateau plateau)
     {
@@ -34,6 +35,7 @@ public class Rover
             return true;
         }
 
+        Stuck = true;
         return false;
     }
 
@@ -49,6 +51,12 @@ public class Rover
 
     public string Report()
     {
-        return Position.x + ":" + Position.y + ":" + Orientation.ToString()[0];
+        var result = Position.x + ":" + Position.y + ":" + Orientation.ToString()[0];
+        if (Stuck)
+        {
+            result = "O:" + result;
+        }
+
+        return result;
     }
 }
