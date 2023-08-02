@@ -49,6 +49,7 @@ public class ParserTests
         var plateau = new Plateau();
         var rover = new Rover(plateau);
         plateau.Settle( 5, 5);
+        plateau.PutObstacle(4, 5);
         
         var sut = new Antenna(rover);
         sut.Receive("LM");
