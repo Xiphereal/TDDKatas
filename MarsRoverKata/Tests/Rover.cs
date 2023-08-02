@@ -23,7 +23,7 @@ public class Rover
 		plateau.Settle( x, y);
 	}
 
-	public void MoveForward()
+	public bool MoveForward()
 	{
 		var delta = Orientation.Direction();
         var targetPosition = plateau.PreviewPosition(delta);
@@ -31,7 +31,10 @@ public class Rover
         if(!plateau.Occupied(targetPosition))
         {
             plateau.Settle(targetPosition);
+			return true;
         }
+
+		return false;
 	}
 
 	public void RotateRight()

@@ -25,8 +25,13 @@ public class Antenna
                 rover.RotateRight();
             else if (command == 'L')
                 rover.RotateLeft();
-            else
-                rover.MoveForward();
+			else
+			{
+                var hasMoved = rover.MoveForward();
+
+				if (!hasMoved)
+					break;
+			}
         }
     }
 }
