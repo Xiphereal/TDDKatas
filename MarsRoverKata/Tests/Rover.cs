@@ -47,8 +47,8 @@ public class Rover
         Orientation = Orientation.RotateLeft();
     }
 
-    internal string Report()
+    public string Report()
     {
-        return "5:5:N";
+        return Position.x + ":" + Position.y + ":" + Orientation.ToString()[0];
     }
 }

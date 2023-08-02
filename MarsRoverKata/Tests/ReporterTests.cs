@@ -25,5 +25,18 @@ namespace MarsRoverKata.Tests
 
             rover.Report().Should().Be("5:6:N");
         }
+        
+        [Fact]
+        public void ReportObstacle()
+        {
+            var plateau = new Plateau();
+            var rover = new Rover(plateau);
+            plateau.Settle( 5, 5);
+            plateau.PutObstacle(5, 6);
+            
+            rover.MoveForward();
+
+            rover.Report().Should().Be("O:5:5:N");
+        }
     }
 }
