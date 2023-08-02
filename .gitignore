@@ -350,4 +350,4 @@ MigrationBackup/
 .ionide/
 
 # idea based cache directory
-.idea
+.idea/
