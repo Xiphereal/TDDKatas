@@ -30,7 +30,7 @@ public class ParserTests
     }
 
     [Fact]
-    public void Receive_RotateLeftCommand()
+    public void Receive_RotateLeftAndMoveCommands()
     {
         var plateau = new Plateau();
         var rover = new Rover(plateau);
@@ -41,4 +41,20 @@ public class ParserTests
 
         rover.Position.Should().Be((4, 5));
     }
+
+    [Fact]
+    public void Receive_RotateLeftAndMoveCommands_WithObstacle_ThenNoMovement()
+    {
+        var plateau = new Plateau();
+        var rover = new Rover(plateau);
+        plateau.Settle( 5, 5);
+
+        var sut = new Antenna(rover);
+        sut.Receive("LM");
+
+        rover.Position.Should().Be((5, 5));
+    }
+
+
+
 }
