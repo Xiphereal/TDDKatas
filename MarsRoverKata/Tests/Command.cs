@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MarsRoverKata.Tests
 {
@@ -26,5 +28,9 @@ namespace MarsRoverKata.Tests
         {
             this.commands = commands;
         }
+
+        public static implicit operator Inputs(string input) => new(input.Select(command => (Command)command).ToArray());
+        public static implicit operator string(Inputs command) => (Char[]);
+
     }
 }

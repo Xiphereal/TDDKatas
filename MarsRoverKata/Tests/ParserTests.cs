@@ -11,8 +11,8 @@ public class ParserTests
 		var otroDocmás = new Plateau(); 
 		var doc = new Rover(otroDocmás);
 
-		var sut = new MissionControl(doc);
-		sut.Order('M');
+		var sut = new Antenna(doc);
+		sut.Receive('M');
 
 		doc.Position.Should().Be((0, 1));
 	}
@@ -23,8 +23,8 @@ public class ParserTests
         var plateau = new Plateau();
         var rover = new Rover(plateau);
 
-        var sut = new MissionControl(rover);
-        sut.Order("RM");
+        var sut = new Antenna(rover);
+        sut.Receive("RM");
         
         rover.Position.Should().Be((1,0));
     }
