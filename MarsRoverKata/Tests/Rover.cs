@@ -25,9 +25,12 @@ public class Rover
 
 	public void MoveForward()
 	{
-		var (x, y) = Orientation.Direction();
+		var delta = Orientation.Direction();
 
-		plateau.Settle( Position.x + x, Position.y + y);
+        if(!plateau.Occupied((Position.x + delta.x, Position.y + delta.y)))
+        {
+            plateau.Settle( Position.x + delta.x, Position.y + delta.y);
+        }
 	}
 
 	public void RotateRight()
