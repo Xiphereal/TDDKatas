@@ -5,40 +5,40 @@ namespace MarsRoverKata.Tests;
 
 public class ParserTests
 {
-	[Fact]
-	public void Receive_MoveForwardCommand()
-	{
-		var otroDocmás = new Plateau(); 
-		var doc = new Rover(otroDocmás);
+    [Fact]
+    public void Receive_MoveForwardCommand()
+    {
+        var otroDocmás = new Plateau();
+        var doc = new Rover(otroDocmás);
 
-		var sut = new Antenna(doc);
-		sut.Receive("M");
+        var sut = new Antenna(doc);
+        sut.Receive("M");
 
-		doc.Position.Should().Be((0, 1));
-	}
+        doc.Position.Should().Be((0, 1));
+    }
 
     [Fact]
-    public void Receive_RotateRightCommand()
+    public void Receive_RotateRightAndMoveCommands()
     {
         var plateau = new Plateau();
         var rover = new Rover(plateau);
 
         var sut = new Antenna(rover);
         sut.Receive("RM");
-        
-        rover.Position.Should().Be((1,0));
+
+        rover.Position.Should().Be((1, 0));
     }
-    
+
     [Fact]
     public void Receive_RotateLeftCommand()
     {
         var plateau = new Plateau();
         var rover = new Rover(plateau);
-        plateau.Settle(rover, 5,5);
+        plateau.Settle(rover, 5, 5);
 
         var sut = new Antenna(rover);
         sut.Receive("LM");
-        
-        rover.Position.Should().Be((4,5));
+
+        rover.Position.Should().Be((4, 5));
     }
 }
