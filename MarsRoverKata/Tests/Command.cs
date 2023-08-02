@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,7 +21,7 @@ namespace MarsRoverKata.Tests
         public static implicit operator char(Command command) => command.whatHasToBeDone;
     }
 
-    public readonly struct Inputs
+    public readonly struct Inputs : IEnumerable<Command>
     {
         readonly Command[] commands;
 
@@ -30,7 +31,9 @@ namespace MarsRoverKata.Tests
         }
 
         public static implicit operator Inputs(string input) => new(input.Select(command => (Command)command).ToArray());
-        public static implicit operator string(Inputs command) => (Char[]);
+        public static implicit operator string(Inputs command) =>  new(command.commands.Select(command => (char)command).ToArray());
 
+        public IEnumerator<Command> GetEnumerator() => ((IEnumerable<Command>)commands).GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

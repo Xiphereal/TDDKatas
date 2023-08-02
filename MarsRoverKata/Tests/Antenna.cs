@@ -19,6 +19,14 @@ public class Antenna
 
 	public void Receive(Inputs input)
 	{
-		rover.MoveForward();
+        foreach (var command in input)
+        {
+            if (command == 'R')
+                rover.RotateRight();
+            else if (command == 'L')
+                rover.RotateLeft();
+            else
+                rover.MoveForward();
+        }
     }
 }
