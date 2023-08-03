@@ -351,3 +351,6 @@ MigrationBackup/
 
 # idea based cache directory
 .idea/
+
+# vscode stuff
+.vscode/
