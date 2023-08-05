@@ -95,7 +95,7 @@ namespace SudokuKata.Tests.UnitTests
                 .Should().Be("The Sudoku is not solvable");
         }
 
-        //WIP
+        [Fact]
         public void Solution_can_be_proposed_for_single_empty_cell()
         {
             new Sudoku(

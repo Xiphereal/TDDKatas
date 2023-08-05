@@ -47,7 +47,7 @@
                 {
                     foreach (var cell in row.Where(c => c.IsEmpty()))
                     {
-                        cell.Number = new Random().Next(1, 4);
+                        cell.Number = new Random().Next(1, candidate.MaxNumber);
                     }
                 }
             }
