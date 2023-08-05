@@ -50,7 +50,10 @@ namespace SudokuKata.Tests
 
             static bool HasDuplicates(List<Cell> row)
             {
-                return row.Distinct().Count() != row.Count;
+                var nonEmptyCells = new List<Cell>(row);
+                nonEmptyCells.RemoveAll(c => c.IsEmpty());
+
+                return nonEmptyCells.Distinct().Count() != nonEmptyCells.Count;
             }
         }
 

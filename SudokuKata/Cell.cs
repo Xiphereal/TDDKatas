@@ -16,7 +16,7 @@
 
         public override bool Equals(object? obj)
         {
-            return obj is Cell cell && Number == cell.Number;
+            return obj is Cell other && Number == other.Number;
         }
 
         public override int GetHashCode()

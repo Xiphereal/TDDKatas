@@ -54,6 +54,17 @@ namespace SudokuKata.Tests.UnitTests
         }
 
         [Fact]
+        public void Matrix_with_empty_cells_in_same_column_is_compliant()
+        {
+            var matrix = Matrix()
+                .WithRow(new Cell(), new Cell(1))
+                .WithRow(new Cell(), new Cell(2))
+                .Build();
+
+            matrix.CheckForViolations().Should().Be("The input complies with Sudoku's rules.");
+        }
+
+        [Fact]
         public void Columns_can_be_obtained_from_rows()
         {
             var matrix = Matrix()
