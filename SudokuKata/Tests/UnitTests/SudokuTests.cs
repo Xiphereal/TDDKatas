@@ -109,20 +109,18 @@ namespace SudokuKata.Tests.UnitTests
                     "1,2,");
         }
 
-        // WIP
+        [Fact]
         public void Solution_can_be_proposed_for_several_empty_cells()
         {
             new Sudoku(
                 Matrix()
-                    .WithRow(new Cell(), new Cell(2), new Cell(3))
-                    .WithRow(new Cell(2), new Cell(), new Cell(1))
-                    .WithRow(new Cell(3), new Cell(1), new Cell())
+                    .WithRow(new Cell(), new Cell(2))
+                    .WithRow(new Cell(), new Cell(1))
                     .Build())
                 .ProposeSolution()
                 .Should().Be(
-                    "1,2,3" + Environment.NewLine +
-                    "2,3,1" + Environment.NewLine +
-                    "3,1,2");
+                    "1,2," + Environment.NewLine +
+                    "2,1,");
         }
     }
 }
