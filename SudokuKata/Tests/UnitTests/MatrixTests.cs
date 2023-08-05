@@ -97,5 +97,16 @@ namespace SudokuKata.Tests.UnitTests
 
             clone.Rows.Any(r => r.Any(c => c.Number == 99)).Should().BeFalse();
         }
+
+        [Fact]
+        public void MaxNumberInMatrix()
+        {
+            Matrix()
+                .WithRow(1, 9)
+                .WithRow(1, 9)
+                .Build()
+            .MaxNumber
+            .Should().Be(9);
+        }
     }
 }

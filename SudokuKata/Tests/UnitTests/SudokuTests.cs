@@ -109,17 +109,6 @@ namespace SudokuKata.Tests.UnitTests
                     "1,2,");
         }
 
-        [Fact]
-        public void MaxNumberInMatrix()
-        {
-            Matrix()
-                .WithRow(1, 9)
-                .WithRow(1, 9)
-                .Build()
-            .MaxNumber
-            .Should().Be(9);
-        }
-
         // WIP
         public void Solution_can_be_proposed_for_several_empty_cells()
         {
