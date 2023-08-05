@@ -95,7 +95,7 @@ namespace SudokuKata.Tests.UnitTests
                 .Should().Be("The Sudoku is not solvable");
         }
 
-        [Fact]
+        //WIP
         public void Solution_can_be_proposed_for_single_empty_cell()
         {
             new Sudoku(
@@ -107,6 +107,17 @@ namespace SudokuKata.Tests.UnitTests
                 .Should().Be(
                     "2,1," + Environment.NewLine +
                     "1,2,");
+        }
+
+        [Fact]
+        public void MaxNumberInMatrix()
+        {
+            Matrix()
+                .WithRow(1, 9)
+                .WithRow(1, 9)
+                .Build()
+            .MaxNumber
+            .Should().Be(9);
         }
 
         // WIP

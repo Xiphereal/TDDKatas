@@ -7,6 +7,8 @@ namespace SudokuKata.Tests
         public List<List<Cell>> Rows { get; set; } = new List<List<Cell>>();
         public List<List<Cell>> Columns => ColumnsFrom(Rows);
 
+        public int MaxNumber => Rows.SelectMany(r => r).Select(c => c.Number).Max().Value;
+
         private List<List<Cell>> ColumnsFrom(List<List<Cell>> rows)
         {
             if (Rows.Any(r => r.Count != Rows.Count))
