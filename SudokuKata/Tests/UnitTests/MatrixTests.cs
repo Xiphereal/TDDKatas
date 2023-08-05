@@ -119,5 +119,27 @@ namespace SudokuKata.Tests.UnitTests
             .MaxNumber
             .Should().Be(9);
         }
+
+        [Fact]
+        public void Calculate_available_candidate_numbers_in_row()
+        {
+            Matrix()
+                .WithRow(new Cell(), new Cell(1))
+                .WithRow(new Cell(), new Cell(2))
+                .Build()
+            .AvailableCandidateNumbersIn(rowIndex: 0)
+            .Should().Be(2);
+        }
+
+        [Fact]
+        public void Calculate_available_candidate_numbers_in_row_triangulation()
+        {
+            Matrix()
+                .WithRow(new Cell(), new Cell(1))
+                .WithRow(new Cell(), new Cell(2))
+                .Build()
+            .AvailableCandidateNumbersIn(rowIndex: 1)
+            .Should().Be(1);
+        }
     }
 }

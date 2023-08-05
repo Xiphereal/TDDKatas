@@ -123,5 +123,17 @@ namespace SudokuKata.Tests
 
             return clone;
         }
+
+        public int AvailableCandidateNumbersIn(int rowIndex)
+        {
+            IEnumerable<int> numbersInRow =
+                Rows[rowIndex]
+                    .Where(c => !c.IsEmpty())
+                    .Select(c => c.Number!.Value);
+
+            return Enumerable.Range(1, MaxNumber)
+                .Except(numbersInRow)
+                .First();
+        }
     }
 }
