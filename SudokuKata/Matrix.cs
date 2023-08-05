@@ -124,7 +124,7 @@ namespace SudokuKata.Tests
             return clone;
         }
 
-        public int AvailableCandidateNumbersIn(int rowIndex)
+        public IEnumerable<int> AvailableCandidateNumbersIn(int rowIndex)
         {
             IEnumerable<int> numbersInRow =
                 Rows[rowIndex]
@@ -132,8 +132,7 @@ namespace SudokuKata.Tests
                     .Select(c => c.Number!.Value);
 
             return Enumerable.Range(1, MaxNumber)
-                .Except(numbersInRow)
-                .First();
+                .Except(numbersInRow);
         }
     }
 }

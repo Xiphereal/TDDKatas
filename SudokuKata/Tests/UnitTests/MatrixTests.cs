@@ -128,7 +128,7 @@ namespace SudokuKata.Tests.UnitTests
                 .WithRow(new Cell(), new Cell(2))
                 .Build()
             .AvailableCandidateNumbersIn(rowIndex: 0)
-            .Should().Be(2);
+            .Should().BeEquivalentTo(new[] { 2 });
         }
 
         [Fact]
@@ -139,7 +139,18 @@ namespace SudokuKata.Tests.UnitTests
                 .WithRow(new Cell(), new Cell(2))
                 .Build()
             .AvailableCandidateNumbersIn(rowIndex: 1)
-            .Should().Be(1);
+            .Should().BeEquivalentTo(new[] { 1 });
+        }
+
+        [Fact]
+        public void Calculate_available_candidate_numbers_in_row_for_several_candidates()
+        {
+            Matrix()
+                .WithRow(new Cell(), new Cell())
+                .WithRow(new Cell(1), new Cell(2))
+                .Build()
+            .AvailableCandidateNumbersIn(rowIndex: 0)
+            .Should().BeEquivalentTo(new[] { 1, 2 });
         }
     }
 }

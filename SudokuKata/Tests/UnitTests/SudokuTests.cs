@@ -122,5 +122,19 @@ namespace SudokuKata.Tests.UnitTests
                     "1,2," + Environment.NewLine +
                     "2,1,");
         }
+
+        [Fact]
+        public void Solution_can_be_proposed_for_cells_with_multiple_candidates()
+        {
+            new Sudoku(
+                Matrix()
+                    .WithRow(new Cell(), new Cell())
+                    .WithRow(new Cell(1), new Cell(2))
+                    .Build())
+            .ProposeSolution()
+            .Should().Be(
+                "2,1," + Environment.NewLine +
+                "1,2,");
+        }
     }
 }

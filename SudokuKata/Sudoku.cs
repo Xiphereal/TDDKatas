@@ -43,13 +43,20 @@
 
             do
             {
+                candidate = initialGrid.DeepClone();
+
                 foreach (var row in candidate.Rows)
                 {
                     foreach (var cell in row.Where(c => c.IsEmpty()))
                     {
-                        cell.Number =
+                        IEnumerable<int> availableNumbers =
                             candidate.AvailableCandidateNumbersIn(
                                 candidate.Rows.IndexOf(row));
+
+                        cell.Number =
+                            availableNumbers
+                                .ElementAt(
+                                    new Random().Next(0, availableNumbers.Count()));
                     }
                 }
             }
