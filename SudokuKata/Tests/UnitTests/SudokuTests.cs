@@ -96,6 +96,20 @@ namespace SudokuKata.Tests.UnitTests
         }
 
         [Fact]
+        public void Unsolvable_Sudoku_not_obvious_at_first_sight_is_also_recognized()
+        {
+            new Sudoku(
+                Matrix()
+                    .WithRow(new Cell(1), new Cell(), new Cell(3), new Cell(4))
+                    .WithRow(new Cell(3), new Cell(4), new Cell(1), new Cell(2))
+                    .WithRow(new Cell(), new Cell(3), new Cell(2), new Cell(1))
+                    .WithRow(new Cell(4), new Cell(1), new Cell(), new Cell(3))
+                    .Build())
+            .ProposeSolution()
+            .Should().Be("The Sudoku is not solvable");
+        }
+
+        [Fact]
         public void Solution_can_be_proposed_for_single_empty_cell()
         {
             new Sudoku(

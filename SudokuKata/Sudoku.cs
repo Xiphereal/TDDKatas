@@ -41,6 +41,9 @@
 
             var candidate = initialGrid.DeepClone();
 
+            var attemps = 0;
+            const int maxAllowedAttemps = 20;
+
             do
             {
                 candidate = initialGrid.DeepClone();
@@ -59,10 +62,16 @@
                                     new Random().Next(0, availableNumbers.Count()));
                     }
                 }
-            }
-            while (IsSolution(candidate) == "The proposed solution is incorrect");
 
-            return candidate.ToString();
+                attemps++;
+            }
+            while (
+                IsSolution(candidate) == "The proposed solution is incorrect"
+                    && attemps < maxAllowedAttemps);
+
+            return IsSolution(candidate) == "The proposed solution is incorrect"
+                ? "The Sudoku is not solvable"
+                : candidate.ToString();
         }
     }
 }
