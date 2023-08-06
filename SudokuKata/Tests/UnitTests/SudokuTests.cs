@@ -91,8 +91,8 @@ namespace SudokuKata.Tests.UnitTests
                     .WithRow(new Cell(1), new Cell())
                     .WithRow(1, 2)
                     .Build())
-                .ProposeSolution()
-                .Should().Be("The Sudoku is not solvable");
+            .ProposeSolution()
+            .Should().Be("The Sudoku is not solvable");
         }
 
         [Fact]
@@ -103,10 +103,10 @@ namespace SudokuKata.Tests.UnitTests
                     .WithRow(new Cell(2), new Cell())
                     .WithRow(1, 2)
                     .Build())
-                .ProposeSolution()
-                .Should().Be(
-                    "2,1," + Environment.NewLine +
-                    "1,2,");
+            .ProposeSolution()
+            .Should().Be(
+                "2,1," + Environment.NewLine +
+                "1,2,");
         }
 
         [Fact]
@@ -117,10 +117,10 @@ namespace SudokuKata.Tests.UnitTests
                     .WithRow(new Cell(), new Cell(2))
                     .WithRow(new Cell(), new Cell(1))
                     .Build())
-                .ProposeSolution()
-                .Should().Be(
-                    "1,2," + Environment.NewLine +
-                    "2,1,");
+            .ProposeSolution()
+            .Should().Be(
+                "1,2," + Environment.NewLine +
+                "2,1,");
         }
 
         [Fact]
