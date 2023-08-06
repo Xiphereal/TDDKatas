@@ -11,10 +11,7 @@ namespace SudokuKata.Tests
 
         private List<List<Cell>> ColumnsFrom(List<List<Cell>> rows)
         {
-            if (Rows.Any(r => r.Count != Rows.Count))
-            {
-                throw new ArgumentException("Matrix must be squared (NxN)");
-            }
+            EvaluateMatrixPreconditions();
 
             var columns = new List<List<Cell>>();
             for (int i = 0; i < rows.Count; i++)
@@ -41,10 +38,7 @@ namespace SudokuKata.Tests
 
         public bool DoesComplyWithRules()
         {
-            if (Rows.Any(r => r.Count != Rows.Count))
-            {
-                throw new ArgumentException("Matrix must be squared (NxN)");
-            }
+            EvaluateMatrixPreconditions();
 
             return !Rows.Any(r => HasDuplicates(r)) && !Columns.Any(r => HasDuplicates(r));
 
@@ -54,6 +48,19 @@ namespace SudokuKata.Tests
                 nonEmptyCells.RemoveAll(c => c.IsEmpty());
 
                 return nonEmptyCells.Distinct().Count() != nonEmptyCells.Count;
+            }
+        }
+
+        private void EvaluateMatrixPreconditions()
+        {
+            if (Rows.Any(r => r.Count != Rows.Count))
+            {
+                throw new ArgumentException("Matrix must be squared (NxN)");
+            }
+
+            if (MaxNumber != Rows.Count)
+            {
+                throw new ArgumentException("This would result in an unsolvable Sudoku");
             }
         }
 
