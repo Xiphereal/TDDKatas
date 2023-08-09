@@ -152,5 +152,27 @@ namespace SudokuKata.Tests.UnitTests
             .AvailableCandidateNumbersIn(rowIndex: 0)
             .Should().BeEquivalentTo(new[] { 1, 2 });
         }
+
+        [Fact]
+        public void Number_of_empty_cells_can_be_calculated_for_Matrix_with_single_empty_cell()
+        {
+            Matrix()
+                .WithRow(new Cell(2), new Cell())
+                .WithRow(new Cell(1), new Cell(2))
+                .Build()
+            .NumberOfEmptyCells
+            .Should().Be(1);
+        }
+
+        [Fact]
+        public void Number_of_empty_cells_can_be_calculated_for_Matrix_with_several_empty_cells()
+        {
+            Matrix()
+                .WithRow(new Cell(), new Cell())
+                .WithRow(new Cell(1), new Cell(2))
+                .Build()
+            .NumberOfEmptyCells
+            .Should().Be(2);
+        }
     }
 }

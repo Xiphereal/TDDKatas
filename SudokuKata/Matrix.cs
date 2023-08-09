@@ -7,7 +7,11 @@ namespace SudokuKata.Tests
         public List<List<Cell>> Rows { get; set; } = new List<List<Cell>>();
         public List<List<Cell>> Columns => ColumnsFrom(Rows);
 
-        public int MaxNumber => Rows.SelectMany(r => r).Select(c => c.Number).Max().Value;
+        public int MaxNumber => AllCells.Select(c => c.Number).Max().Value;
+
+        public int NumberOfEmptyCells => AllCells.Count(c => c.IsEmpty());
+
+        private IEnumerable<Cell> AllCells => Rows.SelectMany(r => r);
 
         private List<List<Cell>> ColumnsFrom(List<List<Cell>> rows)
         {
