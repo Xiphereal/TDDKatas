@@ -21,9 +21,15 @@ namespace TirePressure
         public void NotSetOfWithinThreshold()
         {
             FakeSensor sensor = new FakeSensor();
-            sensor.AlwaysReturn(LowPressureThreshold + 1);
+            sensor.AlwaysReturn(LowPressureThreshold);
             var alarm = new Alarm(sensor);
 
+            alarm.Check();
+            alarm.On.Should().BeFalse();
+
+            sensor.AlwaysReturn(HighPressureThreshold);
+
+            alarm.Check();
             alarm.On.Should().BeFalse();
         }
 
