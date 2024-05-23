@@ -9,9 +9,9 @@
             return value;
         }
 
-        public void AlwaysWithinThreshold()
+        public void AlwaysReturn(double v)
         {
-            this.value = 19;
+            this.value = v;
         }
     }
 }
