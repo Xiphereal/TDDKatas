@@ -16,10 +16,10 @@
             double psiPressureValue = this.sensor.PopNextPressurePsiValue();
 
             if (psiPressureValue < LowPressureThreshold
-                || HighPressureThreshold < psiPressureValue)
-                this.AlarmOn = true;
+                    || HighPressureThreshold < psiPressureValue)
+                this.On = true;
         }
 
-        public bool AlarmOn { get; private set; } = false;
+        public bool On { get; private set; } = false;
     }
 }

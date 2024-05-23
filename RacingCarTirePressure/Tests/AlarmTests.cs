@@ -11,7 +11,7 @@ namespace TirePressure
             ISensor sensor = new FakeSensor();
             var alarm = new Alarm(sensor);
 
-            alarm.AlarmOn.Should().BeFalse();
+            alarm.On.Should().BeFalse();
         }
     }
 }
