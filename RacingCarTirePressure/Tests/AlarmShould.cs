@@ -38,5 +38,17 @@ namespace TirePressure
 
             alarm.On.Should().BeTrue();
         }
+
+        [Fact]
+        public void SetOfBelowThreshold()
+        {
+            FakeSensor sensor = new FakeSensor();
+            sensor.AlwaysReturn(LowPressureThreshold - 1);
+            var alarm = new Alarm(sensor);
+
+            alarm.Check();
+
+            alarm.On.Should().BeTrue();
+        }
     }
 }
