@@ -1,10 +1,17 @@
 ﻿namespace TirePressure
 {
-    internal class FakeSensor : ISensor
+    public class FakeSensor : ISensor
     {
+        private double value;
+
         public double PopNextPressurePsiValue()
         {
-            throw new System.NotImplementedException();
+            return value;
+        }
+
+        public void AlwaysWithinThreshold()
+        {
+            this.value = 19;
         }
     }
 }
