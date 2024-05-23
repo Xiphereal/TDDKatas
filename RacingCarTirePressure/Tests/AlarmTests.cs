@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using FluentAssertions;
+using Xunit;
 
 namespace TirePressure
 {
@@ -7,8 +8,10 @@ namespace TirePressure
         [Fact]
         public void AlarmIsOffByDefault()
         {
-            Alarm alarm = new Alarm();
-            Assert.False(alarm.AlarmOn);
+            ISensor sensor = new FakeSensor();
+            var alarm = new Alarm(sensor);
+
+            alarm.AlarmOn.Should().BeFalse();
         }
     }
 }

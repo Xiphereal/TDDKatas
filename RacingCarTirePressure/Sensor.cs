@@ -1,6 +1,6 @@
 ﻿namespace TirePressure
 {
-    public class Sensor
+    public class Sensor : ISensor
     {
         private const double Offset = 16;
 
