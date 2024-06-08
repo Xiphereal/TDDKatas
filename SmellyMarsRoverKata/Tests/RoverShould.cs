@@ -74,5 +74,18 @@ namespace MarsRoverKata.Tests
             sut.Receive("l");
             sut.Direction.Should().Be("N");
         }
+
+
+        [Fact]
+        public void AcceptASequenceOfCommands()
+        {
+            var sut = new Rover(0, 0, "N");
+
+            sut.Receive("rfr");
+
+            sut.X.Should().Be(1);
+            sut.Y.Should().Be(0);
+            sut.Direction.Should().Be("S");
+        }
     }
 }
