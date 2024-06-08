@@ -36,14 +36,12 @@ namespace GildedRose
                 item.Quality++;
         }
 
-        public void UpdateQualityAfterExpiration()
+        public virtual void UpdateQualityAfterExpiration()
         {
             if (!IsExpired())
                 throw new ArgumentException();
 
-            if (IsAgedBrie())
-                IncreaseQuality();
-            else if (IsBackstagePasses())
+            if (IsBackstagePasses())
                 RenderUseless();
             else
                 DecreaseQuality();
