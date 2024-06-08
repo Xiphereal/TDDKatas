@@ -60,7 +60,7 @@ namespace MarsRoverKata
                 X += displacement;
         }
 
-        private void Rotate(char command)
+        private void Rotate(RotateCommand command)
         {
             if (Direction == N)
             {
