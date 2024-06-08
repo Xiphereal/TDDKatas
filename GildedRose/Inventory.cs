@@ -6,6 +6,8 @@ namespace GildedRose.Console
         private const string BackstagePases = "Backstage passes to a TAFKAL80ETC concert";
         private const string Sulfuras = "Sulfuras, Hand of Ragnaros";
         private const string AgedBrie = "Aged Brie";
+        private const int MaxQuality = 50;
+        private const int MinQuality = 0;
 
         private IList<Item> Items = [];
 
@@ -24,14 +26,14 @@ namespace GildedRose.Console
             {
                 if (IsCommon(item))
                 {
-                    if (item.Quality > 0)
+                    if (item.Quality > MinQuality)
                     {
                         item.Quality = item.Quality - 1;
                     }
                 }
                 else
                 {
-                    if (item.Quality < 50)
+                    if (item.Quality < MaxQuality)
                     {
                         item.Quality = item.Quality + 1;
 
@@ -39,7 +41,7 @@ namespace GildedRose.Console
                         {
                             if (item.SellIn < 11)
                             {
-                                if (item.Quality < 50)
+                                if (item.Quality < MaxQuality)
                                 {
                                     item.Quality = item.Quality + 1;
                                 }
@@ -47,7 +49,7 @@ namespace GildedRose.Console
 
                             if (item.SellIn < 6)
                             {
-                                if (item.Quality < 50)
+                                if (item.Quality < MaxQuality)
                                 {
                                     item.Quality = item.Quality + 1;
                                 }
@@ -58,13 +60,13 @@ namespace GildedRose.Console
 
                 item.SellIn = item.SellIn - 1;
 
-                if (item.SellIn < 0)
+                if (item.SellIn < MinQuality)
                 {
                     if (item.Name != AgedBrie)
                     {
                         if (item.Name != BackstagePases)
                         {
-                            if (item.Quality > 0)
+                            if (item.Quality > MinQuality)
                             {
                                 item.Quality = item.Quality - 1;
                             }
@@ -76,7 +78,7 @@ namespace GildedRose.Console
                     }
                     else
                     {
-                        if (item.Quality < 50)
+                        if (item.Quality < MaxQuality)
                         {
                             item.Quality = item.Quality + 1;
                         }
