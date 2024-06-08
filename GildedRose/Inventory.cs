@@ -17,21 +17,13 @@
         {
             foreach (ItemWrapper item in ExceptSulfuras(Items))
             {
-                UpdateQuality(item);
+                item.UpdateQuality();
 
                 item.ReduceSellInBy1();
 
                 if (item.IsExpired())
                     item.UpdateQualityAfterExpiration();
             }
-        }
-
-        private static void UpdateQuality(ItemWrapper item)
-        {
-            if (item.IsCommon() || item.IsAgedBrie())
-                item.UpdateQuality();
-            else if (item.IsBackstagePasses())
-                item.IncreaseQualityForBackstagePasses();
         }
 
         private static IEnumerable<ItemWrapper> ExceptSulfuras(

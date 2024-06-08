@@ -12,6 +12,9 @@ namespace GildedRose
                 if (item.IsAgedBrie())
                     return new AgedBrie(x);
 
+                if (item.IsBackstagePasses())
+                    return new BackstagePasses(x);
+
                 return item;
             });
     }

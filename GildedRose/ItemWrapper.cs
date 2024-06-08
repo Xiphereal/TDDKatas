@@ -11,7 +11,7 @@ namespace GildedRose
         private const string AgedBrie = "Aged Brie";
         private const string Sulfuras = "Sulfuras, Hand of Ragnaros";
 
-        private Item item;
+        protected Item item;
 
         public ItemWrapper(Item item)
         {
@@ -54,11 +54,10 @@ namespace GildedRose
 
         public bool IsAgedBrie() => item.Name == AgedBrie;
         public bool IsSulfuras() => item.Name == Sulfuras;
+        public bool IsBackstagePasses() => item.Name == BackstagePases;
 
         public void RenderUseless() => item.Quality = 0;
 
-        public bool IsBackstagePasses() =>
-            item.Name == BackstagePases;
 
         public void IncreaseQualityForBackstagePasses()
         {
