@@ -53,15 +53,7 @@
             if (IsCommon(item))
                 item.DecreaseQuality();
             else
-            {
-                if (item.Quality < MaxQuality)
-                {
-                    item.Quality++;
-
-                    if (item.IsBackstagePasses())
-                        item.IncreaseQualityForBackstagePasses();
-                }
-            }
+                item.IncreaseQuality();
         }
 
         private static IEnumerable<Item> ExceptSulfuras(IList<Item> items)

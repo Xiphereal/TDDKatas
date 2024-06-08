@@ -20,6 +20,17 @@ namespace GildedRose
                 item.Quality--;
         }
 
+        public static void IncreaseQuality(this Item item)
+        {
+            if (item.Quality < MaxQuality)
+            {
+                item.Quality++;
+
+                if (item.IsBackstagePasses())
+                    item.IncreaseQualityForBackstagePasses();
+            }
+        }
+
         public static bool IsBackstagePasses(this Item item)
         {
             return item.Name == BackstagePases;
