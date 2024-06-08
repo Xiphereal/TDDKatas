@@ -20,16 +20,13 @@ namespace GildedRose.Console
 
         public void PassDay()
         {
-            foreach (Item item in Items)
+            foreach (Item item in ExceptSulfuras(Items))
             {
-                if (item.Name != AgedBrie && item.Name != BackstagePases)
+                if (IsCommon(item))
                 {
                     if (item.Quality > 0)
                     {
-                        if (item.Name != Sulfuras)
-                        {
-                            item.Quality = item.Quality - 1;
-                        }
+                        item.Quality = item.Quality - 1;
                     }
                 }
                 else
@@ -59,10 +56,7 @@ namespace GildedRose.Console
                     }
                 }
 
-                if (item.Name != Sulfuras)
-                {
-                    item.SellIn = item.SellIn - 1;
-                }
+                item.SellIn = item.SellIn - 1;
 
                 if (item.SellIn < 0)
                 {
@@ -72,10 +66,7 @@ namespace GildedRose.Console
                         {
                             if (item.Quality > 0)
                             {
-                                if (item.Name != Sulfuras)
-                                {
-                                    item.Quality = item.Quality - 1;
-                                }
+                                item.Quality = item.Quality - 1;
                             }
                         }
                         else
@@ -94,6 +85,14 @@ namespace GildedRose.Console
             }
         }
 
+        private static IEnumerable<Item> ExceptSulfuras(IList<Item> items)
+        {
+            return items.Where(x => x.Name != Sulfuras);
+        }
 
+        private static bool IsCommon(Item item)
+        {
+            return item.Name != AgedBrie && item.Name != BackstagePases;
+        }
     }
 }
