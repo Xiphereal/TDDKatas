@@ -34,6 +34,20 @@ namespace GildedRose.Tests
             item.SellIn.Should().Be(0);
         }
 
+        [Fact]
+        public void QualityCanNotDropBelow0()
+        {
+            Item item = new Item()
+            {
+                Quality = 1,
+            };
+            var sut = Inventory.Empty.With(item);
 
+            sut.Degrade();
+            item.Quality.Should().Be(0);
+
+            sut.Degrade();
+            item.Quality.Should().Be(0);
+        }
     }
 }
