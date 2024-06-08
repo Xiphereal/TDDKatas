@@ -7,14 +7,7 @@ namespace GildedRose.Console
 
         public static Inventory Empty => new();
 
-        public Inventory With(Item item)
-        {
-            Items.Add(item);
-
-            return this;
-        }
-
-        public Inventory With(IList<Item> items)
+        public Inventory With(params Item[] items)
         {
             Items = items.ToList();
 
