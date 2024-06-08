@@ -1,4 +1,6 @@
-﻿namespace MarsRoverKata
+﻿using System;
+
+namespace MarsRoverKata
 {
     public class Rover
     {
@@ -19,14 +21,24 @@
             {
                 string command = commandsSequence.Substring(i, i + 1);
 
-                if (command == "l" || command == "r")
-                {
-                    Rotate(command);
-                }
-                else
-                {
-                    Displace(command);
-                }
+                Process(command);
+            }
+        }
+
+        private void Process(string command)
+        {
+            if (command != "l" && command != "r" && command != "f")
+            {
+                throw new ArgumentException();
+            }
+
+            if (command == "l" || command == "r")
+            {
+                Rotate(command);
+            }
+            else
+            {
+                Displace(command);
             }
         }
 
