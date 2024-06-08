@@ -6,6 +6,8 @@ namespace GildedRose.Tests
 {
     public class GildedRoseInventoryTests
     {
+        private const string AgedBrie = "Aged Brie";
+
         // Max quality is 50
         // Min quality is 0
         // Each pass day lowers quality & sell in values
@@ -48,6 +50,38 @@ namespace GildedRose.Tests
 
             sut.Degrade();
             item.Quality.Should().Be(0);
+        }
+
+        [Fact]
+        public void AgedBrie_IncreasesQualityOverTime()
+        {
+            Item item = new Item()
+            {
+                Name = AgedBrie,
+                Quality = 1,
+            };
+            var sut = Inventory.Empty.With(item);
+
+            sut.Degrade();
+
+            item.Quality.Should().BeGreaterThan(1);
+        }
+
+        [Fact]
+        public void QualityCanNotGoAbove50()
+        {
+            Item item = new Item()
+            {
+                Name = AgedBrie,
+                Quality = 49,
+            };
+            var sut = Inventory.Empty.With(item);
+
+            sut.Degrade();
+            item.Quality.Should().Be(50);
+
+            sut.Degrade();
+            item.Quality.Should().Be(50);
         }
     }
 }
