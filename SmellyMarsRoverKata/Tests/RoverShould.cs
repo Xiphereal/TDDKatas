@@ -5,13 +5,18 @@ namespace MarsRoverKata.Tests
 {
     public class RoverShould
     {
+        private const char N = 'N';
+        private const char E = 'E';
+        private const char S = 'S';
+        private const char W = 'W';
+
         [Fact]
         public void StartAtOriginAndFacingWhateverDirectionIsTold()
         {
-            var sut = new Rover(0, 0, "N");
+            var sut = new Rover(0, 0, N);
             sut.X.Should().Be(0);
             sut.Y.Should().Be(0);
-            sut.Direction.Should().Be("N");
+            sut.Direction.Should().Be(N);
         }
 
         [Fact]
@@ -25,7 +30,7 @@ namespace MarsRoverKata.Tests
 
         private static void MovesNorth()
         {
-            var sut = new Rover(0, 0, "N");
+            var sut = new Rover(0, 0, N);
 
             sut.Receive("f");
 
@@ -35,7 +40,7 @@ namespace MarsRoverKata.Tests
 
         private static void MovesSouth()
         {
-            var sut = new Rover(0, 0, "S");
+            var sut = new Rover(0, 0, S);
 
             sut.Receive("f");
 
@@ -45,7 +50,7 @@ namespace MarsRoverKata.Tests
 
         private static void MovesEast()
         {
-            var sut = new Rover(0, 0, "E");
+            var sut = new Rover(0, 0, E);
 
             sut.Receive("f");
 
@@ -55,7 +60,7 @@ namespace MarsRoverKata.Tests
 
         private static void MovesWest()
         {
-            var sut = new Rover(0, 0, "W");
+            var sut = new Rover(0, 0, W);
 
             sut.Receive("f");
 
@@ -66,26 +71,26 @@ namespace MarsRoverKata.Tests
         [Fact]
         public void ChangeDirectionByRotating()
         {
-            var sut = new Rover(0, 0, "N");
+            var sut = new Rover(0, 0, N);
 
             sut.Receive("r");
-            sut.Direction.Should().Be("E");
+            sut.Direction.Should().Be(E);
 
             sut.Receive("l");
-            sut.Direction.Should().Be("N");
+            sut.Direction.Should().Be(N);
         }
 
 
         [Fact]
         public void AcceptASequenceOfCommands()
         {
-            var sut = new Rover(0, 0, "N");
+            var sut = new Rover(0, 0, N);
 
             sut.Receive("rfr");
 
             sut.X.Should().Be(1);
             sut.Y.Should().Be(0);
-            sut.Direction.Should().Be("S");
+            sut.Direction.Should().Be(S);
         }
     }
 }

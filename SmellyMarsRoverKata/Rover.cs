@@ -10,7 +10,12 @@ namespace MarsRoverKata
         private const char f = 'f';
         private static readonly char[] allowedCommands = [r, l, f];
 
-        public Rover(int x, int y, string direction)
+        private const char N = 'N';
+        private const char E = 'E';
+        private const char S = 'S';
+        private const char W = 'W';
+
+        public Rover(int x, int y, char direction)
         {
             X = x;
             Y = y;
@@ -19,7 +24,7 @@ namespace MarsRoverKata
 
         public int X { get; private set; }
         public int Y { get; private set; }
-        public string Direction { get; private set; }
+        public char Direction { get; private set; }
 
         public void Receive(string commandsSequence)
         {
@@ -50,11 +55,11 @@ namespace MarsRoverKata
                 displacement1 = 1;
             var displacement = displacement1;
 
-            if (Direction == "N")
+            if (Direction == N)
                 Y += displacement;
-            else if (Direction == "S")
+            else if (Direction == S)
                 Y -= displacement;
-            else if (Direction == "W")
+            else if (Direction == W)
                 X -= displacement;
             else
                 X += displacement;
@@ -62,33 +67,33 @@ namespace MarsRoverKata
 
         private void Rotate(char command)
         {
-            if (Direction == "N")
+            if (Direction == N)
             {
                 if (command == r)
-                    Direction = "E";
+                    Direction = E;
                 else
-                    Direction = "W";
+                    Direction = W;
             }
-            else if (Direction == "S")
+            else if (Direction == S)
             {
                 if (command == r)
-                    Direction = "W";
+                    Direction = W;
                 else
-                    Direction = "E";
+                    Direction = E;
             }
-            else if (Direction == "W")
+            else if (Direction == W)
             {
                 if (command == r)
-                    Direction = "N";
+                    Direction = N;
                 else
-                    Direction = "S";
+                    Direction = S;
             }
             else
             {
                 if (command == r)
-                    Direction = "S";
+                    Direction = S;
                 else
-                    Direction = "N";
+                    Direction = N;
             }
         }
     }
