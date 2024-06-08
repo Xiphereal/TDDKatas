@@ -7,11 +7,8 @@ namespace GildedRose.Tests
     public class GildedRoseInventoryTests
     {
         private const string AgedBrie = "Aged Brie";
+        private const string BackstagePases = "Backstage passes to a TAFKAL80ETC concert";
 
-        // Max quality is 50
-        // Min quality is 0
-        // Each pass day lowers quality & sell in values
-        // aged brie increases quality the older it gets
         // backstage passes increase quality by 2 when there are 10 days or less
         // backstage passes increase quality by 3 when there are 5 days or less
         // backstage passes has quality 0 after the SellIn expires
@@ -82,6 +79,22 @@ namespace GildedRose.Tests
 
             sut.Degrade();
             item.Quality.Should().Be(50);
+        }
+
+        [Fact]
+        public void BackstagePasses_IncreaseQualityBy2_WhenThereAre10daysOrLess()
+        {
+            Item item = new Item()
+            {
+                Name = BackstagePases,
+                SellIn = 10,
+                Quality = 0,
+            };
+            var sut = Inventory.Empty.With(item);
+
+            sut.Degrade();
+
+            item.Quality.Should().Be(2);
         }
     }
 }

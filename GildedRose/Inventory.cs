@@ -3,6 +3,7 @@ namespace GildedRose.Console
 {
     public class Inventory
     {
+        private const string BackstagePases = "Backstage passes to a TAFKAL80ETC concert";
         private IList<Item> Items = [];
 
         public static Inventory Empty => new();
@@ -18,7 +19,7 @@ namespace GildedRose.Console
         {
             for (var i = 0; i < Items.Count; i++)
             {
-                if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                if (Items[i].Name != "Aged Brie" && Items[i].Name != BackstagePases)
                 {
                     if (Items[i].Quality > 0)
                     {
@@ -34,7 +35,7 @@ namespace GildedRose.Console
                     {
                         Items[i].Quality = Items[i].Quality + 1;
 
-                        if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
+                        if (Items[i].Name == BackstagePases)
                         {
                             if (Items[i].SellIn < 11)
                             {
@@ -64,7 +65,7 @@ namespace GildedRose.Console
                 {
                     if (Items[i].Name != "Aged Brie")
                     {
-                        if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                        if (Items[i].Name != BackstagePases)
                         {
                             if (Items[i].Quality > 0)
                             {
