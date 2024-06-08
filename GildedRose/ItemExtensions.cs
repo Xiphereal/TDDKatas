@@ -68,20 +68,10 @@ namespace GildedRose
             item.IncreaseQuality();
 
             if (item.SellIn < 11)
-            {
-                if (item.Quality < MaxQuality)
-                {
-                    item.Quality++;
-                }
-            }
+                item.IncreaseQuality();
 
             if (item.SellIn < 6)
-            {
-                if (item.Quality < MaxQuality)
-                {
-                    item.Quality++;
-                }
-            }
+                item.IncreaseQuality();
         }
     }
 }
