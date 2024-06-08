@@ -62,5 +62,17 @@ namespace MarsRoverKata.Tests
             sut.X.Should().Be(-1);
             sut.Y.Should().Be(0);
         }
+
+        [Fact]
+        public void ChangeDirectionByRotating()
+        {
+            var sut = new Rover(0, 0, "N");
+
+            sut.Receive("r");
+            sut.Direction.Should().Be("E");
+
+            sut.Receive("l");
+            sut.Direction.Should().Be("N");
+        }
     }
 }
