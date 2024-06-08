@@ -34,17 +34,17 @@
 
         private static void UpdateQualityAgain(Item item)
         {
-            if (item.Name != AgedBrie)
-            {
-                if (item.Name != BackstagePases)
-                    item.DecreaseQuality();
-                else
-                    item.Quality -= item.Quality;
-            }
-            else
+            if (item.Name == AgedBrie)
             {
                 if (item.Quality < MaxQuality)
                     item.Quality++;
+            }
+            else
+            {
+                if (item.Name == BackstagePases)
+                    item.Quality -= item.Quality;
+                else
+                    item.DecreaseQuality();
             }
         }
 
