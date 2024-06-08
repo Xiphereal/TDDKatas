@@ -1,5 +1,4 @@
-﻿
-namespace GildedRose.Console
+﻿namespace GildedRose.Console
 {
     public class Inventory
     {
@@ -38,35 +37,21 @@ namespace GildedRose.Console
             if (item.Name != AgedBrie)
             {
                 if (item.Name != BackstagePases)
-                {
-                    if (item.Quality > MinQuality)
-                    {
-                        item.Quality--;
-                    }
-                }
+                    item.DecreaseQuality();
                 else
-                {
                     item.Quality -= item.Quality;
-                }
             }
             else
             {
                 if (item.Quality < MaxQuality)
-                {
                     item.Quality++;
-                }
             }
         }
 
         private static void UpdateQuality(Item item)
         {
             if (IsCommon(item))
-            {
-                if (item.Quality > MinQuality)
-                {
-                    item.Quality--;
-                }
-            }
+                item.DecreaseQuality();
             else
             {
                 if (item.Quality < MaxQuality)
