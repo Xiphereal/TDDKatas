@@ -96,5 +96,21 @@ namespace GildedRose.Tests
 
             item.Quality.Should().Be(2);
         }
+
+        [Fact]
+        public void BackstagePasses_IncreaseQualityBy3_WhenThereAre5daysOrLess()
+        {
+            Item item = new Item()
+            {
+                Name = BackstagePases,
+                SellIn = 5,
+                Quality = 0,
+            };
+            var sut = Inventory.Empty.With(item);
+
+            sut.Degrade();
+
+            item.Quality.Should().Be(3);
+        }
     }
 }
