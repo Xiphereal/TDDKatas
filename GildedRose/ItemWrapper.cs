@@ -27,7 +27,9 @@ namespace GildedRose
 
         public bool IsExpired() => item.SellIn < 0;
 
-        public virtual void UpdateQuality() => DecreaseQuality();
+        public virtual void UpdateQuality()
+        {
+        }
 
         public void DecreaseQuality()
         {
@@ -43,10 +45,7 @@ namespace GildedRose
 
         public virtual void UpdateQualityAfterExpiration()
         {
-            if (!IsExpired())
-                throw new ArgumentException();
 
-            DecreaseQuality();
         }
     }
 }
