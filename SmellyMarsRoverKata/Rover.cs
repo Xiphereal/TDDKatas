@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Linq;
 
 namespace MarsRoverKata
 {
     public class Rover
     {
+        private static readonly string[] allowedCommands = ["r", "l", "f"];
+
         public Rover(int x, int y, string direction)
         {
             X = x;
@@ -27,7 +30,7 @@ namespace MarsRoverKata
 
         private void Process(string command)
         {
-            if (command != "l" && command != "r" && command != "f")
+            if (!allowedCommands.Contains(command))
             {
                 throw new ArgumentException();
             }
