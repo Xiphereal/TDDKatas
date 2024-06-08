@@ -58,24 +58,8 @@
                 {
                     item.Quality++;
 
-                    if (item.Name == BackstagePases)
-                    {
-                        if (item.SellIn < 11)
-                        {
-                            if (item.Quality < MaxQuality)
-                            {
-                                item.Quality++;
-                            }
-                        }
-
-                        if (item.SellIn < 6)
-                        {
-                            if (item.Quality < MaxQuality)
-                            {
-                                item.Quality++;
-                            }
-                        }
-                    }
+                    if (item.IsBackstagePasses())
+                        item.IncreaseQualityForBackstagePasses();
                 }
             }
         }

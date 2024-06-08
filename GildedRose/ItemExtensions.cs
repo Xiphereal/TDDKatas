@@ -5,6 +5,9 @@ namespace GildedRose
     public static class ItemExtensions
     {
         private const int MinQuality = 0;
+        private const int MaxQuality = 50;
+
+        private const string BackstagePases = "Backstage passes to a TAFKAL80ETC concert";
 
         public static void ReduceSellInBy1(this Item item)
         {
@@ -15,6 +18,35 @@ namespace GildedRose
         {
             if (item.Quality > MinQuality)
                 item.Quality--;
+        }
+
+        public static bool IsBackstagePasses(this Item item)
+        {
+            return item.Name == BackstagePases;
+        }
+
+        public static void IncreaseQualityForBackstagePasses(this Item item)
+        {
+            if (!IsBackstagePasses(item))
+            {
+                throw new ArgumentException();
+            }
+
+            if (item.SellIn < 11)
+            {
+                if (item.Quality < MaxQuality)
+                {
+                    item.Quality++;
+                }
+            }
+
+            if (item.SellIn < 6)
+            {
+                if (item.Quality < MaxQuality)
+                {
+                    item.Quality++;
+                }
+            }
         }
     }
 }
