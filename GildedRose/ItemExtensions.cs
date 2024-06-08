@@ -9,6 +9,7 @@ namespace GildedRose
 
         private const string BackstagePases = "Backstage passes to a TAFKAL80ETC concert";
         private const string AgedBrie = "Aged Brie";
+        private const string Sulfuras = "Sulfuras, Hand of Ragnaros";
 
         public static bool IsCommon(this Item item) =>
             item.Name != AgedBrie && item.Name != BackstagePases;
@@ -43,6 +44,7 @@ namespace GildedRose
         }
 
         public static bool IsAgedBrie(this Item item) => item.Name == AgedBrie;
+        public static bool IsSulfuras(this Item item) => item.Name == Sulfuras;
 
         public static void RenderUseless(this Item item) => item.Quality = 0;
 

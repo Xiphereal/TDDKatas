@@ -2,11 +2,6 @@
 {
     public class Inventory
     {
-        private const string BackstagePases = "Backstage passes to a TAFKAL80ETC concert";
-        private const string Sulfuras = "Sulfuras, Hand of Ragnaros";
-        private const string AgedBrie = "Aged Brie";
-        private const int MaxQuality = 50;
-
         private IList<Item> Items = [];
 
         public static Inventory Empty => new();
@@ -43,7 +38,7 @@
 
         private static IEnumerable<Item> ExceptSulfuras(IList<Item> items)
         {
-            return items.Where(x => x.Name != Sulfuras);
+            return items.Where(x => !x.IsSulfuras());
         }
     }
 }
