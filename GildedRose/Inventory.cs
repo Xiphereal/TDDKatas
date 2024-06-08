@@ -27,26 +27,15 @@
                 item.ReduceSellInBy1();
 
                 if (item.IsExpired())
-                    UpdateQualityAgain(item);
+                    item.UpdateQualityAfterExpiration();
             }
         }
 
-        private static void UpdateQualityAgain(Item item)
-        {
-            if (item.Name == AgedBrie)
-            {
-                if (item.Quality < MaxQuality)
-                    item.Quality++;
-            }
-            else if (item.Name == BackstagePases)
-                item.RenderUseless();
-            else
-                item.DecreaseQuality();
-        }
+
 
         private static void UpdateQuality(Item item)
         {
-            if (IsCommon(item))
+            if (item.IsCommon())
                 item.DecreaseQuality();
             else
                 item.IncreaseQuality();
@@ -55,11 +44,6 @@
         private static IEnumerable<Item> ExceptSulfuras(IList<Item> items)
         {
             return items.Where(x => x.Name != Sulfuras);
-        }
-
-        private static bool IsCommon(Item item)
-        {
-            return item.Name != AgedBrie && item.Name != BackstagePases;
         }
     }
 }
