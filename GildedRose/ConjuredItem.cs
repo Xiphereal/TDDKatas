@@ -2,12 +2,8 @@
 
 namespace GildedRose
 {
-    public class ConjuredItem : ItemWrapper
+    public class ConjuredItem(Item item) : ItemWrapper(item)
     {
-        public ConjuredItem(Item item) : base(item)
-        {
-        }
-
         public override void UpdateQuality()
         {
             DecreaseQuality();

@@ -2,12 +2,8 @@
 
 namespace GildedRose
 {
-    public class BackstagePasses : ItemWrapper
+    public class BackstagePasses(Item item) : ItemWrapper(item)
     {
-        public BackstagePasses(Item item) : base(item)
-        {
-        }
-
         public override void UpdateQuality()
         {
             IncreaseQuality();

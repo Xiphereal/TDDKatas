@@ -2,12 +2,8 @@
 
 namespace GildedRose
 {
-    public class AgedBrie : ItemWrapper
+    public class AgedBrie(Item item) : ItemWrapper(item)
     {
-        public AgedBrie(Item item) : base(item)
-        {
-        }
-
         public override void UpdateQualityAfterExpiration()
         {
             if (!IsExpired())
