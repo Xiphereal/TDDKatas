@@ -6,7 +6,6 @@
         private const string Sulfuras = "Sulfuras, Hand of Ragnaros";
         private const string AgedBrie = "Aged Brie";
         private const int MaxQuality = 50;
-        private const int MinQuality = 0;
 
         private IList<Item> Items = [];
 

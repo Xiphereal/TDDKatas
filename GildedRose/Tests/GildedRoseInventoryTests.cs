@@ -68,12 +68,29 @@ namespace GildedRose.Tests
             {
                 Name = AgedBrie,
                 Quality = 1,
+                SellIn = 1,
             };
             var sut = Inventory.Empty.With(item);
 
             sut.PassDay();
 
-            item.Quality.Should().BeGreaterThan(1);
+            item.Quality.Should().Be(2);
+        }
+
+        [Fact]
+        public void AgedBrie_IncreasesQualityTwice_WhenExpired()
+        {
+            Item item = new Item()
+            {
+                Name = AgedBrie,
+                Quality = 1,
+                SellIn = 0,
+            };
+            var sut = Inventory.Empty.With(item);
+
+            sut.PassDay();
+
+            item.Quality.Should().Be(3);
         }
 
         [Fact]
