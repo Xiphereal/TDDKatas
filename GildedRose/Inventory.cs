@@ -37,7 +37,7 @@
                 item.DecreaseQuality();
             else if (item.IsBackstagePasses())
                 item.IncreaseQualityForBackstagePasses();
-            else
+            else if (item.IsAgedBrie())
                 item.IncreaseQuality();
         }
 

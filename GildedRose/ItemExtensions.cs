@@ -10,20 +10,12 @@ namespace GildedRose
         private const string BackstagePases = "Backstage passes to a TAFKAL80ETC concert";
         private const string AgedBrie = "Aged Brie";
 
-        public static bool IsCommon(this Item item)
-        {
-            return item.Name != AgedBrie && item.Name != BackstagePases;
-        }
+        public static bool IsCommon(this Item item) =>
+            item.Name != AgedBrie && item.Name != BackstagePases;
 
-        public static void ReduceSellInBy1(this Item item)
-        {
-            item.SellIn--;
-        }
+        public static void ReduceSellInBy1(this Item item) => item.SellIn--;
 
-        public static bool IsExpired(this Item item)
-        {
-            return item.SellIn < 0;
-        }
+        public static bool IsExpired(this Item item) => item.SellIn < 0;
 
         public static void DecreaseQuality(this Item item)
         {
@@ -42,7 +34,7 @@ namespace GildedRose
             if (!item.IsExpired())
                 throw new ArgumentException();
 
-            if (item.Name == AgedBrie)
+            if (item.IsAgedBrie())
                 item.IncreaseQuality();
             else if (item.IsBackstagePasses())
                 item.RenderUseless();
@@ -50,15 +42,12 @@ namespace GildedRose
                 item.DecreaseQuality();
         }
 
-        public static void RenderUseless(this Item item)
-        {
-            item.Quality = 0;
-        }
+        public static bool IsAgedBrie(this Item item) => item.Name == AgedBrie;
 
-        public static bool IsBackstagePasses(this Item item)
-        {
-            return item.Name == BackstagePases;
-        }
+        public static void RenderUseless(this Item item) => item.Quality = 0;
+
+        public static bool IsBackstagePasses(this Item item) =>
+            item.Name == BackstagePases;
 
         public static void IncreaseQualityForBackstagePasses(this Item item)
         {
