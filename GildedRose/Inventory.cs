@@ -28,14 +28,14 @@ namespace GildedRose.Console
                 {
                     if (item.Quality > MinQuality)
                     {
-                        item.Quality = item.Quality - 1;
+                        item.Quality--;
                     }
                 }
                 else
                 {
                     if (item.Quality < MaxQuality)
                     {
-                        item.Quality = item.Quality + 1;
+                        item.Quality++;
 
                         if (item.Name == BackstagePases)
                         {
@@ -43,7 +43,7 @@ namespace GildedRose.Console
                             {
                                 if (item.Quality < MaxQuality)
                                 {
-                                    item.Quality = item.Quality + 1;
+                                    item.Quality++;
                                 }
                             }
 
@@ -51,14 +51,14 @@ namespace GildedRose.Console
                             {
                                 if (item.Quality < MaxQuality)
                                 {
-                                    item.Quality = item.Quality + 1;
+                                    item.Quality++;
                                 }
                             }
                         }
                     }
                 }
 
-                item.SellIn = item.SellIn - 1;
+                item.SellIn--;
 
                 if (item.SellIn < MinQuality)
                 {
@@ -68,19 +68,19 @@ namespace GildedRose.Console
                         {
                             if (item.Quality > MinQuality)
                             {
-                                item.Quality = item.Quality - 1;
+                                item.Quality--;
                             }
                         }
                         else
                         {
-                            item.Quality = item.Quality - item.Quality;
+                            item.Quality -= item.Quality;
                         }
                     }
                     else
                     {
                         if (item.Quality < MaxQuality)
                         {
-                            item.Quality = item.Quality + 1;
+                            item.Quality++;
                         }
                     }
                 }
