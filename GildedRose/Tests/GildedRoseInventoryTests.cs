@@ -9,8 +9,6 @@ namespace GildedRose.Tests
         private const string AgedBrie = "Aged Brie";
         private const string BackstagePases = "Backstage passes to a TAFKAL80ETC concert";
 
-        // backstage passes increase quality by 2 when there are 10 days or less
-        // backstage passes increase quality by 3 when there are 5 days or less
         // backstage passes has quality 0 after the SellIn expires
         // Sulfuras has no SellIn nor quality decrement
         // When SellIn date has passed, quality degrades twice as fast
@@ -111,6 +109,22 @@ namespace GildedRose.Tests
             sut.Degrade();
 
             item.Quality.Should().Be(3);
+        }
+
+        [Fact]
+        public void BackstagePasses_AreUseless_WhenConcertIsOver()
+        {
+            Item item = new Item()
+            {
+                Name = BackstagePases,
+                SellIn = 0,
+                Quality = 50,
+            };
+            var sut = Inventory.Empty.With(item);
+
+            sut.Degrade();
+
+            item.Quality.Should().Be(0);
         }
     }
 }
