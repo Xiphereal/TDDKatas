@@ -2,20 +2,20 @@
 {
     public class Inventory
     {
-        private IList<Item> Items = [];
+        private IEnumerable<ItemWrapper> Items = [];
 
         public static Inventory Empty => new();
 
         public Inventory With(params Item[] items)
         {
-            Items = items.ToList();
+            Items = items.Wrap();
 
             return this;
         }
 
         public void PassDay()
         {
-            foreach (Item item in ExceptSulfuras(Items))
+            foreach (ItemWrapper item in ExceptSulfuras(Items))
             {
                 UpdateQuality(item);
 
@@ -26,7 +26,7 @@
             }
         }
 
-        private static void UpdateQuality(Item item)
+        private static void UpdateQuality(ItemWrapper item)
         {
             if (item.IsCommon())
                 item.DecreaseQuality();
@@ -36,7 +36,8 @@
                 item.IncreaseQuality();
         }
 
-        private static IEnumerable<Item> ExceptSulfuras(IList<Item> items)
+        private static IEnumerable<ItemWrapper> ExceptSulfuras(
+            IEnumerable<ItemWrapper> items)
         {
             return items.Where(x => !x.IsSulfuras());
         }
