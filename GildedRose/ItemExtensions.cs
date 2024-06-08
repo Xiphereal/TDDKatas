@@ -34,24 +34,17 @@ namespace GildedRose
         public static void IncreaseQuality(this Item item)
         {
             if (item.Quality < MaxQuality)
-            {
                 item.Quality++;
-
-                if (item.IsBackstagePasses())
-                    item.IncreaseQualityForBackstagePasses();
-            }
         }
+
         public static void UpdateQualityAfterExpiration(this Item item)
         {
             if (!item.IsExpired())
                 throw new ArgumentException();
 
             if (item.Name == AgedBrie)
-            {
-                if (item.Quality < MaxQuality)
-                    item.Quality++;
-            }
-            else if (item.Name == BackstagePases)
+                item.IncreaseQuality();
+            else if (item.IsBackstagePasses())
                 item.RenderUseless();
             else
                 item.DecreaseQuality();
@@ -71,6 +64,8 @@ namespace GildedRose
         {
             if (!IsBackstagePasses(item))
                 throw new ArgumentException();
+
+            item.IncreaseQuality();
 
             if (item.SellIn < 11)
             {

@@ -31,12 +31,12 @@
             }
         }
 
-
-
         private static void UpdateQuality(Item item)
         {
             if (item.IsCommon())
                 item.DecreaseQuality();
+            else if (item.IsBackstagePasses())
+                item.IncreaseQualityForBackstagePasses();
             else
                 item.IncreaseQuality();
         }
