@@ -28,12 +28,10 @@
 
         private static void UpdateQuality(ItemWrapper item)
         {
-            if (item.IsCommon())
-                item.DecreaseQuality();
+            if (item.IsCommon() || item.IsAgedBrie())
+                item.UpdateQuality();
             else if (item.IsBackstagePasses())
                 item.IncreaseQualityForBackstagePasses();
-            else if (item.IsAgedBrie())
-                item.IncreaseQuality();
         }
 
         private static IEnumerable<ItemWrapper> ExceptSulfuras(

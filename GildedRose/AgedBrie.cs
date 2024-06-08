@@ -15,5 +15,10 @@ namespace GildedRose
 
             IncreaseQuality();
         }
+
+        public override void UpdateQuality()
+        {
+            IncreaseQuality();
+        }
     }
 }

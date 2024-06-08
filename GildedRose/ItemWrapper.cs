@@ -24,6 +24,11 @@ namespace GildedRose
         public void ReduceSellInBy1() => item.SellIn--;
         public bool IsExpired() => item.SellIn < 0;
 
+        public virtual void UpdateQuality()
+        {
+            DecreaseQuality();
+        }
+
         public void DecreaseQuality()
         {
             if (item.Quality > MinQuality)
