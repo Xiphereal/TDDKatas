@@ -24,7 +24,20 @@ namespace GildedRose.Console
         {
             foreach (Item item in ExceptSulfuras(Items))
             {
-                if (IsCommon(item))
+                UpdateQuality(item);
+
+                item.ReduceSellInBy1();
+
+                if (item.SellIn < MinQuality)
+                    UpdateQualityTwice(item);
+            }
+        }
+
+        private static void UpdateQualityTwice(Item item)
+        {
+            if (item.Name != AgedBrie)
+            {
+                if (item.Name != BackstagePases)
                 {
                     if (item.Quality > MinQuality)
                     {
@@ -33,54 +46,49 @@ namespace GildedRose.Console
                 }
                 else
                 {
-                    if (item.Quality < MaxQuality)
-                    {
-                        item.Quality++;
-
-                        if (item.Name == BackstagePases)
-                        {
-                            if (item.SellIn < 11)
-                            {
-                                if (item.Quality < MaxQuality)
-                                {
-                                    item.Quality++;
-                                }
-                            }
-
-                            if (item.SellIn < 6)
-                            {
-                                if (item.Quality < MaxQuality)
-                                {
-                                    item.Quality++;
-                                }
-                            }
-                        }
-                    }
+                    item.Quality -= item.Quality;
                 }
-
-                item.SellIn--;
-
-                if (item.SellIn < MinQuality)
+            }
+            else
+            {
+                if (item.Quality < MaxQuality)
                 {
-                    if (item.Name != AgedBrie)
+                    item.Quality++;
+                }
+            }
+        }
+
+        private static void UpdateQuality(Item item)
+        {
+            if (IsCommon(item))
+            {
+                if (item.Quality > MinQuality)
+                {
+                    item.Quality--;
+                }
+            }
+            else
+            {
+                if (item.Quality < MaxQuality)
+                {
+                    item.Quality++;
+
+                    if (item.Name == BackstagePases)
                     {
-                        if (item.Name != BackstagePases)
+                        if (item.SellIn < 11)
                         {
-                            if (item.Quality > MinQuality)
+                            if (item.Quality < MaxQuality)
                             {
-                                item.Quality--;
+                                item.Quality++;
                             }
                         }
-                        else
+
+                        if (item.SellIn < 6)
                         {
-                            item.Quality -= item.Quality;
-                        }
-                    }
-                    else
-                    {
-                        if (item.Quality < MaxQuality)
-                        {
-                            item.Quality++;
+                            if (item.Quality < MaxQuality)
+                            {
+                                item.Quality++;
+                            }
                         }
                     }
                 }
