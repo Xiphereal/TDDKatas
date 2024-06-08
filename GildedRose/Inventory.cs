@@ -39,13 +39,10 @@
                 if (item.Quality < MaxQuality)
                     item.Quality++;
             }
+            else if (item.Name == BackstagePases)
+                item.RenderUseless();
             else
-            {
-                if (item.Name == BackstagePases)
-                    item.Quality -= item.Quality;
-                else
-                    item.DecreaseQuality();
-            }
+                item.DecreaseQuality();
         }
 
         private static void UpdateQuality(Item item)

@@ -36,6 +36,11 @@ namespace GildedRose
             }
         }
 
+        public static void RenderUseless(this Item item)
+        {
+            item.Quality = 0;
+        }
+
         public static bool IsBackstagePasses(this Item item)
         {
             return item.Name == BackstagePases;
