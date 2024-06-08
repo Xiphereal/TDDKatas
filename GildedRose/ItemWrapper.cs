@@ -2,7 +2,7 @@
 
 namespace GildedRose
 {
-    public class ItemWrapper
+    public abstract class ItemWrapper(Item item)
     {
         private const int MinQuality = 0;
         private const int MaxQuality = 50;
@@ -11,25 +11,18 @@ namespace GildedRose
         private const string AgedBrie = "Aged Brie";
         private const string Sulfuras = "Sulfuras, Hand of Ragnaros";
 
-        protected Item item;
+        protected Item item = item;
 
-        public ItemWrapper(Item item)
-        {
-            this.item = item;
-        }
-
-        public bool IsAgedBrie() => item.Name == AgedBrie;
+        public static bool IsAgedBrie(Item item) => item.Name == AgedBrie;
         public bool IsSulfuras() => item.Name == Sulfuras;
-        public bool IsBackstagePasses() => item.Name == BackstagePases;
-        public bool IsConjured() => item.Name.StartsWith("Conjured");
+        public static bool IsBackstagePasses(Item item) => item.Name == BackstagePases;
+        public static bool IsConjured(Item item) => item.Name.StartsWith("Conjured");
 
         public void ReduceSellInBy1() => item.SellIn--;
 
         public bool IsExpired() => item.SellIn < 0;
 
-        public virtual void UpdateQuality()
-        {
-        }
+        public abstract void UpdateQuality();
 
         public void DecreaseQuality()
         {
@@ -43,9 +36,6 @@ namespace GildedRose
                 item.Quality++;
         }
 
-        public virtual void UpdateQualityAfterExpiration()
-        {
-
-        }
+        public abstract void UpdateQualityAfterExpiration();
     }
 }

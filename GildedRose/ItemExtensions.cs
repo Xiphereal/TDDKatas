@@ -1,4 +1,5 @@
 ﻿using GildedRose.Console;
+using static GildedRose.ItemWrapper;
 
 namespace GildedRose
 {
@@ -7,15 +8,13 @@ namespace GildedRose
         public static IEnumerable<ItemWrapper> Wrap(this IEnumerable<Item> items) =>
             items.Select<Item, ItemWrapper>(x =>
             {
-                ItemWrapper item = new(x);
-
-                if (item.IsAgedBrie())
+                if (IsAgedBrie(x))
                     return new AgedBrie(x);
 
-                if (item.IsBackstagePasses())
+                if (IsBackstagePasses(x))
                     return new BackstagePasses(x);
 
-                if (item.IsConjured())
+                if (IsConjured(x))
                     return new ConjuredItem(x);
 
                 return new CommonItem(x);

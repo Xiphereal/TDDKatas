@@ -67,14 +67,6 @@ namespace GildedRose.Tests
             item.Quality.Should().Be(0);
         }
 
-        [Fact]
-        public void TestName()
-        {
-            Item item = Conjured();
-            new ItemWrapper(item).IsConjured().Should().BeTrue();
-        }
-
-
         private static Item Conjured() => new() { Name = "Conjured bla bla" };
 
         [Fact]
