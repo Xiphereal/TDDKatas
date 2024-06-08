@@ -53,6 +53,19 @@ namespace GildedRose.Tests
             item.Quality.Should().Be(0);
         }
 
+        [Fact]
+        public void ConjuredItems_WhenSellInIsExpired_DegradeTwiceAsFastAsTheRest()
+        {
+            Item item = Conjured();
+            item.Quality = 4;
+            item.SellIn = 0;
+
+            var sut = Inventory.Empty.With(item);
+
+            sut.PassDay();
+
+            item.Quality.Should().Be(0);
+        }
 
         [Fact]
         public void TestName()

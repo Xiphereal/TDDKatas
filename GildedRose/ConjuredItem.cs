@@ -13,5 +13,11 @@ namespace GildedRose
             DecreaseQuality();
             DecreaseQuality();
         }
+
+        public override void UpdateQualityAfterExpiration()
+        {
+            DecreaseQuality();
+            DecreaseQuality();
+        }
     }
 }
