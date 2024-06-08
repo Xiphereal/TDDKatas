@@ -28,7 +28,7 @@ namespace GildedRose.Tests
             };
             var sut = Inventory.Empty.With(item);
 
-            sut.UpdateQuality();
+            sut.Degrade();
 
             item.Quality.Should().Be(1);
             item.SellIn.Should().Be(0);
