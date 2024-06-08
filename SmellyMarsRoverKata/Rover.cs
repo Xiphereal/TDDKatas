@@ -44,16 +44,12 @@ namespace MarsRoverKata
             if (command == l || command == r)
                 Rotate(command);
             else
-                Displace(command);
+                DisplaceTowardsFacingDirection();
         }
 
-        private void Displace(char command)
+        private void DisplaceTowardsFacingDirection()
         {
-            var displacement1 = -1;
-
-            if (command == f)
-                displacement1 = 1;
-            var displacement = displacement1;
+            var displacement = 1;
 
             if (Direction == N)
                 Y += displacement;
