@@ -21,81 +21,87 @@
 
                 if (command == "l" || command == "r")
                 {
-
-                    // Rotate Rover
-                    if (Direction == "N")
-                    {
-                        if (command == "r")
-                        {
-                            Direction = "E";
-                        }
-                        else
-                        {
-                            Direction = "W";
-                        }
-                    }
-                    else if (Direction == "S")
-                    {
-                        if (command == "r")
-                        {
-                            Direction = "W";
-                        }
-                        else
-                        {
-                            Direction = "E";
-                        }
-                    }
-                    else if (Direction == "W")
-                    {
-                        if (command == "r")
-                        {
-                            Direction = "N";
-                        }
-                        else
-                        {
-                            Direction = "S";
-                        }
-                    }
-                    else
-                    {
-                        if (command == "r")
-                        {
-                            Direction = "S";
-                        }
-                        else
-                        {
-                            Direction = "N";
-                        }
-                    }
+                    Rotate(command);
                 }
                 else
                 {
+                    Displace(command);
+                }
+            }
+        }
 
-                    // Displace Rover
-                    var displacement1 = -1;
+        private void Displace(string command)
+        {
+            var displacement1 = -1;
 
-                    if (command == "f")
-                    {
-                        displacement1 = 1;
-                    }
-                    var displacement = displacement1;
+            if (command == "f")
+            {
+                displacement1 = 1;
+            }
+            var displacement = displacement1;
 
-                    if (Direction == "N")
-                    {
-                        Y += displacement;
-                    }
-                    else if (Direction == "S")
-                    {
-                        Y -= displacement;
-                    }
-                    else if (Direction == "W")
-                    {
-                        X -= displacement;
-                    }
-                    else
-                    {
-                        X += displacement;
-                    }
+            if (Direction == "N")
+            {
+                Y += displacement;
+            }
+            else if (Direction == "S")
+            {
+                Y -= displacement;
+            }
+            else if (Direction == "W")
+            {
+                X -= displacement;
+            }
+            else
+            {
+                X += displacement;
+            }
+        }
+
+        private void Rotate(string command)
+        {
+            if (Direction == "N")
+            {
+                if (command == "r")
+                {
+                    Direction = "E";
+                }
+                else
+                {
+                    Direction = "W";
+                }
+            }
+            else if (Direction == "S")
+            {
+                if (command == "r")
+                {
+                    Direction = "W";
+                }
+                else
+                {
+                    Direction = "E";
+                }
+            }
+            else if (Direction == "W")
+            {
+                if (command == "r")
+                {
+                    Direction = "N";
+                }
+                else
+                {
+                    Direction = "S";
+                }
+            }
+            else
+            {
+                if (command == "r")
+                {
+                    Direction = "S";
+                }
+                else
+                {
+                    Direction = "N";
                 }
             }
         }
