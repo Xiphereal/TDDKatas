@@ -6,7 +6,7 @@
         {
             X = x;
             Y = y;
-            this.Direction = direction;
+            Direction = direction;
         }
 
         public int X { get; private set; }

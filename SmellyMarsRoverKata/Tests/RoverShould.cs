@@ -3,10 +3,10 @@ using Xunit;
 
 namespace MarsRoverKata.Tests
 {
-    public class Class1
+    public class RoverShould
     {
         [Fact]
-        public void TestName()
+        public void StartAtOriginAndFacingWhateverDirectionIsTold()
         {
             var sut = new Rover(0, 0, "N");
             sut.X.Should().Be(0);
