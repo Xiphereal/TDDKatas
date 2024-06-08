@@ -19,17 +19,21 @@ namespace GildedRose.Tests
         // feat: conjured items degrade quality twice as fast as normal ones
 
         [Fact]
-        public void SellInReducesBy1_AfterEachDayPasses()
+        public void BothQualityAndSellIn_ReducesBy1_AfterEachDayPasses()
         {
             Item item = new Item()
             {
+                Quality = 2,
                 SellIn = 1,
             };
             var sut = Inventory.Empty.With(item);
 
             sut.UpdateQuality();
 
+            item.Quality.Should().Be(1);
             item.SellIn.Should().Be(0);
         }
+
+
     }
 }
