@@ -10,7 +10,6 @@ namespace GildedRose.Tests
         private const string AgedBrie = "Aged Brie";
         private const string BackstagePases = "Backstage passes to a TAFKAL80ETC concert";
 
-        // Sulfuras has no SellIn nor quality decrement
         // When SellIn date has passed, quality degrades twice as fast
 
         // feat: conjured items degrade quality twice as fast as normal ones
@@ -29,6 +28,21 @@ namespace GildedRose.Tests
 
             item.Quality.Should().Be(1);
             item.SellIn.Should().Be(0);
+        }
+
+        [Fact]
+        public void QualityDegradesTwiceAsFast_WhenSellInHasPassed()
+        {
+            Item item = new Item()
+            {
+                Quality = 2,
+                SellIn = 0,
+            };
+            var sut = Inventory.Empty.With(item);
+
+            sut.PassDay();
+
+            item.Quality.Should().Be(0);
         }
 
         [Fact]
