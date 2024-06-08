@@ -40,7 +40,7 @@ namespace MarsRoverKata
             if (!allowedCommands.Contains(command))
                 throw new ArgumentException();
 
-            if (command == l || command == r)
+            if (RotateCommand.IsOne(command))
                 Rotate(command);
             else
                 DisplaceTowardsFacingDirection();
