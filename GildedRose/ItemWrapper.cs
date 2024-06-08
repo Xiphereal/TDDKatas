@@ -18,16 +18,15 @@ namespace GildedRose
             this.item = item;
         }
 
-        public bool IsCommon() =>
-            item.Name != AgedBrie && item.Name != BackstagePases;
+        public bool IsAgedBrie() => item.Name == AgedBrie;
+        public bool IsSulfuras() => item.Name == Sulfuras;
+        public bool IsBackstagePasses() => item.Name == BackstagePases;
 
         public void ReduceSellInBy1() => item.SellIn--;
+
         public bool IsExpired() => item.SellIn < 0;
 
-        public virtual void UpdateQuality()
-        {
-            DecreaseQuality();
-        }
+        public virtual void UpdateQuality() => DecreaseQuality();
 
         public void DecreaseQuality()
         {
@@ -48,9 +47,5 @@ namespace GildedRose
 
             DecreaseQuality();
         }
-
-        public bool IsAgedBrie() => item.Name == AgedBrie;
-        public bool IsSulfuras() => item.Name == Sulfuras;
-        public bool IsBackstagePasses() => item.Name == BackstagePases;
     }
 }
