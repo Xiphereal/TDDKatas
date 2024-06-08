@@ -3,15 +3,16 @@
     public class Rover
     {
         private string direction;
-        private int y;
-        private int x;
 
         public Rover(int x, int y, string direction)
         {
-            this.x = x;
-            this.y = y;
+            this.X = x;
+            this.Y = y;
             this.direction = direction;
         }
+
+        public int X { get; private set; }
+        public int Y { get; private set; }
 
         public void Receive(string commandsSequence)
         {
@@ -82,19 +83,19 @@
 
                     if (this.direction == "N")
                     {
-                        this.y += displacement;
+                        this.Y += displacement;
                     }
                     else if (this.direction == "S")
                     {
-                        this.y -= displacement;
+                        this.Y -= displacement;
                     }
                     else if (this.direction == "W")
                     {
-                        this.x -= displacement;
+                        this.X -= displacement;
                     }
                     else
                     {
-                        this.x += displacement;
+                        this.X += displacement;
                     }
                 }
             }
