@@ -46,10 +46,7 @@ namespace GildedRose
             if (!IsExpired())
                 throw new ArgumentException();
 
-            if (IsBackstagePasses())
-                RenderUseless();
-            else
-                DecreaseQuality();
+            DecreaseQuality();
         }
 
         public bool IsAgedBrie() => item.Name == AgedBrie;

@@ -18,5 +18,13 @@ namespace GildedRose
             if (item.SellIn < 6)
                 IncreaseQuality();
         }
+
+        public override void UpdateQualityAfterExpiration()
+        {
+            if (!IsExpired())
+                throw new ArgumentException();
+
+            RenderUseless();
+        }
     }
 }
