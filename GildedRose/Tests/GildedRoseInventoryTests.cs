@@ -1,5 +1,6 @@
 using FluentAssertions;
 using GildedRose.Console;
+using System;
 using Xunit;
 
 namespace GildedRose.Tests
@@ -9,7 +10,6 @@ namespace GildedRose.Tests
         private const string AgedBrie = "Aged Brie";
         private const string BackstagePases = "Backstage passes to a TAFKAL80ETC concert";
 
-        // backstage passes has quality 0 after the SellIn expires
         // Sulfuras has no SellIn nor quality decrement
         // When SellIn date has passed, quality degrades twice as fast
 
@@ -125,6 +125,34 @@ namespace GildedRose.Tests
             sut.Degrade();
 
             item.Quality.Should().Be(0);
+        }
+
+        [Fact]
+        public void SulfurasHasNotSellIn_NorQualityDecrement()
+        {
+            Item item = Sulfuras();
+            var sut = Inventory.Empty.With(item);
+
+            Execute(sut.Degrade, times: 100);
+
+            item.Quality.Should().Be(Sulfuras().Quality);
+            item.SellIn.Should().Be(Sulfuras().SellIn);
+        }
+
+        private void Execute(Action what, int times)
+        {
+            for (int i = 0; i < times; i++)
+                what();
+        }
+
+        private static Item Sulfuras()
+        {
+            return new Item
+            {
+                Name = "Sulfuras, Hand of Ragnaros",
+                SellIn = 0,
+                Quality = 80
+            };
         }
     }
 }

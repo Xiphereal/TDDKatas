@@ -4,6 +4,9 @@ namespace GildedRose.Console
     public class Inventory
     {
         private const string BackstagePases = "Backstage passes to a TAFKAL80ETC concert";
+        private const string Sulfuras = "Sulfuras, Hand of Ragnaros";
+        private const string AgedBrie = "Aged Brie";
+
         private IList<Item> Items = [];
 
         public static Inventory Empty => new();
@@ -19,11 +22,11 @@ namespace GildedRose.Console
         {
             for (var i = 0; i < Items.Count; i++)
             {
-                if (Items[i].Name != "Aged Brie" && Items[i].Name != BackstagePases)
+                if (Items[i].Name != AgedBrie && Items[i].Name != BackstagePases)
                 {
                     if (Items[i].Quality > 0)
                     {
-                        if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                        if (Items[i].Name != Sulfuras)
                         {
                             Items[i].Quality = Items[i].Quality - 1;
                         }
@@ -56,20 +59,20 @@ namespace GildedRose.Console
                     }
                 }
 
-                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                if (Items[i].Name != Sulfuras)
                 {
                     Items[i].SellIn = Items[i].SellIn - 1;
                 }
 
                 if (Items[i].SellIn < 0)
                 {
-                    if (Items[i].Name != "Aged Brie")
+                    if (Items[i].Name != AgedBrie)
                     {
                         if (Items[i].Name != BackstagePases)
                         {
                             if (Items[i].Quality > 0)
                             {
-                                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                                if (Items[i].Name != Sulfuras)
                                 {
                                     Items[i].Quality = Items[i].Quality - 1;
                                 }
