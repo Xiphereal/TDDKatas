@@ -27,12 +27,12 @@
 
                 item.ReduceSellInBy1();
 
-                if (item.SellIn < MinQuality)
-                    UpdateQualityTwice(item);
+                if (item.IsExpired())
+                    UpdateQualityAgain(item);
             }
         }
 
-        private static void UpdateQualityTwice(Item item)
+        private static void UpdateQualityAgain(Item item)
         {
             if (item.Name != AgedBrie)
             {

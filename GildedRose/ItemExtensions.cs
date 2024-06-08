@@ -14,6 +14,11 @@ namespace GildedRose
             item.SellIn--;
         }
 
+        public static bool IsExpired(this Item item)
+        {
+            return item.SellIn < 0;
+        }
+
         public static void DecreaseQuality(this Item item)
         {
             if (item.Quality > MinQuality)
