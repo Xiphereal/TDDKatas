@@ -29,7 +29,7 @@
 
             var inventory = Inventory.Empty.With(app.Items.ToArray());
 
-            inventory.Degrade();
+            inventory.PassDay();
 
             System.Console.ReadKey();
         }

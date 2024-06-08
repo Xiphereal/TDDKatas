@@ -18,7 +18,7 @@ namespace GildedRose.Console
             return this;
         }
 
-        public void Degrade()
+        public void PassDay()
         {
             for (var i = 0; i < Items.Count; i++)
             {

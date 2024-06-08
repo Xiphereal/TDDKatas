@@ -25,7 +25,7 @@ namespace GildedRose.Tests
             };
             var sut = Inventory.Empty.With(item);
 
-            sut.Degrade();
+            sut.PassDay();
 
             item.Quality.Should().Be(1);
             item.SellIn.Should().Be(0);
@@ -40,10 +40,10 @@ namespace GildedRose.Tests
             };
             var sut = Inventory.Empty.With(item);
 
-            sut.Degrade();
+            sut.PassDay();
             item.Quality.Should().Be(0);
 
-            sut.Degrade();
+            sut.PassDay();
             item.Quality.Should().Be(0);
         }
 
@@ -57,7 +57,7 @@ namespace GildedRose.Tests
             };
             var sut = Inventory.Empty.With(item);
 
-            sut.Degrade();
+            sut.PassDay();
 
             item.Quality.Should().BeGreaterThan(1);
         }
@@ -72,10 +72,10 @@ namespace GildedRose.Tests
             };
             var sut = Inventory.Empty.With(item);
 
-            sut.Degrade();
+            sut.PassDay();
             item.Quality.Should().Be(50);
 
-            sut.Degrade();
+            sut.PassDay();
             item.Quality.Should().Be(50);
         }
 
@@ -90,7 +90,7 @@ namespace GildedRose.Tests
             };
             var sut = Inventory.Empty.With(item);
 
-            sut.Degrade();
+            sut.PassDay();
 
             item.Quality.Should().Be(2);
         }
@@ -106,7 +106,7 @@ namespace GildedRose.Tests
             };
             var sut = Inventory.Empty.With(item);
 
-            sut.Degrade();
+            sut.PassDay();
 
             item.Quality.Should().Be(3);
         }
@@ -122,7 +122,7 @@ namespace GildedRose.Tests
             };
             var sut = Inventory.Empty.With(item);
 
-            sut.Degrade();
+            sut.PassDay();
 
             item.Quality.Should().Be(0);
         }
@@ -133,7 +133,7 @@ namespace GildedRose.Tests
             Item item = Sulfuras();
             var sut = Inventory.Empty.With(item);
 
-            Execute(sut.Degrade, times: 100);
+            Execute(sut.PassDay, times: 100);
 
             item.Quality.Should().Be(Sulfuras().Quality);
             item.SellIn.Should().Be(Sulfuras().SellIn);
