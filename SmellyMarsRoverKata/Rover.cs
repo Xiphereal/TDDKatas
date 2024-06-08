@@ -28,12 +28,8 @@ namespace MarsRoverKata
 
         public void Receive(string commandsSequence)
         {
-            for (var i = 0; i < commandsSequence.Length; ++i)
-            {
-                char command = commandsSequence.ElementAt(i);
-
+            foreach (char command in commandsSequence)
                 Process(command);
-            }
         }
 
         private void Process(char command)
