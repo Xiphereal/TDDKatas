@@ -15,6 +15,9 @@ namespace GildedRose
                 if (item.IsBackstagePasses())
                     return new BackstagePasses(x);
 
+                if (item.IsConjured())
+                    return new ConjuredItem(x);
+
                 return item;
             });
     }

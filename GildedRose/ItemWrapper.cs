@@ -21,6 +21,7 @@ namespace GildedRose
         public bool IsAgedBrie() => item.Name == AgedBrie;
         public bool IsSulfuras() => item.Name == Sulfuras;
         public bool IsBackstagePasses() => item.Name == BackstagePases;
+        public bool IsConjured() => item.Name.StartsWith("Conjured");
 
         public void ReduceSellInBy1() => item.SellIn--;
 

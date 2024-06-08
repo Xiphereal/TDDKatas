@@ -10,18 +10,12 @@ namespace GildedRose.Tests
         private const string AgedBrie = "Aged Brie";
         private const string BackstagePases = "Backstage passes to a TAFKAL80ETC concert";
 
-        // When SellIn date has passed, quality degrades twice as fast
-
-        // feat: conjured items degrade quality twice as fast as normal ones
-
         [Fact]
         public void BothQualityAndSellIn_ReducesBy1_AfterEachDayPasses()
         {
-            Item item = new Item()
-            {
-                Quality = 2,
-                SellIn = 1,
-            };
+            Item item = NamedItem();
+            item.Quality = 2;
+            item.SellIn = 1;
             var sut = Inventory.Empty.With(item);
 
             sut.PassDay();
@@ -30,14 +24,14 @@ namespace GildedRose.Tests
             item.SellIn.Should().Be(0);
         }
 
+        private static Item NamedItem() => new() { Name = "Any" };
+
         [Fact]
         public void QualityDegradesTwiceAsFast_WhenSellInHasPassed()
         {
-            Item item = new Item()
-            {
-                Quality = 2,
-                SellIn = 0,
-            };
+            Item item = NamedItem();
+            item.Quality = 2;
+            item.SellIn = 0;
             var sut = Inventory.Empty.With(item);
 
             sut.PassDay();
@@ -46,12 +40,35 @@ namespace GildedRose.Tests
         }
 
         [Fact]
+        public void ConjuredItems_WhenSellInIsNotExpired_DegradeTwiceAsFastAsTheRest()
+        {
+            Item item = Conjured();
+            item.Quality = 2;
+            item.SellIn = 1;
+
+            var sut = Inventory.Empty.With(item);
+
+            sut.PassDay();
+
+            item.Quality.Should().Be(0);
+        }
+
+
+        [Fact]
+        public void TestName()
+        {
+            Item item = Conjured();
+            new ItemWrapper(item).IsConjured().Should().BeTrue();
+        }
+
+
+        private static Item Conjured() => new() { Name = "Conjured bla bla" };
+
+        [Fact]
         public void QualityCanNotDropBelow0()
         {
-            Item item = new Item()
-            {
-                Quality = 1,
-            };
+            Item item = NamedItem();
+            item.Quality = 1;
             var sut = Inventory.Empty.With(item);
 
             sut.PassDay();
