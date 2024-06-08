@@ -26,5 +26,8 @@ namespace GildedRose
 
             RenderUseless();
         }
+
+        private void RenderUseless() => item.Quality = 0;
+
     }
 }

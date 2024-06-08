@@ -52,22 +52,5 @@ namespace GildedRose
         public bool IsAgedBrie() => item.Name == AgedBrie;
         public bool IsSulfuras() => item.Name == Sulfuras;
         public bool IsBackstagePasses() => item.Name == BackstagePases;
-
-        public void RenderUseless() => item.Quality = 0;
-
-
-        public void IncreaseQualityForBackstagePasses()
-        {
-            if (!IsBackstagePasses())
-                throw new ArgumentException();
-
-            IncreaseQuality();
-
-            if (item.SellIn < 11)
-                IncreaseQuality();
-
-            if (item.SellIn < 6)
-                IncreaseQuality();
-        }
     }
 }
