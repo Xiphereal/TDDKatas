@@ -2,17 +2,16 @@
 {
     public class Rover
     {
-        private string direction;
-
         public Rover(int x, int y, string direction)
         {
-            this.X = x;
-            this.Y = y;
-            this.direction = direction;
+            X = x;
+            Y = y;
+            this.Direction = direction;
         }
 
         public int X { get; private set; }
         public int Y { get; private set; }
+        public string Direction { get; private set; }
 
         public void Receive(string commandsSequence)
         {
@@ -24,48 +23,48 @@
                 {
 
                     // Rotate Rover
-                    if (this.direction == "N")
+                    if (Direction == "N")
                     {
                         if (command == "r")
                         {
-                            this.direction = "E";
+                            Direction = "E";
                         }
                         else
                         {
-                            this.direction = "W";
+                            Direction = "W";
                         }
                     }
-                    else if (this.direction == "S")
+                    else if (Direction == "S")
                     {
                         if (command == "r")
                         {
-                            this.direction = "W";
+                            Direction = "W";
                         }
                         else
                         {
-                            this.direction = "E";
+                            Direction = "E";
                         }
                     }
-                    else if (this.direction == "W")
+                    else if (Direction == "W")
                     {
                         if (command == "r")
                         {
-                            this.direction = "N";
+                            Direction = "N";
                         }
                         else
                         {
-                            this.direction = "S";
+                            Direction = "S";
                         }
                     }
                     else
                     {
                         if (command == "r")
                         {
-                            this.direction = "S";
+                            Direction = "S";
                         }
                         else
                         {
-                            this.direction = "N";
+                            Direction = "N";
                         }
                     }
                 }
@@ -81,21 +80,21 @@
                     }
                     var displacement = displacement1;
 
-                    if (this.direction == "N")
+                    if (Direction == "N")
                     {
-                        this.Y += displacement;
+                        Y += displacement;
                     }
-                    else if (this.direction == "S")
+                    else if (Direction == "S")
                     {
-                        this.Y -= displacement;
+                        Y -= displacement;
                     }
-                    else if (this.direction == "W")
+                    else if (Direction == "W")
                     {
-                        this.X -= displacement;
+                        X -= displacement;
                     }
                     else
                     {
-                        this.X += displacement;
+                        X += displacement;
                     }
                 }
             }
