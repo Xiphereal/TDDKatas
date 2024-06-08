@@ -28,6 +28,9 @@ namespace MarsRoverKata
 
         public void Receive(string commandsSequence)
         {
+            if (commandsSequence.Any(x => !allowedCommands.Contains(x)))
+                throw new ArgumentException();
+
             foreach (char command in commandsSequence)
                 Process(command);
         }
