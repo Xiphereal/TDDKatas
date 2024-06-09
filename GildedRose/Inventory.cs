@@ -4,7 +4,10 @@ namespace GildedRose.Console
     public class Inventory
     {
         private const string AgedBrie = "Aged Brie";
+        private const string Sulfuras = "Sulfuras, Hand of Ragnaros";
+        private const string BackstagePasses = "Backstage passes to a TAFKAL80ETC concert";
         private const int MaxQuality = 50;
+
         private IList<Item> Items;
 
         public Inventory(IList<Item> items)
@@ -21,11 +24,11 @@ namespace GildedRose.Console
         {
             for (var i = 0; i < Items.Count; i++)
             {
-                if (Items[i].Name != AgedBrie && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                if (Items[i].Name != AgedBrie && Items[i].Name != BackstagePasses)
                 {
                     if (Items[i].Quality > 0)
                     {
-                        if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                        if (Items[i].Name != Sulfuras)
                         {
                             Items[i].Quality = Items[i].Quality - 1;
                         }
@@ -37,7 +40,7 @@ namespace GildedRose.Console
                     {
                         Items[i].Quality = Items[i].Quality + 1;
 
-                        if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
+                        if (Items[i].Name == BackstagePasses)
                         {
                             if (Items[i].SellIn < 11)
                             {
@@ -58,7 +61,7 @@ namespace GildedRose.Console
                     }
                 }
 
-                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                if (Items[i].Name != Sulfuras)
                 {
                     Items[i].SellIn = Items[i].SellIn - 1;
                 }
@@ -67,11 +70,11 @@ namespace GildedRose.Console
                 {
                     if (Items[i].Name != AgedBrie)
                     {
-                        if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                        if (Items[i].Name != BackstagePasses)
                         {
                             if (Items[i].Quality > 0)
                             {
-                                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                                if (Items[i].Name != Sulfuras)
                                 {
                                     Items[i].Quality = Items[i].Quality - 1;
                                 }
