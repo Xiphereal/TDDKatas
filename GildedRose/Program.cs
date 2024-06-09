@@ -3,6 +3,7 @@
     public class Program
     {
         private const int MaxQuality = 50;
+        private const int MinQuality = 0;
         private IList<Item> Items;
 
         public static Program Main(string[] args)
@@ -14,7 +15,7 @@
                 Items = new List<Item>
                 {
                     new Item {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
-                    new Item {Name = "Aged Brie", SellIn = 2, Quality = 0},
+                    new Item {Name = "Aged Brie", SellIn = 2, Quality = MinQuality},
                     new Item {Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7},
                     new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80},
                     new Item
@@ -98,9 +99,10 @@
             if (item.Quality < MaxQuality)
                 item.Quality++;
         }
+
         private static void DecreaseQuality(Item item)
         {
-            if (item.Quality > 0)
+            if (item.Quality > MinQuality)
                 item.Quality--;
         }
     }
