@@ -36,17 +36,11 @@
 
         public IEnumerable<Item> PassDay()
         {
-            foreach (Item item in Items)
+            foreach (Item item in ExceptSulfuras(Items))
             {
                 if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
                 {
-                    if (item.Quality > 0)
-                    {
-                        if (item.Name != "Sulfuras, Hand of Ragnaros")
-                        {
-                            item.Quality--;
-                        }
-                    }
+                    DecreaseQuality(item);
                 }
                 else
                 {
@@ -69,10 +63,7 @@
                     }
                 }
 
-                if (item.Name != "Sulfuras, Hand of Ragnaros")
-                {
-                    item.SellIn--;
-                }
+                item.SellIn--;
 
                 if (item.SellIn < 0)
                 {
@@ -80,13 +71,7 @@
                     {
                         if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
                         {
-                            if (item.Quality > 0)
-                            {
-                                if (item.Name != "Sulfuras, Hand of Ragnaros")
-                                {
-                                    item.Quality--;
-                                }
-                            }
+                            DecreaseQuality(item);
                         }
                         else
                         {
@@ -103,12 +88,20 @@
             return Items;
         }
 
+        private static IEnumerable<Item> ExceptSulfuras(IEnumerable<Item> items)
+        {
+            return items.Where(x => x.Name != "Sulfuras, Hand of Ragnaros");
+        }
+
         private static void IncreaseQuality(Item item)
         {
             if (item.Quality < MaxQuality)
-            {
                 item.Quality++;
-            }
+        }
+        private static void DecreaseQuality(Item item)
+        {
+            if (item.Quality > 0)
+                item.Quality--;
         }
     }
 
