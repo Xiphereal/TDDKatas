@@ -35,7 +35,7 @@
 
         public void UpdateQuality()
         {
-            inventory.UpdateQuality();
+            inventory.PassDay();
         }
     }
 

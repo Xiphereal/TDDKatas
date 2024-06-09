@@ -11,7 +11,7 @@ namespace GildedRose.Console
 
         public static Inventory With(IList<Item> items) => new Inventory(items);
 
-        public void UpdateQuality()
+        public void PassDay()
         {
             foreach (Item item in ExceptLegendaries(items))
             {
@@ -20,20 +20,23 @@ namespace GildedRose.Console
                 item.SellIn--;
 
                 if (IsExpired(item))
+                    UpdateQualityAfterExpiration(item);
+            }
+        }
+
+        private static void UpdateQualityAfterExpiration(Item item)
+        {
+            if (item.Name == AgedBrie)
+                IncreaseQuality(item);
+            else
+            {
+                if (item.Name == BackstagePasses)
+                    item.Quality -= item.Quality;
+                else
                 {
-                    if (item.Name == AgedBrie)
-                        IncreaseQuality(item);
-                    else
+                    if (item.Quality > MinQuality)
                     {
-                        if (item.Name == BackstagePasses)
-                            item.Quality -= item.Quality;
-                        else
-                        {
-                            if (item.Quality > MinQuality)
-                            {
-                                item.Quality--;
-                            }
-                        }
+                        item.Quality--;
                     }
                 }
             }

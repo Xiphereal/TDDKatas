@@ -38,7 +38,7 @@ namespace GildedRose.Tests
             };
             Inventory sut = Inventory.With(items);
 
-            sut.UpdateQuality();
+            sut.PassDay();
 
             items.Should().BeEquivalentTo(
             [
@@ -75,7 +75,7 @@ namespace GildedRose.Tests
             };
             Inventory sut = Inventory.With(items);
 
-            Repeat(sut.UpdateQuality, times: 2);
+            Repeat(sut.PassDay, times: 2);
 
             items.Should().BeEquivalentTo(
             [
@@ -118,7 +118,7 @@ namespace GildedRose.Tests
             };
             Inventory sut = Inventory.With(items);
 
-            Repeat(sut.UpdateQuality, times: 10);
+            Repeat(sut.PassDay, times: 10);
 
             items.Should().BeEquivalentTo(
             [
@@ -145,7 +145,7 @@ namespace GildedRose.Tests
                 Quality = 1,
             };
 
-            Inventory.With([item]).UpdateQuality();
+            Inventory.With([item]).PassDay();
 
             item.SellIn.Should().Be(3);
             item.Quality.Should().Be(MinQuality);
@@ -162,7 +162,7 @@ namespace GildedRose.Tests
             Inventory sut = Inventory.With([item]);
 
             const int manyTimes = 100;
-            Repeat(sut.UpdateQuality, manyTimes);
+            Repeat(sut.PassDay, manyTimes);
 
             item.Quality.Should().Be(MinQuality);
         }
@@ -179,7 +179,7 @@ namespace GildedRose.Tests
             Inventory sut = Inventory.With([item]);
 
             const int manyTimes = 100;
-            Repeat(sut.UpdateQuality, manyTimes);
+            Repeat(sut.PassDay, manyTimes);
 
             item.Quality.Should().Be(MaxQuality);
         }
@@ -195,7 +195,7 @@ namespace GildedRose.Tests
             };
             Inventory sut = Inventory.With([item]);
 
-            sut.UpdateQuality();
+            sut.PassDay();
 
             item.Quality.Should().Be(11);
         }
@@ -206,7 +206,7 @@ namespace GildedRose.Tests
             Item item = Sulfuras();
             Inventory sut = Inventory.With([item]);
 
-            sut.UpdateQuality();
+            sut.PassDay();
 
             item.Quality.Should().Be(Sulfuras().Quality);
             item.SellIn.Should().Be(Sulfuras().SellIn);
@@ -221,7 +221,7 @@ namespace GildedRose.Tests
                 Quality = 2,
             };
 
-            Inventory.With([item]).UpdateQuality();
+            Inventory.With([item]).PassDay();
 
             item.Quality.Should().Be(MinQuality);
         }
@@ -237,7 +237,7 @@ namespace GildedRose.Tests
             };
             Inventory sut = Inventory.With([item]);
 
-            sut.UpdateQuality();
+            sut.PassDay();
 
             item.Quality.Should().Be(12);
         }
@@ -253,7 +253,7 @@ namespace GildedRose.Tests
             };
             Inventory sut = Inventory.With([item]);
 
-            sut.UpdateQuality();
+            sut.PassDay();
 
             item.Quality.Should().Be(6);
         }
@@ -269,7 +269,7 @@ namespace GildedRose.Tests
             };
             Inventory sut = Inventory.With([item]);
 
-            sut.UpdateQuality();
+            sut.PassDay();
 
             item.Quality.Should().Be(7);
         }
@@ -285,7 +285,7 @@ namespace GildedRose.Tests
             };
             Inventory sut = Inventory.With([item]);
 
-            sut.UpdateQuality();
+            sut.PassDay();
 
             item.Quality.Should().Be(10);
         }
@@ -301,7 +301,7 @@ namespace GildedRose.Tests
             };
             Inventory sut = Inventory.With([item]);
 
-            sut.UpdateQuality();
+            sut.PassDay();
 
             item.Quality.Should().Be(MinQuality);
         }
