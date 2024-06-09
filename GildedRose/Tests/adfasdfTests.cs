@@ -68,6 +68,14 @@ namespace GildedRose.Tests
             sulfuras.Quality.Should().Be(80);
         }
 
+        [Fact]
+        public void QualityNeverDegradesBelow0()
+        {
+            IEnumerable<Item> items = PassDays(3);
+
+            items.All(x => x.Quality >= 0).Should().BeTrue();
+        }
+
         private IEnumerable<Item> PassDays(int times)
         {
             Console.Program gildedRose = Console.Program.Main([]);
