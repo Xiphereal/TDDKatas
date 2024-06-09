@@ -9,7 +9,11 @@ namespace GildedRose.Tests
 {
     public class adfasdfTests
     {
+        private const string Sulfuras = "Sulfuras, Hand of Ragnaros";
+        private const string BackstagePasses = "Backstage passes to a TAFKAL80ETC concert";
+
         // test: ver si hay una forma más semántica de hacer el AllSatisfy
+        // reordenar tests para que sigan criterio más importante y sencillo.
 
         [Fact]
         public void IsRefactorOver()
@@ -28,10 +32,10 @@ namespace GildedRose.Tests
                 new Item {Name = "+5 Dexterity Vest", SellIn = 8, Quality = 18},
                 new Item {Name = "Aged Brie", SellIn = 0, Quality = 2},
                 new Item {Name = "Elixir of the Mongoose", SellIn = 3, Quality = 5},
-                new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80},
+                new Item {Name = Sulfuras, SellIn = 0, Quality = 80},
                 new Item
                     {
-                        Name = "Backstage passes to a TAFKAL80ETC concert",
+                        Name = BackstagePasses,
                         SellIn = 13,
                         Quality = 22
                     },
@@ -49,10 +53,10 @@ namespace GildedRose.Tests
                 new Item {Name = "+5 Dexterity Vest", SellIn = 7, Quality = 17},
                 new Item {Name = "Aged Brie", SellIn = -1, Quality = 4},
                 new Item {Name = "Elixir of the Mongoose", SellIn = 2, Quality = 4},
-                new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80},
+                new Item {Name = Sulfuras, SellIn = 0, Quality = 80},
                 new Item
                     {
-                        Name = "Backstage passes to a TAFKAL80ETC concert",
+                        Name = BackstagePasses,
                         SellIn = 12,
                         Quality = 23
                     },
@@ -65,7 +69,7 @@ namespace GildedRose.Tests
         {
             IEnumerable<Item> items = PassDays(100);
 
-            Item sulfuras = GetItemBy(name: "Sulfuras, Hand of Ragnaros", items);
+            Item sulfuras = GetItemBy(name: Sulfuras, items);
             sulfuras.SellIn.Should().Be(0);
             sulfuras.Quality.Should().Be(80);
         }
@@ -76,6 +80,24 @@ namespace GildedRose.Tests
             IEnumerable<Item> items = PassDays(20);
 
             items.All(x => x.Quality >= 0).Should().BeTrue();
+        }
+
+        [Fact]
+        public void QualityNeverGoesAbove50_ExceptForSulfuras()
+        {
+            IEnumerable<Item> items = PassDays(100);
+
+            items.Where(x => x.Name != Sulfuras).All(x => x.Quality <= 50)
+                .Should().BeTrue();
+        }
+
+        [Fact]
+        public void BackstagePasses_QualityIncreaseOverTime()
+        {
+            int qualityBefore = GetItemBy(BackstagePasses, PassDays(2)).Quality;
+
+            GetItemBy(BackstagePasses, PassDays(3)).Quality
+                .Should().BeGreaterThan(qualityBefore);
         }
 
         private IEnumerable<Item> PassDays(int times)
