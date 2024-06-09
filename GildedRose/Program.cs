@@ -39,54 +39,72 @@
         {
             foreach (Item item in ExceptSulfuras(Items))
             {
-                if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
+                DecreaseSellIn(item);
+
+                UpdateQuality(item);
+
+                if (IsExpired(item))
+                    UpdateQualityAgain(item);
+            }
+
+            return Items;
+        }
+
+        private static void UpdateQualityAgain(Item item)
+        {
+            if (item.Name != "Aged Brie")
+            {
+                if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
                 {
                     DecreaseQuality(item);
                 }
                 else
                 {
-                    if (item.Quality < MaxQuality)
-                    {
-                        item.Quality++;
-
-                        if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            if (item.SellIn < 11)
-                            {
-                                IncreaseQuality(item);
-                            }
-
-                            if (item.SellIn < 6)
-                            {
-                                IncreaseQuality(item);
-                            }
-                        }
-                    }
+                    item.Quality -= item.Quality;
                 }
+            }
+            else
+            {
+                IncreaseQuality(item);
+            }
+        }
 
-                item.SellIn--;
+        private static bool IsExpired(Item item)
+        {
+            return item.SellIn < 0;
+        }
 
-                if (item.SellIn < 0)
+        private static void DecreaseSellIn(Item item)
+        {
+            item.SellIn--;
+        }
+
+        private static void UpdateQuality(Item item)
+        {
+            if (DegradesOverTime(item))
+                DecreaseQuality(item);
+            else
+            {
+                IncreaseQuality(item);
+
+                if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
                 {
-                    if (item.Name != "Aged Brie")
+                    if (item.SellIn <= 10)
                     {
-                        if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            DecreaseQuality(item);
-                        }
-                        else
-                        {
-                            item.Quality -= item.Quality;
-                        }
+                        IncreaseQuality(item);
                     }
-                    else
+
+                    if (item.SellIn <= 5)
                     {
                         IncreaseQuality(item);
                     }
                 }
             }
+        }
 
-            return Items;
+        private static bool DegradesOverTime(Item item)
+        {
+            return item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert";
         }
 
         private static IEnumerable<Item> ExceptSulfuras(IEnumerable<Item> items)
