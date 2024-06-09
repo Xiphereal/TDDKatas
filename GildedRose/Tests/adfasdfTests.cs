@@ -44,6 +44,16 @@ namespace GildedRose.Tests
         }
 
         [Fact]
+        public void Characterization_After2Daysasdfasfdasfd()
+        {
+            int qualityBefore =
+                GetItemBy("Elixir of the Mongoose", PassDays(5)).Quality;
+
+            GetItemBy("Elixir of the Mongoose", PassDays(6)).Quality
+                .Should().Be(qualityBefore - 2);
+        }
+
+        [Fact]
         public void Characterization_After3Days()
         {
             IEnumerable<Item> items = PassDays(3);
@@ -133,9 +143,9 @@ namespace GildedRose.Tests
             Console.Program gildedRose = Console.Program.Main([]);
 
             // The 2 is because Main already pass a day, as well as UpdateQuality.
-            Repeat(() => gildedRose.UpdateQuality(), times - 2);
+            Repeat(() => gildedRose.PassDay(), times - 2);
 
-            IEnumerable<Item> items = gildedRose.UpdateQuality();
+            IEnumerable<Item> items = gildedRose.PassDay();
 
             return items;
         }

@@ -2,6 +2,7 @@
 {
     public class Program
     {
+        private const int MaxQuality = 50;
         private IList<Item> Items;
 
         public static Program Main(string[] args)
@@ -26,14 +27,14 @@
                 }
             };
 
-            app.UpdateQuality();
+            app.PassDay();
 
             ////System.Console.ReadKey();
 
             return app;
         }
 
-        public IEnumerable<Item> UpdateQuality()
+        public IEnumerable<Item> PassDay()
         {
             for (var i = 0; i < Items.Count; i++)
             {
@@ -49,7 +50,7 @@
                 }
                 else
                 {
-                    if (Items[i].Quality < 50)
+                    if (Items[i].Quality < MaxQuality)
                     {
                         Items[i].Quality = Items[i].Quality + 1;
 
@@ -57,7 +58,7 @@
                         {
                             if (Items[i].SellIn < 11)
                             {
-                                if (Items[i].Quality < 50)
+                                if (Items[i].Quality < MaxQuality)
                                 {
                                     Items[i].Quality = Items[i].Quality + 1;
                                 }
@@ -65,7 +66,7 @@
 
                             if (Items[i].SellIn < 6)
                             {
-                                if (Items[i].Quality < 50)
+                                if (Items[i].Quality < MaxQuality)
                                 {
                                     Items[i].Quality = Items[i].Quality + 1;
                                 }
@@ -100,7 +101,7 @@
                     }
                     else
                     {
-                        if (Items[i].Quality < 50)
+                        if (Items[i].Quality < MaxQuality)
                         {
                             Items[i].Quality = Items[i].Quality + 1;
                         }
