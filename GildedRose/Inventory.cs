@@ -15,24 +15,7 @@ namespace GildedRose.Console
         {
             foreach (Item item in ExceptLegendaries(items))
             {
-                if (item.Name != AgedBrie && item.Name != BackstagePasses)
-                    DecreaseQuality(item);
-                else
-                {
-                    if (item.Quality < MaxQuality)
-                    {
-                        item.Quality++;
-
-                        if (item.Name == BackstagePasses)
-                        {
-                            if (item.SellIn <= 10)
-                                IncreaseQuality(item);
-
-                            if (item.SellIn <= 5)
-                                IncreaseQuality(item);
-                        }
-                    }
-                }
+                UpdateQuality(item);
 
                 item.SellIn--;
 
@@ -56,7 +39,27 @@ namespace GildedRose.Console
             }
         }
 
+        private static void UpdateQuality(Item item)
+        {
+            if (item.Name != AgedBrie && item.Name != BackstagePasses)
+                DecreaseQuality(item);
+            else
+            {
+                if (item.Quality < MaxQuality)
+                {
+                    item.Quality++;
 
+                    if (item.Name == BackstagePasses)
+                    {
+                        if (item.SellIn <= 10)
+                            IncreaseQuality(item);
+
+                        if (item.SellIn <= 5)
+                            IncreaseQuality(item);
+                    }
+                }
+            }
+        }
 
         private static IEnumerable<Item> ExceptLegendaries(IList<Item> items)
         {
