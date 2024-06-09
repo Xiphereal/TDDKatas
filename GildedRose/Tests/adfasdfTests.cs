@@ -100,6 +100,16 @@ namespace GildedRose.Tests
                 .Should().BeGreaterThan(qualityBefore);
         }
 
+        [Fact]
+        public void BackstagePasses_QualityDropsToZeroOnExpiration()
+        {
+            GetItemBy(BackstagePasses, PassDays(15)).Quality
+                .Should().NotBe(0);
+
+            GetItemBy(BackstagePasses, PassDays(16)).Quality
+                .Should().Be(0);
+        }
+
         private IEnumerable<Item> PassDays(int times)
         {
             Console.Program gildedRose = Console.Program.Main([]);
