@@ -19,9 +19,7 @@ namespace GildedRose.Tests
         [Fact]
         public void Characterization_After2Days()
         {
-            Console.Program gildedRose = Console.Program.Main([]);
-
-            IEnumerable<Item> items = gildedRose.UpdateQuality();
+            IEnumerable<Item> items = PassDays(2);
 
             items.Should().BeEquivalentTo(
             [
@@ -42,9 +40,7 @@ namespace GildedRose.Tests
         [Fact]
         public void Characterization_After3Days()
         {
-            Console.Program gildedRose = Console.Program.Main([]);
-            gildedRose.UpdateQuality();
-            IEnumerable<Item> items = gildedRose.UpdateQuality();
+            IEnumerable<Item> items = PassDays(3);
 
             items.Should().BeEquivalentTo(
             [
@@ -65,15 +61,23 @@ namespace GildedRose.Tests
         [Fact]
         public void Characterization_SulfurasNeverExpires_AndQualityDoesNotChange()
         {
-            Console.Program gildedRose = Console.Program.Main([]);
-
-            Repeat(() => gildedRose.UpdateQuality(), times: 100);
-
-            IEnumerable<Item> items = gildedRose.UpdateQuality();
+            IEnumerable<Item> items = PassDays(100);
 
             Item sulfuras = GetItemBy(name: "Sulfuras, Hand of Ragnaros", items);
             sulfuras.SellIn.Should().Be(0);
             sulfuras.Quality.Should().Be(80);
+        }
+
+        private IEnumerable<Item> PassDays(int times)
+        {
+            Console.Program gildedRose = Console.Program.Main([]);
+
+            // The 2 is because Main already pass a day, as well as UpdateQuality.
+            Repeat(() => gildedRose.UpdateQuality(), times - 2);
+
+            IEnumerable<Item> items = gildedRose.UpdateQuality();
+
+            return items;
         }
 
         private static Item GetItemBy(string name, IEnumerable<Item> items)
