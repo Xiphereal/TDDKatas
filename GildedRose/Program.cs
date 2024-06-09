@@ -1,134 +1,114 @@
 ﻿namespace GildedRose.Console
 {
-    public class Program
+    internal class Program
     {
-        private const int MaxQuality = 50;
-        private const int MinQuality = 0;
         private IList<Item> Items;
 
-        public static Program Main(string[] args)
+        private static void Main(string[] args)
         {
             System.Console.WriteLine("OMGHAI!");
 
             var app = new Program()
             {
                 Items = new List<Item>
-                {
-                    new Item {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
-                    new Item {Name = "Aged Brie", SellIn = 2, Quality = MinQuality},
-                    new Item {Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7},
-                    new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80},
-                    new Item
-                        {
-                            Name = "Backstage passes to a TAFKAL80ETC concert",
-                            SellIn = 15,
-                            Quality = 20
-                        },
-                    new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
-                }
+                                          {
+                                              new Item {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
+                                              new Item {Name = "Aged Brie", SellIn = 2, Quality = 0},
+                                              new Item {Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7},
+                                              new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80},
+                                              new Item
+                                                  {
+                                                      Name = "Backstage passes to a TAFKAL80ETC concert",
+                                                      SellIn = 15,
+                                                      Quality = 20
+                                                  },
+                                              new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
+                                          }
+
             };
 
-            app.PassDay();
+            app.UpdateQuality();
 
-            ////System.Console.ReadKey();
+            System.Console.ReadKey();
 
-            return app;
         }
 
-        public IEnumerable<Item> PassDay()
+        public void UpdateQuality()
         {
-            foreach (Item item in ExceptSulfuras(Items))
+            for (var i = 0; i < Items.Count; i++)
             {
-                DecreaseSellIn(item);
+                if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                {
+                    if (Items[i].Quality > 0)
+                    {
+                        if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                        {
+                            Items[i].Quality = Items[i].Quality - 1;
+                        }
+                    }
+                }
+                else
+                {
+                    if (Items[i].Quality < 50)
+                    {
+                        Items[i].Quality = Items[i].Quality + 1;
 
-                UpdateQuality(item);
+                        if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
+                        {
+                            if (Items[i].SellIn < 11)
+                            {
+                                if (Items[i].Quality < 50)
+                                {
+                                    Items[i].Quality = Items[i].Quality + 1;
+                                }
+                            }
 
-                if (IsExpired(item))
-                    UpdateQualityAgain(item);
+                            if (Items[i].SellIn < 6)
+                            {
+                                if (Items[i].Quality < 50)
+                                {
+                                    Items[i].Quality = Items[i].Quality + 1;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                {
+                    Items[i].SellIn = Items[i].SellIn - 1;
+                }
+
+                if (Items[i].SellIn < 0)
+                {
+                    if (Items[i].Name != "Aged Brie")
+                    {
+                        if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                        {
+                            if (Items[i].Quality > 0)
+                            {
+                                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                                {
+                                    Items[i].Quality = Items[i].Quality - 1;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Items[i].Quality = Items[i].Quality - Items[i].Quality;
+                        }
+                    }
+                    else
+                    {
+                        if (Items[i].Quality < 50)
+                        {
+                            Items[i].Quality = Items[i].Quality + 1;
+                        }
+                    }
+                }
             }
-
-            return Items;
         }
 
-        private static void UpdateQualityAgain(Item item)
-        {
-            if (IsAgedBrie(item))
-                IncreaseQuality(item);
-            else if (IsBackstagePasses(item))
-                RenderUseless(item);
-            else
-                DecreaseQuality(item);
-        }
-
-        private static bool IsAgedBrie(Item item)
-        {
-            return item.Name == "Aged Brie";
-        }
-
-        private static bool IsBackstagePasses(Item item)
-        {
-            return item.Name == "Backstage passes to a TAFKAL80ETC concert";
-        }
-
-        private static void RenderUseless(Item item)
-        {
-            if (!IsBackstagePasses(item))
-                throw new ArgumentException();
-
-            item.Quality = MinQuality;
-        }
-
-        private static bool IsExpired(Item item)
-        {
-            return item.SellIn < 0;
-        }
-
-        private static void DecreaseSellIn(Item item)
-        {
-            item.SellIn--;
-        }
-
-        private static void UpdateQuality(Item item)
-        {
-            if (DegradesOverTime(item))
-                DecreaseQuality(item);
-            else if (IsAgedBrie(item))
-                IncreaseQuality(item);
-            else if (IsBackstagePasses(item))
-            {
-                IncreaseQuality(item);
-
-                if (item.SellIn <= 10)
-                    IncreaseQuality(item);
-
-                if (item.SellIn <= 5)
-                    IncreaseQuality(item);
-            }
-            else
-                throw new ArgumentException();
-        }
-
-        private static bool DegradesOverTime(Item item)
-        {
-            return !IsAgedBrie(item) && !IsBackstagePasses(item);
-        }
-
-        private static IEnumerable<Item> ExceptSulfuras(IEnumerable<Item> items)
-        {
-            return items.Where(x => x.Name != "Sulfuras, Hand of Ragnaros");
-        }
-
-        private static void IncreaseQuality(Item item)
-        {
-            if (item.Quality < MaxQuality)
-                item.Quality++;
-        }
-
-        private static void DecreaseQuality(Item item)
-        {
-            if (item.Quality > MinQuality)
-                item.Quality--;
-        }
     }
 
     public class Item
