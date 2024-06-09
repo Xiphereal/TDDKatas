@@ -1,6 +1,92 @@
+using FluentAssertions;
+using GildedRose.Console;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Xunit;
+
 namespace GildedRose.Tests
 {
     public class adfasdfTests
     {
+        [Fact]
+        public void IsRefactorOver()
+        {
+            // And we should readd the System.Console.ReadKey();
+            Console.Program.Main([]).Should().BeNull();
+        }
+
+        [Fact]
+        public void Characterization_After2Days()
+        {
+            Console.Program gildedRose = Console.Program.Main([]);
+
+            IEnumerable<Item> items = gildedRose.UpdateQuality();
+
+            items.Should().BeEquivalentTo(
+            [
+                new Item {Name = "+5 Dexterity Vest", SellIn = 8, Quality = 18},
+                new Item {Name = "Aged Brie", SellIn = 0, Quality = 2},
+                new Item {Name = "Elixir of the Mongoose", SellIn = 3, Quality = 5},
+                new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80},
+                new Item
+                    {
+                        Name = "Backstage passes to a TAFKAL80ETC concert",
+                        SellIn = 13,
+                        Quality = 22
+                    },
+                new Item {Name = "Conjured Mana Cake", SellIn = 1, Quality = 4}
+            ]);
+        }
+
+        [Fact]
+        public void Characterization_After3Days()
+        {
+            Console.Program gildedRose = Console.Program.Main([]);
+            gildedRose.UpdateQuality();
+            IEnumerable<Item> items = gildedRose.UpdateQuality();
+
+            items.Should().BeEquivalentTo(
+            [
+                new Item {Name = "+5 Dexterity Vest", SellIn = 7, Quality = 17},
+                new Item {Name = "Aged Brie", SellIn = -1, Quality = 4},
+                new Item {Name = "Elixir of the Mongoose", SellIn = 2, Quality = 4},
+                new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80},
+                new Item
+                    {
+                        Name = "Backstage passes to a TAFKAL80ETC concert",
+                        SellIn = 12,
+                        Quality = 23
+                    },
+                new Item {Name = "Conjured Mana Cake", SellIn = 0, Quality = 3}
+            ]);
+        }
+
+        [Fact]
+        public void Characterization_SulfurasNeverExpires_AndQualityDoesNotChange()
+        {
+            Console.Program gildedRose = Console.Program.Main([]);
+
+            Repeat(() => gildedRose.UpdateQuality(), times: 100);
+
+            IEnumerable<Item> items = gildedRose.UpdateQuality();
+
+            Item sulfuras = GetItemBy(name: "Sulfuras, Hand of Ragnaros", items);
+            sulfuras.SellIn.Should().Be(0);
+            sulfuras.Quality.Should().Be(80);
+        }
+
+        private static Item GetItemBy(string name, IEnumerable<Item> items)
+        {
+            return items.Single(x => x.Name == name);
+        }
+
+        private void Repeat(Action action, int times)
+        {
+            for (int i = 0; i < times; i++)
+            {
+                action();
+            }
+        }
     }
 }
