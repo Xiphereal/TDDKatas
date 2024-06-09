@@ -17,51 +17,58 @@ namespace GildedRose.Console
             {
                 UpdateQuality(item);
 
-                item.SellIn--;
+                UpdateSellIn(item);
 
                 if (IsExpired(item))
                     UpdateQualityAfterExpiration(item);
             }
         }
 
-        private static void UpdateQualityAfterExpiration(Item item)
+        private static void UpdateSellIn(Item item)
         {
-            if (item.Name == AgedBrie)
-                IncreaseQuality(item);
-            else
-            {
-                if (item.Name == BackstagePasses)
-                    item.Quality -= item.Quality;
-                else
-                {
-                    if (item.Quality > MinQuality)
-                    {
-                        item.Quality--;
-                    }
-                }
-            }
+            item.SellIn--;
         }
 
         private static void UpdateQuality(Item item)
         {
-            if (item.Name != AgedBrie && item.Name != BackstagePasses)
+            if (DoesDecreaseQualityOverTime(item))
+                DecreaseQuality(item);
+            else if (item.Name == BackstagePasses)
+            {
+                IncreaseQuality(item);
+
+                if (item.SellIn <= 10)
+                    IncreaseQuality(item);
+
+                if (item.SellIn <= 5)
+                    IncreaseQuality(item);
+            }
+            else if (item.Name == AgedBrie)
+                IncreaseQuality(item);
+            else
+                throw new ArgumentException();
+        }
+
+        private static void UpdateQualityAfterExpiration(Item item)
+        {
+            if (item.Name == AgedBrie)
+                IncreaseQuality(item);
+            else if (item.Name == BackstagePasses)
+                RenderUseless(item);
+            else if (DoesDecreaseQualityOverTime(item))
                 DecreaseQuality(item);
             else
-            {
-                if (item.Quality < MaxQuality)
-                {
-                    item.Quality++;
+                throw new ArgumentException();
+        }
 
-                    if (item.Name == BackstagePasses)
-                    {
-                        if (item.SellIn <= 10)
-                            IncreaseQuality(item);
+        private static void RenderUseless(Item item)
+        {
+            item.Quality = 0;
+        }
 
-                        if (item.SellIn <= 5)
-                            IncreaseQuality(item);
-                    }
-                }
-            }
+        private static bool DoesDecreaseQualityOverTime(Item item)
+        {
+            return item.Name != AgedBrie && item.Name != BackstagePasses;
         }
 
         private static IEnumerable<Item> ExceptLegendaries(IList<Item> items)
