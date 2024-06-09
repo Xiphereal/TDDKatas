@@ -110,6 +110,24 @@ namespace GildedRose.Tests
                 .Should().Be(0);
         }
 
+        [Fact]
+        public void BackstagePasses_QualityIncreasesBy2_When10daysRemaining()
+        {
+            int qualityBefore = GetItemBy(BackstagePasses, PassDays(5)).Quality;
+
+            GetItemBy(BackstagePasses, PassDays(6)).Quality
+                .Should().Be(qualityBefore + 2);
+        }
+
+        [Fact]
+        public void BackstagePasses_QualityIncreasesBy3_When5daysRemaining()
+        {
+            int qualityBefore = GetItemBy(BackstagePasses, PassDays(10)).Quality;
+
+            GetItemBy(BackstagePasses, PassDays(11)).Quality
+                .Should().Be(qualityBefore + 3);
+        }
+
         private IEnumerable<Item> PassDays(int times)
         {
             Console.Program gildedRose = Console.Program.Main([]);
