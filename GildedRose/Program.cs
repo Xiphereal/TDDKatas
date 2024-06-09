@@ -52,21 +52,25 @@
 
         private static void UpdateQualityAgain(Item item)
         {
-            if (item.Name != "Aged Brie")
-            {
-                if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
-                {
-                    DecreaseQuality(item);
-                }
-                else
-                {
-                    item.Quality -= item.Quality;
-                }
-            }
-            else
-            {
+            if (item.Name == "Aged Brie")
                 IncreaseQuality(item);
-            }
+            else if (IsBackstagePasses(item))
+                RenderUseless(item);
+            else
+                DecreaseQuality(item);
+        }
+
+        private static bool IsBackstagePasses(Item item)
+        {
+            return item.Name == "Backstage passes to a TAFKAL80ETC concert";
+        }
+
+        private static void RenderUseless(Item item)
+        {
+            if (!IsBackstagePasses(item))
+                throw new ArgumentException();
+
+            item.Quality = MinQuality;
         }
 
         private static bool IsExpired(Item item)
