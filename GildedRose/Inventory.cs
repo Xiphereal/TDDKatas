@@ -7,6 +7,7 @@ namespace GildedRose.Console
         private const string Sulfuras = "Sulfuras, Hand of Ragnaros";
         private const string BackstagePasses = "Backstage passes to a TAFKAL80ETC concert";
         private const int MaxQuality = 50;
+        private const int MinQuality = 0;
 
         public static Inventory With(IList<Item> items) => new Inventory(items);
 
@@ -16,7 +17,7 @@ namespace GildedRose.Console
             {
                 if (item.Name != AgedBrie && item.Name != BackstagePasses)
                 {
-                    if (item.Quality > 0)
+                    if (item.Quality > MinQuality)
                     {
                         if (item.Name != Sulfuras)
                         {
@@ -32,21 +33,11 @@ namespace GildedRose.Console
 
                         if (item.Name == BackstagePasses)
                         {
-                            if (item.SellIn < 11)
-                            {
-                                if (item.Quality < MaxQuality)
-                                {
-                                    item.Quality++;
-                                }
-                            }
+                            if (item.SellIn <= 10)
+                                IncreaseQuality(item);
 
-                            if (item.SellIn < 6)
-                            {
-                                if (item.Quality < MaxQuality)
-                                {
-                                    item.Quality++;
-                                }
-                            }
+                            if (item.SellIn <= 5)
+                                IncreaseQuality(item);
                         }
                     }
                 }
@@ -56,9 +47,13 @@ namespace GildedRose.Console
                     item.SellIn--;
                 }
 
-                if (item.SellIn < 0)
+                if (IsExpired(item))
                 {
-                    if (item.Name != AgedBrie)
+                    if (item.Name == AgedBrie)
+                    {
+                        IncreaseQuality(item);
+                    }
+                    else
                     {
                         if (item.Name != BackstagePasses)
                         {
@@ -75,15 +70,19 @@ namespace GildedRose.Console
                             item.Quality -= item.Quality;
                         }
                     }
-                    else
-                    {
-                        if (item.Quality < MaxQuality)
-                        {
-                            item.Quality++;
-                        }
-                    }
                 }
             }
+        }
+
+        private static bool IsExpired(Item item)
+        {
+            return item.SellIn < 0;
+        }
+
+        private static void IncreaseQuality(Item item)
+        {
+            if (item.Quality < MaxQuality)
+                item.Quality++;
         }
     }
 }
