@@ -52,12 +52,17 @@
 
         private static void UpdateQualityAgain(Item item)
         {
-            if (item.Name == "Aged Brie")
+            if (IsAgedBrie(item))
                 IncreaseQuality(item);
             else if (IsBackstagePasses(item))
                 RenderUseless(item);
             else
                 DecreaseQuality(item);
+        }
+
+        private static bool IsAgedBrie(Item item)
+        {
+            return item.Name == "Aged Brie";
         }
 
         private static bool IsBackstagePasses(Item item)
@@ -87,28 +92,25 @@
         {
             if (DegradesOverTime(item))
                 DecreaseQuality(item);
-            else
+            else if (IsAgedBrie(item))
+                IncreaseQuality(item);
+            else if (IsBackstagePasses(item))
             {
                 IncreaseQuality(item);
 
-                if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
-                {
-                    if (item.SellIn <= 10)
-                    {
-                        IncreaseQuality(item);
-                    }
+                if (item.SellIn <= 10)
+                    IncreaseQuality(item);
 
-                    if (item.SellIn <= 5)
-                    {
-                        IncreaseQuality(item);
-                    }
-                }
+                if (item.SellIn <= 5)
+                    IncreaseQuality(item);
             }
+            else
+                throw new ArgumentException();
         }
 
         private static bool DegradesOverTime(Item item)
         {
-            return item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert";
+            return !IsAgedBrie(item) && !IsBackstagePasses(item);
         }
 
         private static IEnumerable<Item> ExceptSulfuras(IEnumerable<Item> items)
