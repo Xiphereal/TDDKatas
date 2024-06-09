@@ -13,18 +13,10 @@ namespace GildedRose.Console
 
         public void UpdateQuality()
         {
-            foreach (Item item in items)
+            foreach (Item item in ExceptLegendaries(items))
             {
                 if (item.Name != AgedBrie && item.Name != BackstagePasses)
-                {
-                    if (item.Quality > MinQuality)
-                    {
-                        if (item.Name != Sulfuras)
-                        {
-                            item.Quality--;
-                        }
-                    }
-                }
+                    DecreaseQuality(item);
                 else
                 {
                     if (item.Quality < MaxQuality)
@@ -42,36 +34,33 @@ namespace GildedRose.Console
                     }
                 }
 
-                if (item.Name != Sulfuras)
-                {
-                    item.SellIn--;
-                }
+                item.SellIn--;
 
                 if (IsExpired(item))
                 {
                     if (item.Name == AgedBrie)
-                    {
                         IncreaseQuality(item);
-                    }
                     else
                     {
-                        if (item.Name != BackstagePasses)
-                        {
-                            if (item.Quality > 0)
-                            {
-                                if (item.Name != Sulfuras)
-                                {
-                                    item.Quality--;
-                                }
-                            }
-                        }
+                        if (item.Name == BackstagePasses)
+                            item.Quality -= item.Quality;
                         else
                         {
-                            item.Quality -= item.Quality;
+                            if (item.Quality > MinQuality)
+                            {
+                                item.Quality--;
+                            }
                         }
                     }
                 }
             }
+        }
+
+
+
+        private static IEnumerable<Item> ExceptLegendaries(IList<Item> items)
+        {
+            return items.Where(x => x.Name != Sulfuras);
         }
 
         private static bool IsExpired(Item item)
@@ -83,6 +72,12 @@ namespace GildedRose.Console
         {
             if (item.Quality < MaxQuality)
                 item.Quality++;
+        }
+
+        private static void DecreaseQuality(Item item)
+        {
+            if (item.Quality > MinQuality)
+                item.Quality--;
         }
     }
 }
