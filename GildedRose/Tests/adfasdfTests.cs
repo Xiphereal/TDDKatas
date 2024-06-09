@@ -9,6 +9,8 @@ namespace GildedRose.Tests
 {
     public class adfasdfTests
     {
+        // test: ver si hay una forma más semántica de hacer el AllSatisfy
+
         [Fact]
         public void IsRefactorOver()
         {
@@ -71,7 +73,7 @@ namespace GildedRose.Tests
         [Fact]
         public void QualityNeverDegradesBelow0()
         {
-            IEnumerable<Item> items = PassDays(3);
+            IEnumerable<Item> items = PassDays(20);
 
             items.All(x => x.Quality >= 0).Should().BeTrue();
         }
