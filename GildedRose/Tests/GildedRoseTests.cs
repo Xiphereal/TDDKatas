@@ -22,7 +22,7 @@ namespace GildedRose.Tests
         // Conjured items degrade in Quality twice as fast as normal items
 
         [Fact]
-        public void TestName()
+        public void Characterization()
         {
             List<Item> items = new List<Item>
             {
