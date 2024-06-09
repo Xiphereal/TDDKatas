@@ -3,6 +3,8 @@ namespace GildedRose.Console
 {
     public class Inventory
     {
+        private const string AgedBrie = "Aged Brie";
+        private const int MaxQuality = 50;
         private IList<Item> Items;
 
         public Inventory(IList<Item> items)
@@ -19,7 +21,7 @@ namespace GildedRose.Console
         {
             for (var i = 0; i < Items.Count; i++)
             {
-                if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                if (Items[i].Name != AgedBrie && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
                 {
                     if (Items[i].Quality > 0)
                     {
@@ -31,7 +33,7 @@ namespace GildedRose.Console
                 }
                 else
                 {
-                    if (Items[i].Quality < 50)
+                    if (Items[i].Quality < MaxQuality)
                     {
                         Items[i].Quality = Items[i].Quality + 1;
 
@@ -39,7 +41,7 @@ namespace GildedRose.Console
                         {
                             if (Items[i].SellIn < 11)
                             {
-                                if (Items[i].Quality < 50)
+                                if (Items[i].Quality < MaxQuality)
                                 {
                                     Items[i].Quality = Items[i].Quality + 1;
                                 }
@@ -47,7 +49,7 @@ namespace GildedRose.Console
 
                             if (Items[i].SellIn < 6)
                             {
-                                if (Items[i].Quality < 50)
+                                if (Items[i].Quality < MaxQuality)
                                 {
                                     Items[i].Quality = Items[i].Quality + 1;
                                 }
@@ -63,7 +65,7 @@ namespace GildedRose.Console
 
                 if (Items[i].SellIn < 0)
                 {
-                    if (Items[i].Name != "Aged Brie")
+                    if (Items[i].Name != AgedBrie)
                     {
                         if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
                         {
@@ -82,7 +84,7 @@ namespace GildedRose.Console
                     }
                     else
                     {
-                        if (Items[i].Quality < 50)
+                        if (Items[i].Quality < MaxQuality)
                         {
                             Items[i].Quality = Items[i].Quality + 1;
                         }
