@@ -13,7 +13,7 @@ public class PayCoffee
 
     public void Execute(Request request, double payment)
     {
-        if (payment > 0 && catalog.ASDfasdf().Contains(request.Coffee))
+        if (payment > 0 && catalog.Contains(request.Coffee))
         {
             serviceCoffee.Execute(request);
         }

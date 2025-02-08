@@ -2,16 +2,11 @@
 
 namespace CoffeeMachine;
 
-public class Catalog(params string[] coffes) : IReadOnlyList<string>
+public class Catalog(params string[] coffees) : IReadOnlyList<string>
 {
-    public IReadOnlyList<string> ASDfasdf()
-    {
-        return coffes;
-    }
-
     public IEnumerator<string> GetEnumerator()
     {
-        return ((IEnumerable<string>)coffes).GetEnumerator();
+        return ((IEnumerable<string>)coffees).GetEnumerator();
     }
 
     IEnumerator IEnumerable.GetEnumerator()
@@ -19,7 +14,7 @@ public class Catalog(params string[] coffes) : IReadOnlyList<string>
         return GetEnumerator();
     }
 
-    public int Count => coffes.Length;
+    public int Count => coffees.Length;
 
-    public string this[int index] => coffes[index];
+    public string this[int index] => coffees[index];
 }
