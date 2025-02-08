@@ -2,7 +2,14 @@
 
 public class ServiceCoffee
 {
-    public static void Execute(Request request, MockDrinkMaker mockDrinkMaker)
+    private MockDrinkMaker mockDrinkMaker;
+
+    public ServiceCoffee(MockDrinkMaker mockDrinkMaker)
+    {
+        this.mockDrinkMaker = mockDrinkMaker;
+    }
+
+    public void Execute(Request request)
     {
     }
 }

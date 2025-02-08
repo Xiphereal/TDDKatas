@@ -9,11 +9,10 @@ public class Tests
     {
         var mockDrinkMaker = new MockDrinkMaker();
 
-        ServiceCoffee.Execute(new Request(), mockDrinkMaker);
+        new ServiceCoffee(mockDrinkMaker).Execute(new Request());
 
         mockDrinkMaker.ServedDrinks.Should().Be(0);
     }
-
 }
 
 public class MockDrinkMaker
