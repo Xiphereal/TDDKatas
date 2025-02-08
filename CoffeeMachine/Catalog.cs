@@ -1,9 +1,9 @@
 ﻿namespace CoffeeMachine;
 
-public class Catalog
+public class Catalog(params string[] coffes)
 {
     public IReadOnlyList<string> ASDfasdf()
     {
-        return [];
+        return coffes;
     }
 }
