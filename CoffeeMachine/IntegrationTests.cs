@@ -3,7 +3,7 @@ using NUnit.Framework.Interfaces;
 
 namespace CoffeeMachine;
 
-public class Tests
+public class IntegrationTests
 {
     [Test]
     public void NothingIsServedOnEmptyRequest()
