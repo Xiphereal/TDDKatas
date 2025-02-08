@@ -20,10 +20,26 @@ public class IntegrationTests
     {
         var mockDrinkMaker = new MockDrinkMaker();
 
-        new ServiceCoffee(mockDrinkMaker).Execute(new Request()
+        new ServiceCoffee(mockDrinkMaker).Execute(RequestCoffee());
+
+        mockDrinkMaker.ServedDrinks.Should().Be(1);
+    }
+
+    private static Request RequestCoffee()
+    {
+        return new Request()
         {
             Coffee = "Capuccino"
-        });
+        };
+    }
+
+    [Test]
+    public void CoffeeIsPaid_SoItIsServed()
+    {
+        var mockDrinkMaker = new MockDrinkMaker();
+
+        new PayCoffee(new ServiceCoffee(mockDrinkMaker))
+            .Execute(RequestCoffee(), payment: 1.0);
 
         mockDrinkMaker.ServedDrinks.Should().Be(1);
     }
