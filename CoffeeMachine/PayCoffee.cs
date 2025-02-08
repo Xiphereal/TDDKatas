@@ -4,6 +4,9 @@ public class PayCoffee(ServiceCoffee serviceCoffee)
 {
     public void Execute(Request request, double payment)
     {
-        serviceCoffee.Execute(request);
+        if (payment > 0)
+        {
+            serviceCoffee.Execute(request);
+        }
     }
 }

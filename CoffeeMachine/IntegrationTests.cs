@@ -43,6 +43,17 @@ public class IntegrationTests
 
         mockDrinkMaker.ServedDrinks.Should().Be(1);
     }
+
+    [Test]
+    public void CoffeeIsNotPaid_ItIsNotServed()
+    {
+        var mockDrinkMaker = new MockDrinkMaker();
+
+        new PayCoffee(new ServiceCoffee(mockDrinkMaker))
+            .Execute(RequestCoffee(), payment: 0);
+
+        mockDrinkMaker.ServedDrinks.Should().Be(0);
+    }
 }
 
 public class MockDrinkMaker
