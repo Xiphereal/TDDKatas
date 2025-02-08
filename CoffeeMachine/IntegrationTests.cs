@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using NUnit.Framework.Interfaces;
 
 namespace CoffeeMachine;
 
@@ -20,16 +19,24 @@ public class IntegrationTests
     {
         var mockDrinkMaker = new MockDrinkMaker();
 
-        new ServiceCoffee(mockDrinkMaker).Execute(RequestCoffee());
+        new ServiceCoffee(mockDrinkMaker).Execute(RequestCappuccino());
 
         mockDrinkMaker.ServedDrinks.Should().Be(1);
     }
 
-    private static Request RequestCoffee()
+    private static Request RequestCappuccino()
     {
         return new Request()
         {
-            Coffee = "Capuccino"
+            Coffee = "Cappuccino"
+        };
+    }
+
+    private static Request RequestOutOfCatalogCoffee()
+    {
+        return new Request()
+        {
+            Coffee = "Out of catalog"
         };
     }
 
@@ -39,7 +46,7 @@ public class IntegrationTests
         var mockDrinkMaker = new MockDrinkMaker();
 
         new PayCoffee(new ServiceCoffee(mockDrinkMaker))
-            .Execute(RequestCoffee(), payment: 1.0);
+            .Execute(RequestCappuccino(), payment: 1.0);
 
         mockDrinkMaker.ServedDrinks.Should().Be(1);
     }
@@ -50,7 +57,7 @@ public class IntegrationTests
         var mockDrinkMaker = new MockDrinkMaker();
 
         new PayCoffee(new ServiceCoffee(mockDrinkMaker))
-            .Execute(RequestCoffee(), payment: 0);
+            .Execute(RequestCappuccino(), payment: 0);
 
         mockDrinkMaker.ServedDrinks.Should().Be(0);
     }
@@ -61,7 +68,7 @@ public class IntegrationTests
         var mockDrinkMaker = new MockDrinkMaker();
 
         new PayCoffee(new ServiceCoffee(mockDrinkMaker))
-            .Execute(RequestCoffee(), payment: 0);
+            .Execute(RequestOutOfCatalogCoffee(), payment: 1);
 
         mockDrinkMaker.ServedDrinks.Should().Be(0);
     }
