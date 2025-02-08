@@ -11,5 +11,9 @@ public class ServiceCoffee
 
     public void Execute(Request request)
     {
+        if (request.Coffee is not null)
+        {
+            mockDrinkMaker.ServedDrinks = 1;
+        }
     }
 }
