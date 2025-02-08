@@ -32,4 +32,10 @@ public class Tests
 public class MockDrinkMaker
 {
     public int ServedDrinks { get; set; }
+
+
+    public void Serve()
+    {
+        ServedDrinks = 1;
+    }
 }

@@ -13,7 +13,7 @@ public class ServiceCoffee
     {
         if (request.Coffee is not null)
         {
-            mockDrinkMaker.ServedDrinks = 1;
+            mockDrinkMaker.Serve();
         }
     }
 }
